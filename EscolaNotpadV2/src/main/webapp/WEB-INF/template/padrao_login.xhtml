@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title><ui:insert name="title">Escola Notpad</ui:insert></title>
+	<h:outputStylesheet name="/bootstrap/css/bootstrap.css" />
+	<h:outputStylesheet
+		name="/bootstrap-datepicker/bootstrap-datetimepicker.css" />
+
+	<h:outputStylesheet name="/menu/css/simple-sidebar.css" />
+	<h:outputStylesheet name="/estilo_geral/estilo_css.css" />
+	<h:outputScript name="/js/jquery.min.js" />
+
+	<h:outputScript name="/js/tooltip.js" />
+
+	<h:outputStylesheet name="/libs/foundation-icons/foundation-icons.css" />
+
+	<style>
+body {
+	font-family: 'Lato', Calibri, Arial, sans-serif;
+	background-color: #F9F9F9;
+}
+
+.list-group-submenu {
+	margin-left: 20px;
+}
+
+.senha_perdida:hover{
+	cursor: pointer;
+}
+
+</style>
+</h:head>
+
+<h:body style="background-color: #F9F9F9; ">
+	
+	<ui:insert name="conteudo">
+		<div id="conteudo" ></div>
+	</ui:insert>
+	
+	<h:outputScript name="/libs/moment-with-locales.js" />
+	<h:outputScript name="/libs/bootstrap/js/bootstrap.js" />
+	<h:outputScript	name="/libs/bootstrap-datepicker/bootstrap-datetimepicker.js" />
+	<h:outputScript name="/libs/bootstrap/template/offcanvas.js" />
+
+</h:body>
+
+</html>

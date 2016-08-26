@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/template/padrao_login.xhtml">
+	<ui:define name="conteudo">
+	
+	
+		<center><h:graphicImage value="http://i.imgur.com/Y88o3mn.png" width="120" height="100" style="margin-top: 35px;"/></center>
+		<center><h1>Entrar Na Escola</h1></center>
+		<h:panelGroup rendered="#{not empty param.msg}">
+			<center><div class="alert alert-danger" style="width: 350px;">
+				<h:outputText value="#{param.msg}" />
+			</div></center>
+		</h:panelGroup>	
+		<center><h:messages styleClass="alert alert-danger" style="width: 350px; list-style: none;"></h:messages></center>
+		<center><div id="area_login" style="width: 350px; border: 1px solid #d8dee2; border-radius: 5px;
+		 padding: 20px; font-siZe: 14px; background-color: #FFF;">
+				
+			<h:form>
+				<div class="form-group">
+					<label for="exampleInputEmail1" style="text-align: left; float: left; font-weight: normal;">Email</label>
+					<h:inputText class="form-control" id="inputEmail3" value="#{sessaoMB.emailForm}">
+						<f:passThroughAttribute name="placeholder" value="E-mail" />
+					</h:inputText>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1" style="text-align: left; float: left; font-weight: normal;">Senha</label>
+					<label for="exampleInputPassword1" class="senha_perdida" style="text-align: left; float: right; font-weight: normal; color: #4078c0;">Esqueceu a Senha?</label>
+					<h:inputSecret styleClass="form-control" id="inputPassword3" value="#{sessaoMB.senhaForm}">
+						<f:passThroughAttribute name="placeholder" value="Senha" />
+					</h:inputSecret>
+				</div>
+				<div class="form-group">
+					<h:commandButton styleClass="btn btn-success" value="Entrar" action="#{sessaoMB.entrar}" style="width: 100%;
+					margin-top: 5px; margin-bottom: -10px;" />
+				</div>	
+				
+			</h:form>
+			
+		</div></center>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+<f:metadata>
+	<f:viewParam name="id" value="#{provaMB.editarId}" />
+	<f:event listener="#{provaMB.carregarEdicao}" type="preRenderView" />				
+</f:metadata>
+
+<ui:composition template="/WEB-INF/template/padrao_professor.xhtml">
+	<ui:define name="conteudo"><div id="conteudo"><div id="formulario_cadastro">
+		
+		<div id="quadro_cadastrar_titulo">
+			<h1>Cadastrar Prova <small>Nova</small></h1>
+		</div>
+				
+		<div id="quadro_cadastrar"><div class="col-md-7">
+			<h:form>
+				<h:panelGroup rendered="#{not empty provaMB.prova.id}">
+					<div class="form-group id">
+						<label for="exampleId">ID</label>
+						<h:inputText styleClass="form-control" readonly="true"
+							value="#{provaMB.prova.id}" id="exampleId" />
+					</div>
+				</h:panelGroup>
+				
+				<h:inputHidden value="#{provaMB.prova.id}"  />
+				
+				<label for="exampleInputNome">Titulo Da Prova</label>
+				<h:inputText styleClass="form-control"	value="#{provaMB.prova.tituloProva}" id="exampleInputTiulo" />
+				
+				<label>Data da Prova</label>
+				<div class='input-group date datetimepicker'>
+					<h:inputText styleClass="form-control"
+						value="#{provaMB.prova.dataProva}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:inputText>
+					<span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                
+                <label>Turma Pertencente</label>
+				<h:selectOneMenu styleClass="form-control" value="#{provaMB.prova.turma}">
+					<f:selectItem itemLabel="-- Selecione --" />						
+					<f:selectItems value="#{turmaMB.listaTurmas}" var="turma" 
+						itemLabel="#{turma.titulo}" itemValue="#{turma}" />
+				</h:selectOneMenu>
+								
+				<label for="exampleInputTitulo">Descrição Da Prova</label>
+				<h:inputTextarea cols="30" rows="10"  styleClass="form-control textareaformulario" value="#{provaMB.prova.descricao}" id="exampleInputDescricao" />
+					
+				<div id="inserirAluno">       
+	             <fieldset>
+					<legend>Perguntas Da Prova</legend>
+					<div class="row">
+						<div class="col-sm-9">
+							<h:selectOneMenu id="uiSelecionaCliente" styleClass="form-control" value="#{provaMB.perguntaSelecionada}">
+								<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+								<f:selectItems value="#{perguntaMB.listaPerguntas}" var="pergunta"
+									itemLabel="#{pergunta.tituloPergunta}" itemValue="#{pergunta}" />
+							</h:selectOneMenu>
+						</div>
+						<div class="col-sm-3">
+							<h:commandLink styleClass="btn btn-success">
+								<f:ajax event="click" execute="uiSelecionaCliente"
+									listener="#{provaMB.adicionarPergunta}"
+									render="uiClientesEscursao uiSelecionaCliente" />
+								<span class="glyphicon glyphicon-plus"></span>
+							</h:commandLink>
+						</div>
+					</div>
+					<div class="row">
+						<center><div class="col-sm-12">
+							<h:dataTable styleClass="table table-bordered"
+								id="uiClientesEscursao" value="#{provaMB.prova.perguntasProva}"
+								var="pergunta" style="margin-top: 5px;">
+								<h:column>
+									<f:facet name="header">Nome</f:facet>
+									<h:outputText value="#{pergunta.tituloPergunta}" />
+								</h:column>
+								<h:column >
+									<f:facet name="header">Controle</f:facet>
+									<h:commandLink>
+										<f:attribute name="idPergunta" value="#{pergunta}" />
+										<f:ajax event="click" listener="#{provaMB.excluirPergunta}" execute="@form" render="@form" />
+										
+										 <i class="step fi-x size-18" style="float: left; margin-right: -4px;"></i>
+									</h:commandLink> 
+								</h:column>
+							</h:dataTable>
+						</div></center>
+					</div>
+				</fieldset>
+				</div>
+							
+				<button type="reset">Limpar</button>
+				<h:commandButton styleClass="btn btn-success" action="#{provaMB.salvar}" value="Salvar" />
+			
+			</h:form>
+		</div>
+		</div>
+		
+		<h:outputScript name="/js/datepicker-component.js" />
+	</div></div></ui:define>
+
+</ui:composition>
+</html>

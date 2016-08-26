@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
+	<ui:define name="conteudo"><div id="conteudo">
+	
+	<div id="quadro_cadastrar_titulo">
+		<h1>Gerar Novos <small>Relatorios</small></h1>
+	</div>
+	
+	<div id="quadro_cadastrar"><div class="col-md-7">
+			<h:form enctype="multipart/form-data">
+				<label>Selecione o relatorio a ser gerado</label>
+				<h:selectOneMenu value="#{usuarioMB.usuario.perfil}" styleClass="form-control">
+					<f:selectItem itemLabel="-- Selecione --" />
+					<f:selectItem itemValue="Aluno" itemLabel="Alunos Cadastrados" />	
+					<f:selectItem itemValue="Professor" itemLabel="Professores Cadastrados" />
+					<f:selectItem itemValue="Administrador" itemLabel="Administradores Cadastrados" />						 	   							
+				</h:selectOneMenu>
+					
+				<h:commandButton styleClass="btn btn-success" action="#{usuarioMB.alunosCadastrados}" value="Gerar Relatorio" />
+			
+				<h:messages errorStyle="color: red"></h:messages>
+			
+			</h:form>
+		</div>
+		</div>
+	    
+	</div></ui:define>
+</ui:composition>
+</html>
