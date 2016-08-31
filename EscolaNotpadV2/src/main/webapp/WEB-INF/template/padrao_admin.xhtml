@@ -2,22 +2,23 @@
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title><ui:insert name="title">Escola Notpad</ui:insert></title>
 	<h:outputStylesheet name="/bootstrap/css/bootstrap.css" />
-	<h:outputStylesheet
-		name="/bootstrap-datepicker/bootstrap-datetimepicker.css" />
+	<h:outputStylesheet	name="/bootstrap-datepicker/bootstrap-datetimepicker.css" />
 	<h:outputStylesheet name="/bootstrap/template/offcanvas.css" />
 
 	<h:outputStylesheet name="/menu/css/simple-sidebar.css" />
 	<h:outputStylesheet name="/estilo_geral/estilo_css.css" />
 	<h:outputScript name="/js/jquery.min.js" />
 
-	<h:outputScript name="/js/tooltip.js" />
+	<!-- <h:outputScript name="/js/tooltip.js" /> -->
 
 	<h:outputStylesheet name="/libs/foundation-icons/foundation-icons.css" />
 
@@ -63,6 +64,23 @@
 								style="float: left; margin-top: 1px; margin-right: 3px;"></span>
 						</h:link>
 						<h:link outcome="/admin/listaArquivo" value="Listar Arquivos"
+							styleClass="list-group-item2">
+							<span class="glyphicon glyphicon-list-alt" aria-hidden="true"
+								style="float: left; margin-top: 1px; margin-right: 3px;"></span>
+						</h:link>
+					</div>
+					
+					<a href="#ambiente" class="list-group-item list-group-item-success"
+						data-toggle="collapse" data-parent="#MainMenu"><i
+						class="step fi-map size-18"
+						style="float: left; margin-right: -4px;"></i>Ambientes</a>
+					<div class="collapse" id="ambiente">
+						<h:link outcome="/admin/formularioAmbiente" value="Cadastrar Ambiente"
+							styleClass="list-group-item2">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"
+								style="float: left; margin-top: 1px; margin-right: 3px;"></span>
+						</h:link>
+						<h:link outcome="/admin/listaCurso" value="Listar Cursos"
 							styleClass="list-group-item2">
 							<span class="glyphicon glyphicon-list-alt" aria-hidden="true"
 								style="float: left; margin-top: 1px; margin-right: 3px;"></span>
