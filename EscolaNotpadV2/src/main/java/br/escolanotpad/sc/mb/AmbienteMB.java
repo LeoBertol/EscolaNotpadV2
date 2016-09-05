@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.escolanotpad.sc.model.AmbienteRN;
 import br.escolanotpad.sc.model.entity.Ambiente;
@@ -16,6 +17,7 @@ public class AmbienteMB {
 	private List<Ambiente> listaAmbientes;
 	private AmbienteRN ambienteRN;
 	private Ambiente ambiente;
+	private Long editarId;
 	
 	@PostConstruct
 	public void init(){
@@ -44,6 +46,20 @@ public class AmbienteMB {
 	}
 	public void setAmbiente(Ambiente ambiente) {
 		this.ambiente = ambiente;
+	}
+	
+	public Long getEditarId() {
+		return editarId;
+	}
+
+	public void setEditarId(Long editarId) {
+		this.editarId = editarId;
+	}
+	
+	public void carregarEdicao(){
+		if(editarId != null && !FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()){
+			ambiente = ambienteRN.buscarPorId(editarId);
+		}		
 	}
 	
 	public String salvar() throws SQLException{

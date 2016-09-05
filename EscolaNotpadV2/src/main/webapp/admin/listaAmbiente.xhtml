@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
+	<ui:define name="conteudo">
+		<div id="conteudo">
+
+			<div id="quadro_listar_titulo">
+				<h1>
+					Lista <small>Ambientes</small>
+				</h1>
+			</div>
+
+			<div id="listar_cadastros">
+				<h:form>
+					<h:dataTable value="#{ambienteMB.listaAmbientes}" var="ambiente"
+						styleClass="table table-striped">
+						<h:column>
+							<f:facet name="header">ID</f:facet>
+							<h:outputText value="#{ambiente.id}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Nome</f:facet>
+							<h:outputText value="#{ambiente.nome}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Tipo do ambiente</f:facet>
+							<h:outputText value="#{ambiente.tipoAmbiente}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Opções</f:facet>
+
+							<button type="button" data-toggle="modal" data-target="#myModal#{ambiente.id}"
+								style="background-color: transparent; border: none; float: left">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"
+									style="float: left; margin-top: 1px; margin-right: 3px;"></span>
+							</button>
+							
+							<h:link outcome="/admin/formularioAmbiente" title="Editar">
+								<f:param name="id" value="#{ambiente.id}" />
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"
+									style="float: left; margin-top: 1px; margin-right: 5px;"></span>
+							</h:link>
+							
+								<h:commandLink onclick="return confirm('Tem certeza da exclusão do ambiente #{ambiente.nome}');" title="Excluir"
+						action="#{ambienteMB.excluir(ambiente.id)}"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="float: left; margin-top: 1px; margin-right: 3px;"></span></h:commandLink>
+						
+
+							<div class="modal fade" id="myModal#{ambiente.id}" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel">
+												Informações Sobre <b><h:outputText value="#{ambiente.nome}" /></b>
+											</h4>
+										</div>
+										<div class="modal-body">
+											<p>
+												<b>ID: </b>
+												<h:outputText value="#{ambiente.id}" />
+											</p>
+											<p>
+												<b>Nome: </b>
+												<h:outputText value="#{ambiente.nome}" />
+											</p>
+											<p>
+												<b>Capacidade do Ambiente: </b>
+												<h:outputText value="#{ambiente.capacidade}" />
+											</p>
+											<p>
+												<b>Tipo de Ambiente: </b>
+												<h:outputText value="#{ambiente.tipoAmbiente}" />
+											</p>
+												<p>
+												<b>Descrição:</b>
+											</p>
+											<h:inputTextarea readonly="true" cols="30" rows="10" value="#{ambiente.descricao}" styleClass="form-control textareaformulario" id="descricao" />
+									
+											
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</h:column>
+
+					</h:dataTable>
+
+
+
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>
