@@ -9,8 +9,10 @@ import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.Part;
 
 import br.escolanotpad.sc.commons.UploadUtil;
+import br.escolanotpad.sc.model.RegraRN;
 import br.escolanotpad.sc.model.UsuarioRN;
 import br.escolanotpad.sc.model.entity.Perfil;
+import br.escolanotpad.sc.model.entity.Regra;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 @ManagedBean
@@ -24,11 +26,14 @@ public class UsuarioMB {
 	private List<Usuario> listaAlunos;
 	private List<Usuario> listaAlunosCadastrados;
 	private int tamanho;
+	private RegraRN regraRN;
+	private List<Regra> regras;
 	
 	@PostConstruct
 	public void depoisDeConstruir(){
 		usuario = new Usuario();
 		usuarioRN = new UsuarioRN();
+		regraRN = new RegraRN();		
 	}
 
 	public Usuario getUsuario() {
@@ -68,14 +73,7 @@ public class UsuarioMB {
 		}
 		return listaProfessores;
 	}
-	
-	/*public List<Usuario> getListaAlunosTurma() {
-		if(listaAlunosTurma == null){
-			listaAlunosTurma = usuarioRN.listaAlunosTurma();
-		}
-		return listaAlunosTurma;
-	}*/
-	
+		
 	public void setListaUsuarios(List<Usuario> listaUsuarios) {
 		this.listaUsuarios = listaUsuarios;
 	}
@@ -101,6 +99,33 @@ public class UsuarioMB {
 		usuario = usuarioRN.buscarPorId(editarId);
 	}
 	
+	public UsuarioRN getUsuarioRN() {
+		return usuarioRN;
+	}
+
+	public void setUsuarioRN(UsuarioRN usuarioRN) {
+		this.usuarioRN = usuarioRN;
+	}
+
+	public RegraRN getRegraRN() {
+		return regraRN;
+	}
+
+	public void setRegraRN(RegraRN regraRN) {
+		this.regraRN = regraRN;
+	}
+
+	public List<Regra> getRegras() {
+		if (regras == null){
+			regras = regraRN.listar();
+		}
+		return regras;
+	}
+
+	public void setRegras(List<Regra> regras) {
+		this.regras = regras;
+	}
+
 	public String excluir(String id){
 				
 		Long idExcluir = Long.parseLong(id);
@@ -128,6 +153,7 @@ public class UsuarioMB {
 				
 	}
 	
+	/*
 	public String alunosCadastrados(){
 		if(listaAlunosCadastrados == null){
 			if(usuario.getPerfil().equals(Perfil.Professor)){
@@ -142,7 +168,7 @@ public class UsuarioMB {
 			}
 		}
 		return "/admin/relatorioAlunosCadastrados";
-	}
+	}*/
 
 	public List<Usuario> getListaAlunosCadastrados() {
 		if(listaAlunos == null){

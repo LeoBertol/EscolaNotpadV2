@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/template/padrao_professor.xhtml">
+	<ui:define name="conteudo"><div id="conteudo">
+		
+		<div id="quadro_listar_titulo">
+			<h1>Lista <small>Perguntas</small></h1>
+		</div>
+		
+		<div id="listar_cadastros"><h:form>
+			<h:dataTable value="#{perguntaMB.listaPerguntas}" var="pergunta" styleClass="table table-striped">
+				<f:facet name="header">Perguntas</f:facet>
+				
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{pergunta.id}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Titulo</f:facet>
+					<h:outputText value="#{pergunta.tituloPergunta}" />
+				</h:column>
+				
+				<h:column>
+				
+					<button type="button" data-toggle="modal" data-target="#myModal#{pergunta.id}" style="background-color: transparent; border: none; float: left">
+						<span class="glyphicon glyphicon-search" aria-hidden="true" style="float: left; margin-top: 1px; margin-right: 3px;"></span>
+					</button>
+					
+					<h:link  outcome="/prof/formularioPergunta" title="Editar">
+						<f:param name="id" value="#{pergunta.id}" />
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true" style="float: left; margin-top: 1px; margin-right: 5px;"></span>
+					</h:link>
+			
+					<h:commandLink onclick="return confirm('Tem certeza da exclusão da pergunta #{pergunta.tituloPergunta}');" title="Excluir"
+						action="#{perguntaMB.excluir(pergunta.id)}"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="float: left; margin-top: 1px; margin-right: 3px;"></span></h:commandLink>
+						
+					<div class="modal fade" id="myModal#{pergunta.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Informações a Pergunta <b><h:outputText value="#{pergunta.tituloPergunta}" /></b></h4>
+								</div>
+								<div class="modal-body">
+									<p><b>ID: </b> <h:outputText value="#{pergunta.id}" /></p>
+									<p><b>Titulo: </b> <h:outputText value="#{pergunta.tituloPergunta}" /></p>
+									<p><b>Descrição:</b></p>
+									<h:inputTextarea readonly="true" cols="30" rows="10" value="#{pergunta.descricao}" styleClass="form-control textareaformulario" id="exampleInputDescricao" />
+									<p><b>Respostas:</b></p>
+									<h:dataTable value="#{pergunta.alternativasCorreta}" var="resposta" styleClass="table table-striped">
+							     		<h:column>
+							     			<p><h:outputText value="#{resposta.descricao}" /></p>
+							     		</h:column>
+							     		<h:column>
+							     			<p><h:outputText value="#{resposta.correta}" /></p>
+							     		</h:column>
+							     	</h:dataTable>
+								
+								</div>
+							</div>
+						</div>
+					</div>
+			
+				</h:column>
+
+			</h:dataTable>
+			
+
+
+		</h:form></div>
+	</div></ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:metadata>
+	<f:viewParam name="id" value="#{usuarioMB.editarId}" />
+	<f:event listener="#{usuarioMB.carregarUsuario}" type="preRenderView" />
+</f:metadata>
+
+<ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
+	<ui:define name="conteudo"><div id="conteudo"><div id="formulario_cadastro">
+		
+		<div id="quadro_cadastrar_titulo">
+			<h1>Cadastrar Usuário <small>Novo</small></h1>
+		</div>
+		
+		<div id="quadro_cadastrar"><div class="col-md-7">
+			<h:form enctype="multipart/form-data">
+				<h:panelGroup rendered="#{not empty usuarioMB.usuario.id}">
+					<div class="form-group id">
+						<label for="exampleId">ID</label>
+						<h:inputText styleClass="form-control" readonly="true"
+							value="#{usuarioMB.usuario.id}" id="exampleId" />
+					</div>
+				</h:panelGroup>
+				<h:inputHidden value="#{usuarioMB.usuario.id}"  />
+				
+				
+				
+					<label for="exampleInputNome">Nome</label>
+					<h:inputText styleClass="form-control"	value="#{usuarioMB.usuario.nome}" id="exampleInputNome" />
+				
+					<label for="exampleInputTipoUsuario">Tipo Usuário</label>
+					<h:selectOneMenu value="#{usuarioMB.usuario.perfil}" styleClass="form-control">
+						<f:selectItem itemLabel="-- Selecione --" />
+						<f:selectItem itemValue="Administrador" itemLabel="Administrador" />	
+						<f:selectItem itemValue="Aluno" itemLabel="Aluno" />
+						<f:selectItem itemValue="Professor" itemLabel="Professor" />						 	   							
+					</h:selectOneMenu>
+					
+					<label for="exampleInputCpf">CPF</label>
+					<h:inputText styleClass="form-control"	value="#{usuarioMB.usuario.cpf}" id="exampleInputCpf" />
+					
+					<label for="exampleInputEmail1">Email Do Usuario</label>
+					<h:inputText styleClass="form-control" id="exampleInputEmail1"	value="#{usuarioMB.usuario.email}" />
+				
+				
+					<label>Data da Nascimento</label>
+					<div class='input-group date datetimepicker'>
+						<h:inputText styleClass="form-control"
+							value="#{usuarioMB.usuario.dataNascimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:inputText>
+						<span class="input-group-addon">
+	                        <span class="glyphicon glyphicon-calendar"></span>
+	                    </span>
+                    </div>
+				
+					<label for="exampleInputEmail1">Endereço Usuario</label>
+					<h:inputText styleClass="form-control" id="exampleInputEndereco" value="#{usuarioMB.usuario.endereco}" />
+										
+					<label for="exampleInputPassaword1">Senha</label>
+					<h:inputSecret redisplay="true" styleClass="form-control" 
+					value="#{usuarioMB.usuario.senha}" id="exampleInputSenha" />
+					
+					<div class="form-group">
+						<label>Foto de Perfil</label>
+						<h:inputFile styleClass="form-control" value="#{usuarioMB.uploadedFotoPerfil}" />
+					</div>
+					<h:inputHidden value="#{usuarioMB.usuario.fotoPerfil}"/>
+					<h:graphicImage rendered="#{not empty usuarioMB.usuario.fotoPerfil}"
+					styleClass="img-responsive"	name="fotosDePerfil/#{usuarioMB.usuario.fotoPerfil}" />
+								
+				<button type="reset" >Limpar</button>
+				<h:commandButton action="#{usuarioMB.salvar}" value="Salvar" />
+				
+			</h:form>
+		</div>
+		</div>
+		
+		<h:outputScript name="/js/datepicker-component.js" />
+	</div></div></ui:define>
+
+</ui:composition>
+</html>

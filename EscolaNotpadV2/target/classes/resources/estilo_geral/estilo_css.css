@@ -1,0 +1,151 @@
+#conteudo{
+	margin-left: 5%;
+	width: 90%;
+}
+
+/*#quadro_cadastrar_titulo{
+	width: 800px;
+	background-color: #5BC0DE;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	margin-top: 50px;
+	text-align: center;
+}
+
+#quadro_cadastrar_titulo h1{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 7px;
+	color: #000;
+	word-wrap: break-word;
+	text-align: center;
+}
+
+#quadro_cadastrar{
+	width: 800px;
+	background-color: #FFF;
+	box-shadow: 0 0 15px #999;
+	padding: 12px;
+}
+*/
+
+.textareaformulario{
+	resize: none;	
+}
+
+#quadro_cadastrar input[type=submit]{
+	text-transform: uppercase;
+	cursor: pointer;
+	padding: 1em 2em;
+	outline: none;
+	font-weight: 400;
+	border: none;
+	color: #fff;
+	background: #5CB85C;
+	margin-top: 3%;
+	font-weight: bold;
+	border: 1px solid #0aab8a;	
+	margin-bottom: 3%;
+	display: inline-block;
+	margin-right: 5px;
+	border-radius: 5px;
+}
+
+#quadro_cadastrar button[type=reset]{
+	text-transform: uppercase;
+	cursor: pointer;
+	padding: 1em 2em;
+	outline: none;
+	font-weight: 400;
+	border: none;
+	color: #fff;
+	background: #ec971f;
+	margin-top: 3%;
+	font-weight: bold;
+	border: 1px solid #ec971f;	
+	margin-bottom: 3%;
+	display: inline-block;
+	margin-right: 5px;
+	border-radius: 5px;
+}
+
+#quadro_cadastrar input[type=submit]:hover{
+	background: #FFF;
+	color: #5CB85C;
+	border: 1px solid #5CB85C;
+}
+
+#quadro_cadastrar button[type=reset]:hover{
+	background: #FFF;
+	color: #ec971f;
+	border: 1px solid #ec971f;
+}
+/*
+#quadro_listar_titulo{
+	width: 800px;
+	background-color: #5BC0DE;
+	-webkit-border-top-left-radius: 10px;
+	-webkit-border-top-right-radius: 10px;
+	-moz-border-radius-topleft: 10px;
+	-moz-border-radius-topright: 10px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	margin-top: 50px;
+	text-align: center;
+}
+
+#quadro_listar_titulo h1{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 7px;
+	color: #000;
+	word-wrap: break-word;
+	text-align: center;
+}
+
+#listar_cadastros{
+	width: 800px;
+	background-color: #FFF;
+	box-shadow: 0 0 15px #999;
+	padding: 12px;
+}
+*/
+
+.botao{
+	width: 55px;	
+}
+.col-md-7{
+	float: none;
+	padding-left: 0px;
+}
+
+.step {
+  display: inline-block;
+  line-height: 1;
+  width: 10%;
+}
+
+
+.size-12 { font-size: 12px; }
+
+.size-14 { font-size: 14px; }
+
+.size-16 { font-size: 16px; }
+
+.size-18 { font-size: 18px; }
+
+.size-21 { font-size: 21px; }
+
+.size-24 { font-size: 24px; }
+
+.size-36 { font-size: 36px; }
+
+.size-48 { font-size: 48px; }
+
+.size-60 { font-size: 60px; }
+
+.size-72 { font-size: 72px; }

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/template/padrao_aluno.xhtml">
+	<ui:define name="conteudo">
+		<div id="conteudo">
+
+			<div id="quadro_listar_titulo">
+				<h1>
+					Lista <small>Provas</small>
+				</h1>
+			</div>
+
+			<div id="listar_cadastros">
+				<h:form>
+					<h:dataTable value="#{provaMB.listaProvas}" var="prova"
+						styleClass="table table-striped">
+						<h:column>
+							<f:facet name="header">ID</f:facet>
+							<h:outputText value="#{prova.id}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Titulo Da Prova</f:facet>
+							<h:outputText value="#{prova.tituloProva}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Data Da Prova</f:facet>
+							<h:outputText value="#{prova.dataProva}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Opções</f:facet>
+
+							<h:link outcome="/aluno/responderProva" title="Responder Prova">
+								<f:param name="id" value="#{prova.id}" />
+								<span class="glyphicon glyphicon-pencil" aria-hidden="true"
+									style="float: left; margin-top: 1px; margin-right: 5px;"></span>
+							</h:link>
+							
+						</h:column>
+
+					</h:dataTable>
+
+
+
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

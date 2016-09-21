@@ -9,24 +9,6 @@ public class UsuarioRN {
 
 	private UsuarioDAO dao;
 	
-	/*public void salvar(Usuario usuario){
-	 * 	DaoFactory.getUsuarioDao().salvar(usuario);
-	 * }
-	 * 
-	 * public Usuario buscarPorId(long id){
-	 * 	return DaoFactory.getUsuarioDao().buscarPorId(id);
-	 * }
-	 * 
-	 * public list<Usuario> listarTodos(){
-	 * 	return DaoFactory.getUsuarioDao().listarTodos();
-	 * }
-	 * 
-	 * public void excluir(long id){
-	 * 	DaoFactory.getUsuarioDao().excluir(id);
-	 * }
-	 * 
-	 */
-
 	public UsuarioRN() {
 		dao = new UsuarioDAO();
 	}

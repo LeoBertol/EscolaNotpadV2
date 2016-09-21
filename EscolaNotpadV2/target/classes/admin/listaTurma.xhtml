@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
+	<ui:define name="conteudo"><div id="conteudo">
+		
+		<div id="quadro_listar_titulo">
+			<h1>Lista <small>Turmas</small></h1>
+			<hr />
+		</div>
+		
+		<div id="listar_cadastros"><h:form>
+			<h:dataTable value="#{turmaMB.listaTurmas}" var="classe"	styleClass="table table-striped">
+																	
+				<h:column>
+					<f:facet name="header">ID</f:facet>
+					<h:outputText value="#{classe.id}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Nome</f:facet>
+					<h:outputText value="#{classe.nome}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Titulo</f:facet>
+					<h:outputText value="#{classe.titulo}" />
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">Professor Responsavel</f:facet>
+					<h:outputText value="#{classe.professor.nome}" />
+				</h:column>
+								
+				<h:column>
+						     							
+					<button type="button" data-toggle="modal" data-target="#myModal2#{classe.id}" style="background-color: transparent; border: none; float: left">
+						<span class="glyphicon glyphicon-folder-open" aria-hidden="true" style="float: left; margin-top: 1px; margin-right: 3px;"></span>
+					</button>
+					
+					<button type="button" data-toggle="modal" data-target="#myModal#{classe.id}" style="background-color: transparent; border: none; float: left">
+						<span class="glyphicon glyphicon-search" aria-hidden="true" style="float: left; margin-top: 1px; margin-right: 3px;"></span>
+					</button>
+					
+					<h:link  outcome="/admin/formularioTurma" title="Editar">
+						<f:param name="id" value="#{classe.id}" />
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true" style="float: left; margin-top: 1px; margin-right: 5px;"></span>
+					</h:link>
+			
+					<h:commandLink onclick="return confirm('Tem certeza da exclusão da turma #{classe.nome}');" title="Excluir"
+						action="#{turmaMB.excluir(classe.id)}"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="float: left; margin-top: 1px; margin-right: 3px;"></span></h:commandLink>
+				
+					<div class="modal fade" id="myModal#{classe.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel">Informações Sobre a Turma <b><h:outputText value="#{classe.titulo}" /></b></h4>
+					      </div>
+					      <div class="modal-body">
+					      	<p><b>ID: </b> <h:outputText value="#{classe.id}" /></p>
+					      	<p><b>Nome: </b> <h:outputText value="#{classe.nome}" /></p>
+					      	<p><b>Titulo: </b> <h:outputText value="#{classe.titulo}" /></p>
+					      	<p><b>Data De Inicio: </b> <h:outputText value="#{classe.dataDeInicio}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText></p>
+					      	<p><b>Data De Termino: </b> <h:outputText value="#{classe.dataDeTermino}"><f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText></p>
+					      	<p><b>Curso Pertencente: </b> <h:outputText value="#{classe.curso.nome}"/></p>
+					      	<p><b>Professor Responsavel: </b> <h:outputText value="#{classe.professor.nome}"/></p>
+					     	<hr />
+					     	<h3>Alunos Da Turma</h3>
+					     	<h:dataTable value="#{classe.alunosTurma}" var="aluno" styleClass="table table-striped">
+					     		<h:column>
+					     			<p><h:outputText value="#{aluno.nome}" /></p>
+					     		</h:column>
+					     	</h:dataTable>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+					
+					<div class="modal fade" id="myModal2#{classe.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+					  <div class="modal-dialog" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					        <h4 class="modal-title" id="myModalLabel">Arquivos da Turma <b><h:outputText value="#{classe.titulo}" /></b></h4>
+					      </div>
+					      <div class="modal-body">
+					      
+					      		<h:dataTable value="#{classe.listaArquivos}" var="arquivo"	styleClass="table table-striped">
+					      		
+									<h:column>
+									
+										<center><b><h:outputText value="#{arquivo.nome}" /></b></center>
+										<p style="margin-top:10px;"><b>Por: </b><h:outputText value="#{arquivo.usuario.nome}" /></p>
+										<p><b>Em: </b>
+										<h:outputText value="#{arquivo.diaCadastrado}">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR" dateStyle="long" />
+										</h:outputText></p>
+										<p><b>Descrição: </b></p>
+										<p><h:outputText value="#{arquivo.descricao}" /></p>
+										
+										<center>
+											<p>
+												<b>Arquivo:</b>
+											</p>
+											<h:link href="compartilhamentoDeArquivo/#{arquivo.nomeArquivo}"  target="_blank">
+											<h:graphicImage styleClass="img-thumbnail"
+												style="height:200px; width: 200px; margin-bottom: 30px;"
+												name="compartilhamentoDeArquivo/#{arquivo.nomeArquivo}"/></h:link>
+										</center>
+										
+									</h:column>								
+									
+								</h:dataTable>								
+					      			
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				
+				
+				</h:column>
+			</h:dataTable>
+			
+
+
+		</h:form></div>
+	</div></ui:define>
+</ui:composition>
+</html>

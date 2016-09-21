@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+<f:metadata>
+	<f:viewParam name="id" value="#{respostaMB.editarId}" />
+	<f:event listener="#{respostaMB.carregarResposta}" type="preRenderView" />				
+</f:metadata>
+
+<ui:composition template="/WEB-INF/template/padrao_professor.xhtml">
+	<ui:define name="conteudo"><div id="conteudo"><div id="formulario_cadastro">
+		
+		<div id="quadro_cadastrar_titulo">
+			<h1>Cadastrar Resposta <small>Novo</small></h1>
+		</div>
+				
+		<div id="quadro_cadastrar"><div class="col-md-7">
+			<h:form>
+				<h:panelGroup rendered="#{not empty respostaMB.resposta.id}">
+					<div class="form-group id">
+						<label for="exampleId">ID</label>
+						<h:inputText styleClass="form-control" readonly="true"
+							value="#{respostaMB.resposta.id}" id="exampleId" />
+					</div>
+				</h:panelGroup>
+				
+				<h:inputHidden value="#{respostaMB.resposta.id}"  />
+				
+				<label>Pergunta Pertencente</label>
+				<h:selectOneMenu styleClass="form-control" value="#{respostaMB.resposta.pergunta}">
+						<f:selectItem itemLabel="-- Selecione --" />						
+						<f:selectItems value="#{perguntaMB.listaPerguntas}" var="pergunta" 
+							itemLabel="#{pergunta.tituloPergunta}" itemValue="#{pergunta}" />
+				</h:selectOneMenu>
+				
+				<label for="exampleInputTitulo">Descrição</label>
+				<h:inputTextarea cols="30" rows="10"  styleClass="form-control textareaformulario" value="#{respostaMB.resposta.descricao}" id="exampleInputDescricao" />
+				
+				
+				<label for="exampleInputTitulo">Tipo Resposta</label>
+			
+				
+				<h:selectOneMenu styleClass="form-control" value="#{respostaMB.resposta.correta}">
+					<f:selectItem itemLabel="Verdadeiro" itemValue="#{true}"/>						
+					<f:selectItem itemLabel="Falso" itemValue="#{false}"/>	
+				</h:selectOneMenu>
+								
+				<button type="reset">Limpar</button>
+				<h:commandButton styleClass="btn btn-success" action="#{respostaMB.salvar}" value="Salvar" />
+			
+			</h:form>
+		</div>
+		</div>
+		
+		<h:outputScript name="/js/datepicker-component.js" />
+	</div></div></ui:define>
+
+</ui:composition>
+</html>
