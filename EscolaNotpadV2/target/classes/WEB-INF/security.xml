@@ -33,7 +33,7 @@
 		
 	<b:bean id="dataSource" 
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<b:property name="url" value="jdbc:mysql://localhost:3306/escola_notpad"/>
+		<b:property name="url" value="jdbc:mysql://localhost:3306/escola_notpad_v2"/>
 		<b:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 		<b:property name="username" value="root"/>
 		<b:property name="password" value=""/>
