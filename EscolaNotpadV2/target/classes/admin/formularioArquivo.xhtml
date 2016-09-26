@@ -40,7 +40,7 @@
 					</h:selectOneMenu>
 					
 					<h:selectOneMenu style="display: none;" value="#{arquivoMB.arquivo.usuario}" styleClass="form-control">
-						<f:selectItem itemValue="#{sessaoMB.usuarioLogado}" itemLabel="#{sessaoMB.idUsuarioLogado}" />
+						<f:selectItem itemValue="#{loginManager.usuario}" itemLabel="#{loginManager.usuario.id}" />
 					</h:selectOneMenu>
 									
 					<div class='input-group date datetimepicker' style="display: none;">

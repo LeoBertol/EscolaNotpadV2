@@ -79,6 +79,14 @@ public class Usuario {
 		this.cpf = cpf;
 	}
 	
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+
 	public String getFotoPerfil() {
 		return fotoPerfil;
 	}
@@ -147,7 +155,10 @@ public class Usuario {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (perfil != other.perfil)
+		if (perfil == null) {
+			if (other.perfil != null)
+				return false;
+		} else if (!perfil.equals(other.perfil))
 			return false;
 		if (senha == null) {
 			if (other.senha != null)

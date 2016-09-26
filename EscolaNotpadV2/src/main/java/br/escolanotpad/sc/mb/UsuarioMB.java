@@ -1,10 +1,12 @@
 package br.escolanotpad.sc.mb;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.Part;
 
@@ -137,7 +139,7 @@ public class UsuarioMB {
 		return "/admin/listaUsuario";
 	}
 	
-	public String salvar(){
+	public String salvar() throws SQLException{
 		try{
 			String nomeFotoPerfil = UploadUtil.moverArquivo(uploadedFotoPerfil, usuario.getFotoPerfil());
 			

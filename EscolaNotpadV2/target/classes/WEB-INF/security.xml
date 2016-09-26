@@ -19,10 +19,6 @@
 	
 	<b:bean id="CustomAuthenticationHandler" class="br.escolanotpad.sc.commons.CustomAuthenticationHandler"/>
 			
-	<!-- <user-service> Exemplo para login fixo
-		<user name="user" password="password" authorities="ROLE_USER" />
-	</user-service> -->
-	
 	<authentication-manager>
 	
 		<authentication-provider>
