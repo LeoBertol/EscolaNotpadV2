@@ -15,10 +15,9 @@
 	<h:outputStylesheet name="/bootstrap/template/offcanvas.css" />
 
 	<h:outputStylesheet name="/menu/css/simple-sidebar.css" />
-	<h:outputStylesheet name="/estilo_geral/estilo_css.css" />
-	<h:outputScript name="/js/jquery.min.js" />
+	 <h:outputScript name="/js/acordion.js" rendered="false"/>
 
-	<!-- <h:outputScript name="/js/tooltip.js" /> -->
+	 <!--   <h:outputScript name="/js/tooltip.js" /> -->
 
 	<h:outputStylesheet name="/libs/foundation-icons/foundation-icons.css" />
 
@@ -34,7 +33,8 @@
 </h:head>
 
 <h:body>
-	
+
+	<f:facet name="last"><h:outputStylesheet name="/estilo_geral/estilo_css.css" /></f:facet>
 	<div id="wrapper">
 		<h:panelGroup>
 		<!-- Sidebar -->
@@ -52,6 +52,29 @@
 						<span class="glyphicon glyphicon-home " aria-hidden="true"
 							style="float: left; margin-top: 1px; margin-right: 3px;"></span>
 					</h:link>
+					
+					<p:accordionPanel activeIndex="false" style="display: none;">
+						<p:tab title="Godfather Part II">
+						
+						</p:tab>
+					</p:accordionPanel>
+					
+					<a href="#agenda" class="list-group-item list-group-item-success"
+						data-toggle="collapse" data-parent="#MainMenu"><i
+						class="glyphicon glyphicon-calendar"
+						style="float: left; margin-right: 3px;"></i>Agendas</a>
+					<div class="collapse" id="agenda">
+						<h:link outcome="/admin/formularioAgenda" value="Cadastrar Agenda"
+							styleClass="list-group-item2">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"
+								style="float: left; margin-top: 1px; margin-right: 3px;"></span>
+						</h:link>
+						<h:link outcome="/admin/listaAgenda" value="Listar Agendas"
+							styleClass="list-group-item2">
+							<span class="glyphicon glyphicon-list-alt" aria-hidden="true"
+								style="float: left; margin-top: 1px; margin-right: 3px;"></span>
+						</h:link>
+					</div>
 					
 					<a href="#arquivo" class="list-group-item list-group-item-success"
 						data-toggle="collapse" data-parent="#MainMenu"><i

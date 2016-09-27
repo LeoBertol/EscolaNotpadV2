@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+	<f:metadata>
+	<f:viewParam name="id" value="#{agendaMB.editarId}" />
+	<f:event listener="#{agendaMB.carregarEdicao}" type="preRenderView" />
+</f:metadata>
+
+<ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
+
+
+	<ui:define name="conteudo">
+		<div id="conteudo">
+			<div id="formulario_cadastro">
+
+				<div id="quadro_cadastrar_titulo">
+					<h1>
+						Cadastrar Agenda <small>Nova</small>
+					</h1>
+				</div>
+
+				<p:messages autoUpdate="true" />
+
+				<div id="quadro_cadastrar">
+					<div class="col-md-7">
+						<h:form id="formulario">
+
+							<h:panelGroup rendered="#{not empty agendaMB.agenda.id}">
+								<div class="form-group id">
+									<label for="exampleId">ID</label>
+									<h:inputText styleClass="form-control" readonly="true"
+										value="#{agendaMB.agenda.id}" id="exampleId" />
+								</div>
+							</h:panelGroup>
+
+							<label for="tipoAmbiente-id">Professor</label>
+							<br />
+							<p:autoComplete id="professor-id"
+								value="#{agendaMB.agenda.professorResponsavel}"
+								completeMethod="#{agendaMB.completaProfessor}" var="professor"
+								itemLabel="#{professor.nome}" itemValue="#{professor}"
+								forceSelection="true" required="true"
+								requiredMessage="O professor e obrigatorio!"
+								class="form-control" />
+
+							<br />
+							<label>Turma</label>
+							<h:selectOneMenu styleClass="form-control"
+								value="#{agendaMB.agenda.turma}" required="true" requiredMessage="A turma e obrigatorio!">
+								<f:selectItem itemLabel="-- Selecione --" />
+								<f:selectItems value="#{turmaMB.listaTurmas}" var="turma"
+									itemLabel="#{turma.titulo}" itemValue="#{turma}" />
+							</h:selectOneMenu>
+							
+							<label>Ambiente</label>
+							<h:selectOneMenu styleClass="form-control"
+								value="#{agendaMB.agenda.ambiente}" required="true" requiredMessage="O ambiente e obrigatorio!">
+								<f:selectItem itemLabel="-- Selecione --" />
+								<f:selectItems value="#{ambienteMB.listaAmbientes}" var="ambiente"
+									itemLabel="#{ambiente.nome}" itemValue="#{ambiente}" />
+							</h:selectOneMenu>
+
+							
+							<label>Data da locação</label>
+							<div class='input-group date datetimepicker'>
+							
+								<h:inputText styleClass="form-control"
+									value="#{agendaMB.agenda.data}" required="true" requiredMessage="A data de locação e obrigatorio!">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:inputText>
+								<span class="input-group-addon"> <span
+									class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+							
+							<div id="divisao">
+								<div id="1" style="display: inline-block; width: 49%; margin-right: 1%;">
+									<label>Hora de inicio</label>
+					                <div class='input-group date' id='datetimepicker3'>
+					                    <h:inputText type='text' class="form-control" value="#{agendaMB.agenda.inicioDaAula}" required="true"
+					                    requiredMessage="A hora de inicio e obrigatorio!">
+					                    	<!-- <f:convertDateTime pattern="HH:mm"/> -->
+					                    </h:inputText>
+					                    <span class="input-group-addon">
+					                        <span class="glyphicon glyphicon-time"></span>
+					                    </span>
+					                </div>
+						          
+							        <script type="text/javascript">
+							            $(function () {
+							                $('#datetimepicker3').datetimepicker({
+							                    format: 'LT'
+							                });
+							            });
+							        </script>
+						        </div>
+						        <div id="2" style="display: inline-block; width: 49%;">
+							        <label>Hora de termino</label>
+					                <div class='input-group date' id='datetimepicker3a'>
+					                    <h:inputText type='text' class="form-control" value="#{agendaMB.agenda.fimDaAula}" required="true"
+					                    requiredMessage="A hora de termino e obrigatorio!">
+					                    	<!-- <f:convertDateTime pattern="HH:mm"/> -->
+					                    </h:inputText>
+					                    <span class="input-group-addon">
+					                        <span class="glyphicon glyphicon-time"></span>
+					                    </span>
+					                </div>
+						          
+							        <script type="text/javascript">
+							            $(function () {
+							                $('#datetimepicker3a').datetimepicker({
+							                    format: 'LT'
+							                });
+							            });
+							        </script>
+					        	</div>
+					        </div>
+        
+					        <button type="reset" >Limpar</button>
+							<h:commandButton action="#{agendaMB.salvar}" value="Salvar" />
+							
+							
+
+						</h:form>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<h:outputScript name="/js/datepicker-component.js" />
+	</ui:define>
+
+
+</ui:composition>
+</html>
