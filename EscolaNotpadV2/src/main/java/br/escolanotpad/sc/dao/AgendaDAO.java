@@ -3,6 +3,7 @@ package br.escolanotpad.sc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.escolanotpad.sc.model.entity.Agenda;
@@ -32,6 +33,12 @@ public class AgendaDAO extends DAO{
 	public List<Usuario> listarParaAutoComplete(String busca) {
 		Query query = getEM().createQuery("From Usuario where perfil = :perfil order by perfil", Usuario.class);
 		query.setParameter("perfil", "ROLE_PROFESSOR");
+		return query.getResultList();
+	}
+
+	public List<Agenda> listarAgendasPorTurma(String busca) {
+		Query query = getEM().createQuery("From Agenda where turma_id = :turmaid", Agenda.class);
+		query.setParameter("turmaid", busca);
 		return query.getResultList();
 	}
 

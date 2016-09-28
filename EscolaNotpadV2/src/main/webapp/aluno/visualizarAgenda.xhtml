@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/WEB-INF/template/padrao_aluno.xhtml">
+	<ui:define name="conteudo">
+		<div id="conteudo">
+
+			<div id="quadro_listar_titulo">
+				<h1>
+					Lista <small>Agendas</small>
+				</h1>
+			</div>
+
+			<div id="listar_cadastros">
+				<h:form>
+					<h:dataTable value="#{agendaMB.agendaPorTurma(loginManager.usuario.turma.get(0).id)}" var="agenda" styleClass="table table-striped">
+						
+						<h:column>
+							<f:facet name="header">Data de reserva</f:facet>
+							<h:outputText value="#{agenda.data}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Ambiente</f:facet>
+							<h:outputText value="#{agenda.ambiente.nome}" />
+						</h:column>
+												
+						<h:column>
+							<f:facet name="header">Professor Responsavel</f:facet>
+							<h:outputText value="#{agenda.professorResponsavel.nome}" />
+						</h:column>
+						
+						
+						<h:column>
+						
+							<f:facet name="header">Visualização</f:facet>
+							
+							<button type="button" data-toggle="modal" data-target="#myModal#{agenda.id}"
+								style="background-color: transparent; border: none; float: left">
+								<span class="glyphicon glyphicon-search" aria-hidden="true"
+									style="float: left; margin-top: 1px; margin-right: 3px;"></span>
+							</button>
+														
+							<div class="modal fade" id="myModal#{agenda.id}" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel">
+												Informações Sobre a Agenda
+											</h4>
+										</div>
+										<div class="modal-body">
+											
+											<p>
+												<b>ID: </b>
+												<h:outputText value="#{agenda.id}" />
+											</p>
+											
+											<p>
+												<b>Professor responsavel: </b>
+												<h:outputText value="#{agenda.professorResponsavel.nome}" />
+											</p>
+											
+											<p>
+												<b>Ambiente: </b>
+												<h:outputText value="#{agenda.ambiente.nome}" />
+											</p>
+											
+											<p>
+												<b>Turma: </b>
+												<h:outputText value="#{agenda.turma.titulo}" />
+											</p>
+											
+											<p>
+												<b>Data do agendamento: </b>
+												<h:outputText value="#{agenda.data}">
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</h:outputText>
+											</p>
+											
+											<p>
+												<b>Inicio da aula: </b>
+												<h:outputText value="#{agenda.inicioDaAula}" />
+											</p>
+											
+											<p>
+												<b>Fim da aula: </b>
+												<h:outputText value="#{agenda.fimDaAula}" />
+											</p>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+						</h:column>
+						
+
+					</h:dataTable>
+
+
+
+				</h:form>
+			</div>
+			<br />
+		</div>
+		
+		
+		
+		
+	</ui:define>
+</ui:composition>
+
+</html>

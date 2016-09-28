@@ -4,8 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 
 @Entity
@@ -22,6 +25,8 @@ public class Usuario {
 	private String cpf;
 	private Date dataNascimento;
 	private String fotoPerfil;
+	@ManyToMany(mappedBy="alunosTurma", fetch=FetchType.EAGER)
+	private List<Turma> turma;
 	
 	public Long getId() {
 		return id;
@@ -93,6 +98,14 @@ public class Usuario {
 
 	public void setFotoPerfil(String fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
+	}
+	
+	public List<Turma> getTurma() {
+		return turma;
+	}
+
+	public void setTurma(List<Turma> turma) {
+		this.turma = turma;
 	}
 
 	@Override

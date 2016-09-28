@@ -34,12 +34,32 @@ public class AgendaMB {
 	
 	private List<Usuario> listaProfessores;
 	private List<Usuario> listaProfessoresArray;
+	private List<Agenda> listaAgendaPorTurma;
 	
+	
+
 	@PostConstruct
 	public void init(){
 		agendaRN = new AgendaRN();
 		agenda = new Agenda();
 	}
+
+	
+
+	public List<Agenda> getListaAgendaPorTurma(String turmaId) {
+		if(listaAgendaPorTurma == null){
+			listaAgendaPorTurma = agendaRN.listaAgendaPorTurma(turmaId);
+		}
+		return listaAgendaPorTurma;
+	}
+
+
+
+	public void setListaAgendaPorTurma(List<Agenda> listaAgendaPorTurma) {
+		this.listaAgendaPorTurma = listaAgendaPorTurma;
+	}
+
+
 
 	public List<Agenda> getListaAgendas() {
 		if(listaAgendas == null){
@@ -78,13 +98,20 @@ public class AgendaMB {
 		this.editarId = editarId;
 	}
 
-	
+	public String jaEstaLocada(String jaEstaOcupada){
+		return "";
+	}
 	
 	//Auto complete para professor
 	public List<Usuario> completaProfessor(String query) {
 		return agendaRN.listarParaAutoComplete(query);
 	}
 	
+	public List<Agenda> agendaPorTurma(String turmaId) {
+		return agendaRN.listaAgendaPorTurma(turmaId);
+	}
+	
+
 	public String salvar() throws SQLException{
 		agendaRN.salvar(agenda);
 		listaAgendas = null;
@@ -103,6 +130,7 @@ public class AgendaMB {
 		listaAgendas = null;
 		return"";
 	}
+	
 	
 
     
