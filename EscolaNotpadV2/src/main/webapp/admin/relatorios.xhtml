@@ -10,17 +10,17 @@
 	<ui:define name="conteudo"><div id="conteudo">
 	
 	<div id="quadro_cadastrar_titulo">
-		<h1>Gerar Novos <small>Relatorios</small></h1>
+		<h1>Gerar Novos <small>Relatórios</small></h1>
 	</div>
 	
 	<div id="quadro_cadastrar"><div class="col-md-7">
 			<h:form enctype="multipart/form-data">
-				<label>Selecione o relatorio a ser gerado</label>
+				<label>Selecione o relatório a ser gerado</label>
 				<h:selectOneMenu value="#{usuarioMB.usuario.perfil}" styleClass="form-control">
 					<f:selectItem itemLabel="-- Selecione --" />
-					<f:selectItem itemValue="Aluno" itemLabel="Alunos Cadastrados" />	
-					<f:selectItem itemValue="Professor" itemLabel="Professores Cadastrados" />
-					<f:selectItem itemValue="Administrador" itemLabel="Administradores Cadastrados" />						 	   							
+					<f:selectItem itemValue="ROLE_ADMINISTRADOR" itemLabel="Administradores Cadastrados" />
+					<f:selectItem itemValue="ROLE_ALUNO" itemLabel="Alunos Cadastrados" />	
+					<f:selectItem itemValue="ROLE_PROFESSOR" itemLabel="Professores Cadastrados" />						 	   							
 				</h:selectOneMenu>
 					
 				<h:commandButton styleClass="btn btn-success" action="#{usuarioMB.alunosCadastrados}" value="Gerar Relatorio" />

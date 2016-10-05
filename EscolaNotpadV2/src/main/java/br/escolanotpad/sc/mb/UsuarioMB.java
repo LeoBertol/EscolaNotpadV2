@@ -155,22 +155,25 @@ public class UsuarioMB {
 				
 	}
 	
-	/*
 	public String alunosCadastrados(){
 		if(listaAlunosCadastrados == null){
-			if(usuario.getPerfil().equals(Perfil.Professor)){
-				listaAlunosCadastrados = usuarioRN.listarProfessores();
+			if(usuario.getPerfil().equals("ROLE_ADMINISTRADOR")){
+				listaAlunosCadastrados = usuarioRN.listarAdministradores();				
 				tamanho = listaAlunosCadastrados.size();
-			}else if(usuario.getPerfil().equals(Perfil.Aluno)){
+			}else if(usuario.getPerfil().equals("ROLE_ALUNO")){
 				listaAlunosCadastrados = usuarioRN.listarAlunos();
 				tamanho = listaAlunosCadastrados.size();
-			}else if(usuario.getPerfil().equals(Perfil.Administrador)){
-				listaAlunosCadastrados = usuarioRN.listarAdministradores();
+			}else if(usuario.getPerfil().equals("ROLE_PROFESSOR")){
+				listaAlunosCadastrados = usuarioRN.listarProfessores();
 				tamanho = listaAlunosCadastrados.size();
 			}
 		}
 		return "/admin/relatorioAlunosCadastrados";
-	}*/
+	}
+	
+	public String voltarRelatorios(){
+		return "/admin/relatorios";
+	}
 
 	public List<Usuario> getListaAlunosCadastrados() {
 		if(listaAlunos == null){
