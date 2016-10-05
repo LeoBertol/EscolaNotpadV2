@@ -15,7 +15,7 @@
 					Lista <small>Usuários</small>
 				</h1>
 			</div>
-			<p>Usuarios Cadastrados Com Esse Perfil: <h:outputText value="#{usuarioMB.tamanho}" /></p>
+			<p>Usuários Cadastrados Com Esse Perfil: <h:outputText value="#{usuarioMB.tamanho}" /></p>
 			<div id="listar_cadastros">
 				<h:form>
 					<h:dataTable value="#{usuarioMB.listaAlunosCadastrados}" var="user"
@@ -110,7 +110,7 @@
 
 					</h:dataTable>
 
-
+					<h:commandButton styleClass="btn btn-primary" action="#{usuarioMB.voltarRelatorios}" value="Voltar" />
 
 				</h:form>
 			</div>
