@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import br.escolanotpad.sc.model.entity.Perfil;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 public class UsuarioDAO extends DAO {
