@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.Part;
 
+import br.escolanotpad.sc.commons.MailUtil;
 import br.escolanotpad.sc.commons.UploadUtil;
 import br.escolanotpad.sc.model.RegraRN;
 import br.escolanotpad.sc.model.UsuarioRN;
@@ -146,14 +147,21 @@ public class UsuarioMB {
 			usuario.setFotoPerfil(nomeFotoPerfil);							
 			usuarioRN.salvar(usuario);
 			listaUsuarios = null;
+			
+			try{
+			MailUtil.enviarEmail(usuario.getEmail(), "Cadastro Escola NotPad", 
+					"Seja Bem-Vindo(a) " + usuario.getNome() + ", \nVocê foi cadastrado em nossa escola, Sua senha para realizar o login: " + usuario.getSenha());
+			}catch (Exception e){
+				return "/admin/listaUsuario";
+			}
+						
 			return "/admin/listaUsuario";
 			
 		} catch(IOException e){
 			e.printStackTrace();
 			return "";
 		}
-				
-	}
+	}	
 	
 	public String alunosCadastrados(){
 		if(listaAlunosCadastrados == null){
