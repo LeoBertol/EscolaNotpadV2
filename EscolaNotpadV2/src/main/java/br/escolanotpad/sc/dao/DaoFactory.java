@@ -2,12 +2,12 @@ package br.escolanotpad.sc.dao;
 
 public abstract class DaoFactory {
 	
-	private static UsuarioDAO usuarioDao;
+	private static UsuarioDAOTest usuarioDao;
 	private static RegraDAO regraDAO;
 	
-	public static UsuarioDAO getUsuarioDao(){
+	public static UsuarioDAOTest getUsuarioDao(){
 		if (usuarioDao == null){
-			usuarioDao = new UsuarioDAO();
+			usuarioDao = new UsuarioDAOTest();
 		}
 		return usuarioDao;
 	}

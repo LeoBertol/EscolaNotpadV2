@@ -4,16 +4,21 @@ import javax.persistence.EntityManager;
 
 import br.escolanotpad.sc.commons.JpaUtil;
 
-
 public abstract class DAO {
-	
-	public DAO(){
+
+	public DAO() {
 		super();
 	}
 
-	protected EntityManager getEM(){
-			EntityManager em = JpaUtil.getEntityManager();
-			return em;
+	protected EntityManager getEM() {
+		return getEM(null);
 	}
-	
+
+	protected EntityManager getEM(EntityManager entityManager) {
+		if (entityManager == null) {
+			return JpaUtil.getEntityManager();
+		}
+		return entityManager;
+	}
+
 }

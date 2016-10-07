@@ -1,6 +1,8 @@
 package br.escolanotpad.sc.model.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,26 +10,26 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import java.util.List;
-
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String perfil;
 	private String nome;
-	@Column(unique=true)
+	@Column(unique = true)
 	private String email;
 	private String senha;
 	private String endereco;
 	private String cpf;
 	private Date dataNascimento;
 	private String fotoPerfil;
-	@ManyToMany(mappedBy="alunosTurma", fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy = "alunosTurma", fetch = FetchType.EAGER)
 	private List<Turma> turma;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -83,7 +85,7 @@ public class Usuario {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	
+
 	public String getPerfil() {
 		return perfil;
 	}
@@ -99,7 +101,7 @@ public class Usuario {
 	public void setFotoPerfil(String fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;
 	}
-	
+
 	public List<Turma> getTurma() {
 		return turma;
 	}
@@ -180,5 +182,5 @@ public class Usuario {
 			return false;
 		return true;
 	}
-	
+
 }
