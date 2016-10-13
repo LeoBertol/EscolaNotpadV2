@@ -18,10 +18,14 @@
 	</http>
 	
 	<b:bean id="CustomAuthenticationHandler" class="br.escolanotpad.sc.commons.CustomAuthenticationHandler"/>
-			
+	<b:bean id="CustomPasswordEncoder" class="br.escolanotpad.sc.commons.CustomPasswordEncoder"/>
+		
 	<authentication-manager>
 	
 		<authentication-provider>
+			<password-encoder ref="CustomPasswordEncoder"/>
+			<!-- <password-encoder hash="sha-256"> -->
+			
 		
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="select email, senha, 1 from usuario where email=?"

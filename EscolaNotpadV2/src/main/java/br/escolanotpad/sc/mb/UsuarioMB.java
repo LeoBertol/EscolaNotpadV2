@@ -12,6 +12,7 @@ import javax.servlet.http.Part;
 
 import br.escolanotpad.sc.commons.MailUtil;
 import br.escolanotpad.sc.commons.UploadUtil;
+import br.escolanotpad.sc.commons.Utils;
 import br.escolanotpad.sc.model.RegraRN;
 import br.escolanotpad.sc.model.UsuarioRN;
 import br.escolanotpad.sc.model.entity.Perfil;
@@ -143,8 +144,9 @@ public class UsuarioMB {
 	public String salvar() throws SQLException{
 		try{
 			String nomeFotoPerfil = UploadUtil.moverArquivo(uploadedFotoPerfil, usuario.getFotoPerfil());
-			
-			usuario.setFotoPerfil(nomeFotoPerfil);							
+			usuario.setFotoPerfil(nomeFotoPerfil);	
+			String hash = Utils.senhaToSha256(usuario.getSenha());
+			usuario.setSenha(hash);									
 			usuarioRN.salvar(usuario);
 			listaUsuarios = null;
 			

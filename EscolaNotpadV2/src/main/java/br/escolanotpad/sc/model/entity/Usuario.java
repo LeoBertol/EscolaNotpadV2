@@ -20,6 +20,7 @@ public class Usuario {
 	private String nome;
 	@Column(unique=true)
 	private String email;
+	@Column (length = 64)
 	private String senha;
 	private String endereco;
 	private String cpf;
