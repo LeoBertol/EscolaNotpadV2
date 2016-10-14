@@ -8,6 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import java.util.List;
 
 
@@ -24,6 +27,7 @@ public class Usuario {
 	private String senha;
 	private String endereco;
 	private String cpf;
+	@Temporal(value=TemporalType.DATE)
 	private Date dataNascimento;
 	private String fotoPerfil;
 	@ManyToMany(mappedBy="alunosTurma", fetch=FetchType.EAGER)

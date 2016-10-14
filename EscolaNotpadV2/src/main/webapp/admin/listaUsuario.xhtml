@@ -37,8 +37,8 @@
 							<h:outputText value="#{user.cpf}" />
 						</h:column>
 						<h:column>
-							<f:facet name="header">Tipo</f:facet>
-							<h:outputText value="#{user.perfil}" />
+							<f:facet name="header">Perfil</f:facet>
+							<h:outputText value="#{usuarioMB.converterPerfilLayout(user.perfil)}"/>
 						</h:column>
 						<h:column>
 							<f:facet name="header">Opções</f:facet>
@@ -93,8 +93,8 @@
 												<h:outputText value="#{user.cpf}" />
 											</p>
 											<p>
-												<b>Tipo: </b>
-												<h:outputText value="#{user.perfil}" />
+												<b>Perfil: </b>
+												<h:outputText value="#{usuarioMB.converterPerfilLayout(user.perfil)}" />
 											</p>
 											<p>
 												<b>Data De Nascimento: </b>
