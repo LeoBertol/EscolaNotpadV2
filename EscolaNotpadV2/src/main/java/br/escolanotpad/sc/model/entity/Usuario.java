@@ -151,6 +151,14 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -175,14 +183,6 @@ public class Usuario implements Serializable {
 		this.senha = senha;
 	}
 
-	public Date getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
 	public String getEndereco() {
 		return endereco;
 	}
@@ -199,12 +199,12 @@ public class Usuario implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public String getPerfil() {
-		return perfil;
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setPerfil(String perfil) {
-		this.perfil = perfil;
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getFotoPerfil() {

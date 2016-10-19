@@ -19,7 +19,11 @@ public class UsuarioDAO extends DAO {
 	}
 
 	public void salvar(Usuario usuario) {
-		getEM().merge(usuario);
+		if (usuario.getId() == null) {
+			getEM().persist(usuario);
+		} else {
+			getEM().merge(usuario);
+		}
 	}
 
 	public Usuario buscarPorId(Long id) {
