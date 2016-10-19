@@ -47,5 +47,18 @@ public class JpaUtilTest {
 		}
 		this.entityManagerFactory = null;
 	}
+	
+	public void beginSession() {
+		this.entityManager.getTransaction().begin();
+	}
+	
+	public void endSession() {
+		try {
+			this.entityManager.getTransaction().commit();
+		} catch (Exception e) {
+			this.entityManager.getTransaction().rollback();
+			e.printStackTrace();
+		} 
+	}
 
 }

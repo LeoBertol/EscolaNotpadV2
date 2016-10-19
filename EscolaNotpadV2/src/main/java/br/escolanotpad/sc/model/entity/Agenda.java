@@ -1,14 +1,11 @@
 package br.escolanotpad.sc.model.entity;
 
-import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import com.mysql.fabric.xmlrpc.base.Data;
 
 @Entity
 public class Agenda {
