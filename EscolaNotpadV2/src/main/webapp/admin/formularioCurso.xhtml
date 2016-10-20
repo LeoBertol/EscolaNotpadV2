@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
 	
 <f:metadata>
 	<f:viewParam name="id" value="#{cursoMB.editarId}" />
@@ -17,6 +18,8 @@
 		<div id="quadro_cadastrar_titulo">
 			<h1>Cadastrar curso <small>Novo</small></h1>
 		</div>
+		
+		<p:messages autoUpdate="true"/>
 				
 		<div id="quadro_cadastrar"><div class="col-md-7">
 			<h:form>
@@ -32,39 +35,12 @@
 					<label for="exampleInputNome">Nome</label>
 					<h:inputText styleClass="form-control"	value="#{cursoMB.curso.nome}" id="exampleInputNome" />
 				
-					<label for="exampleInputTitulo">Titulo</label>
-					<h:inputText styleClass="form-control"	value="#{cursoMB.curso.titulo}" id="exampleInputTitulo" />
-					
 					<label for="exampleInputTitulo">Descrição</label>
 					<h:inputTextarea cols="30" rows="10"  styleClass="form-control textareaformulario" value="#{cursoMB.curso.descricao}" id="exampleInputDescricao" />
 					
 					<label for="exampleInputTitulo">Mensalidade</label>
 					<h:inputText styleClass="form-control"	value="#{cursoMB.curso.mensalidade}" id="exampleInputMensalidade" />
-				
-					<label>Data de Início Inscrições</label>
-					<div class='input-group date datetimepicker'>
-						<h:inputText styleClass="form-control"
-							value="#{cursoMB.curso.dataDeInicioInscricoes}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:inputText>
-						<span class="input-group-addon">
-	                        <span class="glyphicon glyphicon-calendar"></span>
-	                    </span>
-                    </div>
-				
-			
-					<label>Data de Termino Inscrições</label>
-					<div class='input-group date datetimepicker'>
-						<h:inputText styleClass="form-control"
-							value="#{cursoMB.curso.dataDeTerminoInscricoes}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:inputText>
-						<span class="input-group-addon">
-	                        <span class="glyphicon glyphicon-calendar"></span>
-	                    </span>
-                    </div>
-				
-							
+											
 				<button type="reset">Limpar</button>
 				<h:commandButton styleClass="btn btn-success" action="#{cursoMB.salvar}" value="Salvar" />
 			

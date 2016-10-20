@@ -9,8 +9,12 @@ import br.escolanotpad.sc.model.entity.Curso;
 
 public class CursoDAO extends DAO{
 
-	public void salvar(Curso curso) throws SQLException{
-		getEM().merge(curso);
+	public void salvar(Curso curso){
+		if(curso.getId() == null){
+			getEM().persist(curso);
+		}else{
+			getEM().merge(curso);
+		}		
 	}
 	
 	public Curso buscarPorId(Long id){

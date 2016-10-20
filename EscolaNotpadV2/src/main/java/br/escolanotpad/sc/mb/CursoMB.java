@@ -36,9 +36,22 @@ public class CursoMB {
 	}
 
 	public String salvar() throws Throwable{
-		cursoRN.salvar(curso);
-		listaCursos = null;
-		return "/admin/listaCurso";
+		if(editarId == null){
+			cursoRN.salvar(curso);
+			listaCursos = null;
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso cadastrado com sucesso!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			curso = new Curso();
+			return "";
+		}else{
+			cursoRN.salvar(curso);
+			listaCursos = null;
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso atualizado com sucesso!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			curso = new Curso();
+			return "";
+		}
+		
 	}
 	
 	public void carregarCurso(ComponentSystemEvent event){
@@ -53,6 +66,8 @@ public class CursoMB {
 		Long idExcluir = Long.parseLong(id);
 		cursoRN.excluir(idExcluir);
 		listaCursos = null;
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Curso removido com sucesso!", "");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 		return "";
 	}
 
