@@ -10,11 +10,11 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.Part;
 
+import br.escolanotpad.sc.commons.MailUtil;
 import br.escolanotpad.sc.commons.UploadUtil;
-import br.escolanotpad.sc.model.RegraRN;
+import br.escolanotpad.sc.commons.Utils;
 import br.escolanotpad.sc.model.UsuarioRN;
 import br.escolanotpad.sc.model.entity.Perfil;
-import br.escolanotpad.sc.model.entity.Regra;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 @ManagedBean
@@ -28,14 +28,11 @@ public class UsuarioMB {
 	private List<Usuario> listaAlunos;
 	private List<Usuario> listaAlunosCadastrados;
 	private int tamanho;
-	private RegraRN regraRN;
-	private List<Regra> regras;
 	
 	@PostConstruct
 	public void depoisDeConstruir(){
 		usuario = new Usuario();
-		usuarioRN = new UsuarioRN();
-		regraRN = new RegraRN();		
+		usuarioRN = new UsuarioRN();	
 	}
 
 	public Usuario getUsuario() {
@@ -109,25 +106,6 @@ public class UsuarioMB {
 		this.usuarioRN = usuarioRN;
 	}
 
-	public RegraRN getRegraRN() {
-		return regraRN;
-	}
-
-	public void setRegraRN(RegraRN regraRN) {
-		this.regraRN = regraRN;
-	}
-
-	public List<Regra> getRegras() {
-		if (regras == null){
-			regras = regraRN.listar();
-		}
-		return regras;
-	}
-
-	public void setRegras(List<Regra> regras) {
-		this.regras = regras;
-	}
-
 	public String excluir(String id){
 				
 		Long idExcluir = Long.parseLong(id);
@@ -142,17 +120,36 @@ public class UsuarioMB {
 	public String salvar() throws SQLException{
 		try{
 			String nomeFotoPerfil = UploadUtil.moverArquivo(uploadedFotoPerfil, usuario.getFotoPerfil());
-			
-			usuario.setFotoPerfil(nomeFotoPerfil);							
+			usuario.setFotoPerfil(nomeFotoPerfil);	
+			String hash = Utils.senhaToSha256(usuario.getSenha());
+			usuario.setSenha(hash);									
 			usuarioRN.salvar(usuario);
 			listaUsuarios = null;
+			
+			try{
+			MailUtil.enviarEmail(usuario.getEmail(), "Cadastro Escola NotPad", 
+					"Seja Bem-Vindo(a) " + usuario.getNome() + ", \nVocê foi cadastrado em nossa escola, Sua senha para realizar o login: " + usuario.getSenha());
+			}catch (Exception e){
+				return "/admin/listaUsuario";
+			}
+						
 			return "/admin/listaUsuario";
 			
 		} catch(IOException e){
 			e.printStackTrace();
 			return "";
 		}
-				
+	}	
+	
+	public String converterPerfilLayout(String perfil){
+		if(perfil.equals("ROLE_ADMINISTRADOR")){
+			perfil = "Administrador";
+		}else if(perfil.equals("ROLE_ALUNO")){
+			perfil = "Aluno";
+		}else if(perfil.equals("ROLE_PROFESSOR")){
+			perfil = "Professor";
+		}
+		return perfil;		
 	}
 	
 	public String alunosCadastrados(){

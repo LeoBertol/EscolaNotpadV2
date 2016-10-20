@@ -6,11 +6,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<f:metadata>
-	<f:viewParam name="id" value="#{usuarioMB.editarId}" />
-	<f:event listener="#{usuarioMB.carregarUsuario}" type="preRenderView" />
-</f:metadata>
-
 <ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
 	<ui:define name="conteudo">
 		<div id="conteudo">
@@ -24,9 +19,7 @@
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs" role="tablist">
 						<li role="presentation" class="active"><a href="#A" aria-controls="A" role="tab" data-toggle="tab">Informações</a></li>
-						<li role="presentation"><a href="#B" aria-controls="B" role="tab" data-toggle="tab">Estilo Design</a></li>
-						<li role="presentation"><a href="#C" aria-controls="C" role="tab" data-toggle="tab">Alterar Informações</a></li>
-						<li role="presentation"><a href="#D" aria-controls="D" role="tab" data-toggle="tab">Sobre Os Desenvolvedores</a></li>
+					<li role="presentation"><a href="#D" aria-controls="D" role="tab" data-toggle="tab">Sobre Os Desenvolvedores</a></li>
 					</ul>
 
 					<!-- Tab panes -->
@@ -37,86 +30,44 @@
 						
 							<div id="quadro_cadastrar">
 								<div class="col-md-7">
-									<center><label for="exampleInputNomefoto" style="margin-top: 10px;">Foto De Perfil</label></center>
-									
-									
-									<center><h:graphicImage styleClass="img-thumbnail"	style="height:200px; width: 200px;"	name="fotosDePerfil/#{sessaoMB.fotoUsuarioLogado}" /></center>
-									
-									<h:panelGroup
-										rendered="#{not empty sessaoMB.nomeUsuarioLogado}">
-										<div class="form-group id">
-											<label for="exampleId">Tipo</label>
-											<h:inputText styleClass="form-control" readonly="true"
-												value="#{sessaoMB.nomeUsuarioLogado}" id="exampleId" />
+									<div class="modal-body">
+										<center>
+												<p>
+													<b>Foto de Perfil:</b>
+												</p>
+												<h:graphicImage styleClass="img-thumbnail"
+													style="height:200px; width: 200px;"
+													name="fotosDePerfil/#{loginManager.usuario.fotoPerfil}" />
+											</center>
+											<p>
+												<b>Nome: </b><h:outputText value="#{loginManager.usuario.nome}"/>
+											</p>
+											<p>
+												<b>Email: </b><h:outputText value="#{loginManager.usuario.email}" />
+											</p>
+											<p>
+												<b>CPF: </b><h:outputText value="#{loginManager.usuario.cpf}" />
+											</p>
+											<p>
+												<b>Perfil: </b><h:outputText value="#{usuarioMB.converterPerfilLayout(loginManager.usuario.perfil)}" />
+											</p>
+											<p>
+												<b>Data De Nascimento: </b>
+												<h:outputText value="#{loginManager.usuario.dataNascimento}">
+													<f:convertDateTime pattern="dd/MM/yyyy" />
+												</h:outputText>
+											</p>
+											<p>
+												<b>Endereço: </b><h:outputText value="#{loginManager.usuario.endereco}" />
+											</p>
+											
 										</div>
-									</h:panelGroup>
-									<h:inputHidden value="#{perguntaMB.pergunta.id}" />
-
-									<label for="exampleInputNome">Nome</label>
-									<h:inputText styleClass="form-control" readonly="true"
-										value="#{sessaoMB.nomeUsuarioLogado}" id="exampleInputNome" />
-
-									<label for="exampleInputEmail">Email</label>
-									<h:inputText styleClass="form-control" readonly="true"
-										value="#{sessaoMB.emailUsuarioLogado}" id="exampleInputEmail" />
-
-									<label for="exampleInputCPF">CPF</label>
-									<h:inputText styleClass="form-control" readonly="true"
-										value="#{sessaoMB.CPFUsuarioLogado}" id="exampleInputCPF" />
-
-									<label for="exampleInputData">Data De Nascimento</label>
-									<h:inputText styleClass="form-control"	value="#{sessaoMB.dataUsuarioLogado}" readonly="true">
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:inputText>
 		
 								</div>
 							</div>
 							
 						</div>
-						
-						<div role="tabpanel" class="tab-pane fade" id="B">
-							<label for="exampleInputData" style="margin-top: 10px;">Cor Do Menu</label>
-							<input id="background-color" type="color"  value=""/>
-						</div>
-						
-						<div role="tabpanel" class="tab-pane fade" id="C">
-							<div id="quadro_cadastrar">
-							<div class="col-md-7">
-							<h:form enctype="multipart/form-data">
-							
-							<h:graphicImage rendered="#{not empty usuarioMB.usuario.fotoPerfil}"
-							styleClass="img-responsive"	name="fotosDePerfil/#{usuarioMB.uploadedFotoPerfil}" />
-								<h:panelGroup rendered="#{not empty sessaoMB.idUsuarioLogado}">
-									<div class="form-group id">
-										<label for="exampleId">ID</label>
-										<h:inputText styleClass="form-control" readonly="true"
-											value="#{sessaoMB.idUsuarioLogado}" id="exampleId" />
-									</div>
-								</h:panelGroup>
-								<h:inputHidden value="#{sessaoMB.idUsuarioLogado}"  />
-								<label for="exampleInputNome">Nome</label>
-								<h:inputText styleClass="form-control" 
-									value="#{sessaoMB.nomeUsuarioLogado}" id="exampleInputNome"/>
-	
-								<label for="exampleInputEmail">Email</label>
-								<h:inputText styleClass="form-control" 
-									value="#{sessaoMB.emailUsuarioLogado}" id="exampleInputEmail" />
-	
-								<label for="exampleInputCPF">CPF</label>
-								<h:inputText styleClass="form-control"
-									value="#{sessaoMB.CPFUsuarioLogado}" id="exampleInputCPF" />
-	
-								<label for="exampleInputData">Data De Nascimento</label>
-								<h:inputText styleClass="form-control"	value="#{sessaoMB.dataUsuarioLogado}">
-									<f:convertDateTime pattern="dd/MM/yyyy" />
-								</h:inputText>
-								<button type="reset" >Limpar</button>
-								<h:commandButton action="#{usuarioMB.salvar}" value="Salvar" />
-							</h:form>
-							</div>
-							</div>
-						</div>
-						
+																	
 						<div role="tabpanel" class="tab-pane fade" id="D">
 							<center>
 								<h1><i>Sistema desenvolvido por</i></h1>
@@ -124,6 +75,7 @@
 								<p>Florianópolis, 23 de Julho de 2016.</p>
 							</center>
 						</div>
+					
 						
 
 					</div>
