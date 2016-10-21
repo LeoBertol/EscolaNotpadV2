@@ -16,30 +16,26 @@
 	<ui:define name="conteudo"><div id="conteudo"><div id="formulario_cadastro">
 		
 		<div id="quadro_cadastrar_titulo">
-			<h1>Cadastrar curso <small>Novo</small></h1>
+			<h1>Cadastrar Curso <small>Novo</small></h1>
 		</div>
 		
 		<p:messages autoUpdate="true"/>
 				
 		<div id="quadro_cadastrar"><div class="col-md-7">
 			<h:form>
-				<h:panelGroup rendered="#{not empty cursoMB.curso.id}">
-					<div class="form-group id">
-						<label for="exampleId">ID</label>
-						<h:inputText styleClass="form-control" readonly="true"
-							value="#{cursoMB.curso.id}" id="exampleId" />
-					</div>
-				</h:panelGroup>
+				
 				<h:inputHidden value="#{cursoMB.curso.id}"  />
 				
-					<label for="exampleInputNome">Nome</label>
-					<h:inputText styleClass="form-control"	value="#{cursoMB.curso.nome}" id="exampleInputNome" />
+					<p:outputLabel for="nome-id" value="Nome"/>
+					<p:inputText styleClass="form-control"	value="#{cursoMB.curso.nome}" id="nome-id" required="true"
+								requiredMessage="O Nome do curso é obrigatório!"/>
 				
-					<label for="exampleInputTitulo">Descrição</label>
-					<h:inputTextarea cols="30" rows="10"  styleClass="form-control textareaformulario" value="#{cursoMB.curso.descricao}" id="exampleInputDescricao" />
+					<p:outputLabel for="descricao-id" value="Descrição"/>
+					<p:inputTextarea cols="30" rows="10"  styleClass="form-control textareaformulario" value="#{cursoMB.curso.descricao}" id="descricao-id" required="true"
+								requiredMessage="A descrição do curso é obrigatória!"/>
 					
-					<label for="exampleInputTitulo">Mensalidade</label>
-					<h:inputText styleClass="form-control"	value="#{cursoMB.curso.mensalidade}" id="exampleInputMensalidade" />
+					<p:outputLabel for="mensalidade-id" value="Mensalidade"/>
+					<p:inputText styleClass="form-control"	value="#{cursoMB.curso.mensalidade}" id="mensalidade-id"/>
 											
 				<button type="reset">Limpar</button>
 				<h:commandButton styleClass="btn btn-success" action="#{cursoMB.salvar}" value="Salvar" />

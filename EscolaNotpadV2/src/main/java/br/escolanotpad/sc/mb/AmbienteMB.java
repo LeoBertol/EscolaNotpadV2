@@ -4,12 +4,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.escolanotpad.sc.model.AmbienteRN;
 import br.escolanotpad.sc.model.entity.Ambiente;
+import br.escolanotpad.sc.model.entity.Curso;
 
 @ViewScoped
 @ManagedBean
@@ -62,10 +64,22 @@ public class AmbienteMB {
 		}		
 	}
 	
-	public String salvar() throws SQLException{
-		ambienteRN.salvar(ambiente);
-		listaAmbientes = null;
-		return "";
+	public String salvar() throws Throwable{
+		if(editarId == null){
+			ambienteRN.salvar(ambiente);
+			listaAmbientes = null;
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ambiente cadastrado com sucesso!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			ambiente = new Ambiente();
+			return "";
+		}else{
+			ambienteRN.salvar(ambiente);
+			listaAmbientes = null;
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ambiente atualizado com sucesso!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			ambiente = new Ambiente();
+			return "";
+		}
 	}
 	
 	public String excluir(String id){
