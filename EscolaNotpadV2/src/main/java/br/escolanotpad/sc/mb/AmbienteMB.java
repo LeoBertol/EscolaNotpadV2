@@ -86,6 +86,8 @@ public class AmbienteMB {
 		Long idExcluir = Long.parseLong(id);
 		ambienteRN.excluir(idExcluir);
 		listaAmbientes = null;
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Ambiente removido com sucesso!", "");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 		return"";
 	}
 	
