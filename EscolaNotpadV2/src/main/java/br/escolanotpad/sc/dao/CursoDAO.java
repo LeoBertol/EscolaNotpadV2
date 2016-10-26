@@ -25,7 +25,7 @@ public class CursoDAO extends DAO{
 		Query query = getEM().createQuery("From Curso order by id desc", Curso.class);
 		return query.getResultList();
 	}
-	
+		
 	public void excluir(Long id){
 		Curso curso = getEM().getReference(Curso.class, id);
 		getEM().remove(curso);

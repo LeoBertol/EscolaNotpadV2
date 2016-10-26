@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
+	
+	<ui:define name="conteudo"><div id="conteudo">
+		
+		<div id="quadro_listar_titulo">
+			<h1>Listagem <small>de Cursos</small></h1>
+		</div>
+		
+		<p>Cursos cadastrados: <h:outputText value="#{cursoMB.tamanho}" /></p>
+					
+		<div id="listar_cadastros"><h:form>
+			<p:dataTable value="#{cursoMB.listaCursosCadastrados}" var="course" rows="10"
+                         paginator="true"
+                         paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15,20"
+                         currentPageReportTemplate="(Página: {currentPage} De {totalPages} )" style="text-align: center">
+								
+				<p:column>
+					<f:facet name="header">Curso</f:facet>
+					<h:outputText value="#{course.nome}" />
+				</p:column>
+								
+				<p:column>
+				
+					<f:facet name="header">Ações</f:facet>
+				
+					<button type="button" data-toggle="modal" data-target="#myModal#{course.id}" style="background-color: transparent; border: none">
+						<span class="glyphicon glyphicon-search" aria-hidden="true" style="float: left; margin-top: 1px"></span>
+					</button>
+							
+					<div class="modal fade" id="myModal#{course.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="text-align: left;">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">Informações Sobre <b><h:outputText value="#{course.nome}" /></b></h4>
+								</div>
+								<div class="modal-body">
+									<p><b>Curso: </b> <h:outputText value="#{course.nome}" /></p>
+									<p><b>Mensalidade: </b> <h:outputText value="#{course.mensalidade}" /></p>
+									<p><b>Descrição:</b></p>
+									<h:inputTextarea readonly="true" cols="30" rows="10" value="#{course.descricao}" styleClass="form-control textareaformulario" id="exampleInputDescricao" />								
+								</div>
+							</div>
+						</div>
+					</div>
+			
+				</p:column>
+
+			</p:dataTable>
+			
+			<h:commandButton styleClass="btn btn-primary" action="#{cursoMB.voltarRelatorios}" value="Voltar" style="margin-top: 25px;"/>
+			
+		</h:form></div>
+	</div></ui:define>
+	
+	
+	
+</ui:composition>
+</html>

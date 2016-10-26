@@ -16,7 +16,6 @@ import br.escolanotpad.sc.model.entity.Curso;
 import br.escolanotpad.sc.model.entity.Turma;
 import br.escolanotpad.sc.model.entity.Usuario;
 
-@ViewScoped
 @ManagedBean
 public class TurmaMB {
 	private List<Turma> listaTurmas;
@@ -25,9 +24,9 @@ public class TurmaMB {
 	private Turma turma;
 	private Usuario usuarioLogado;	
 	private Long editarId;
-		
-	
 	private Usuario alunoSelecionado;
+	private List<Turma> listaTurmasCadastradas;
+	private int tamanho;
 	
 	@PostConstruct
 	public void init(){
@@ -86,10 +85,36 @@ public class TurmaMB {
 		this.editarId = editarId;
 	}
 	
+	public List<Turma> getListaTurmasCadastradas() {
+		return listaTurmasCadastradas;
+	}
+
+	public void setListaTurmasCadastradas(List<Turma> listaTurmasCadastradas) {
+		this.listaTurmasCadastradas = listaTurmasCadastradas;
+	}
+
+	public int getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(int tamanho) {
+		this.tamanho = tamanho;
+	}
+
 	public void carregarEdicao(){
 		if(editarId != null && !FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()){
 			turma = turmaRN.buscarPorId(editarId);
 		}
+	}
+	
+	public String voltarRelatorios(){
+		return "/admin/relatorios";
+	}
+	
+	public String turmasCadastradas(){
+		listaTurmasCadastradas = turmaRN.listar();
+		tamanho = listaTurmasCadastradas.size();
+		return "/admin/resultadoRelatorioTurmas";
 	}
 	
 	public void adicionarAluno(AjaxBehaviorEvent event){

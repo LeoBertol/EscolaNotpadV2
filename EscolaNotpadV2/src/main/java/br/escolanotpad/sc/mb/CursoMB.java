@@ -17,6 +17,8 @@ public class CursoMB {
 	private CursoRN cursoRN;
 	private Long editarId;
 	private List<Curso> listaCursos;
+	private List<Curso> listaCursosCadastrados;
+	private int tamanho;
 	
 	@PostConstruct
 	public void initi(){
@@ -52,6 +54,16 @@ public class CursoMB {
 			return "";
 		}
 		
+	}
+	
+	public String voltarRelatorios(){
+		return "/admin/relatorios";
+	}
+	
+	public String cursosCadastrados(){
+		listaCursosCadastrados = cursoRN.listar();
+		tamanho = listaCursosCadastrados.size();
+		return "/admin/resultadoRelatorioCursos";		
 	}
 	
 	public void carregarCurso(ComponentSystemEvent event){
@@ -94,5 +106,23 @@ public class CursoMB {
 	public void setEditarId(Long editarId) {
 		this.editarId = editarId;
 	}
+
+	public List<Curso> getListaCursosCadastrados() {
+		return listaCursosCadastrados;
+	}
+
+	public void setListaCursosCadastrados(List<Curso> listaCursosCadastrados) {
+		this.listaCursosCadastrados = listaCursosCadastrados;
+	}
+
+	public int getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(int tamanho) {
+		this.tamanho = tamanho;
+	}
+	
+	
 			
 }
