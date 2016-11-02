@@ -3,13 +3,17 @@ package br.escolanotpad.sc.model.entity;
 import java.sql.Time;
 import java.util.Date;
 
+import javax.faces.bean.ViewScoped;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.mysql.fabric.xmlrpc.base.Data;
 
+@ViewScoped
 @Entity
 public class Agenda {
 	
@@ -23,9 +27,10 @@ public class Agenda {
 	@ManyToOne
 	private Turma turma;
 	private Date data;
-	private String inicioDaAula;
-	private String fimDaAula;
-	
+	@Temporal(TemporalType.TIME)
+	private Date inicioDaAula;
+	@Temporal(TemporalType.TIME)
+	private Date fimDaAula;
 	public Long getId() {
 		return id;
 	}
@@ -44,30 +49,31 @@ public class Agenda {
 	public void setAmbiente(Ambiente ambiente) {
 		this.ambiente = ambiente;
 	}
-	public Date getData() {
-		return data;
-	}
-	public void setData(Date data) {
-		this.data = data;
-	}
-	public String getInicioDaAula() {
-		return inicioDaAula;
-	}
-	public void setInicioDaAula(String inicioDaAula) {
-		this.inicioDaAula = inicioDaAula;
-	}
-	public String getFimDaAula() {
-		return fimDaAula;
-	}
-	public void setFimDaAula(String fimDaAula) {
-		this.fimDaAula = fimDaAula;
-	}
 	public Turma getTurma() {
 		return turma;
 	}
 	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
+	public Date getData() {
+		return data;
+	}
+	public void setData(Date data) {
+		this.data = data;
+	}
+	public Date getInicioDaAula() {
+		return inicioDaAula;
+	}
+	public void setInicioDaAula(Date inicioDaAula) {
+		this.inicioDaAula = inicioDaAula;
+	}
+	public Date getFimDaAula() {
+		return fimDaAula;
+	}
+	public void setFimDaAula(Date fimDaAula) {
+		this.fimDaAula = fimDaAula;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -92,5 +98,9 @@ public class Agenda {
 			return false;
 		return true;
 	}
+	
+	
+	
+	
 	
 }

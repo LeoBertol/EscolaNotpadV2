@@ -94,6 +94,17 @@
     	<artifactId>commons-email</artifactId>
     	<version>1.4</version>
     </dependency>
+    <dependency>
+    	<groupId>hsqldb</groupId>
+    	<artifactId>hsqldb</artifactId>
+    	<version>1.8.0.10</version>
+    	<scope>test</scope>
+    </dependency>
+    <dependency>
+    	<groupId>com.itextpdf</groupId>
+    	<artifactId>itextpdf</artifactId>
+    	<version>5.5.10</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>${project.artifactId}</finalName>
