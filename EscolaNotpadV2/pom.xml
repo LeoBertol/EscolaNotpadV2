@@ -176,7 +176,7 @@
 				<version>3.7</version>
 				<configuration>
 					<linkXref>true</linkXref>
-					<sourceEncoding>utf-8</sourceEncoding>
+					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
 					<minimumTokens>100</minimumTokens>
 					<targetJdk>${java.version}</targetJdk>
 					<failOnViolation>false</failOnViolation>
@@ -197,7 +197,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.4</version>
+				<version>3.7</version>
 			</plugin>
 		</plugins>
 	</reporting>
