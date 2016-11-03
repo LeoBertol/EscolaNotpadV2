@@ -15,6 +15,11 @@
 
 
 	<ui:define name="conteudo">
+	
+	
+	
+
+	
 		<div id="conteudo">
 			<div id="formulario_cadastro">
 
@@ -29,32 +34,30 @@
 				<div id="quadro_cadastrar">
 					<div class="col-md-7">
 						<h:form id="formulario">
-
-							<h:panelGroup rendered="#{not empty agendaMB.agenda.id}">
-								<div class="form-group id">
-									<label for="exampleId">ID</label>
-									<h:inputText styleClass="form-control" readonly="true"
-										value="#{agendaMB.agenda.id}" id="exampleId" />
-								</div>
-							</h:panelGroup>
+						
+							<h:inputHidden value="#{agendaMB.agenda.id}"  />
 
 							<label for="tipoAmbiente-id">Professor</label>
 							<br />
+							
 							<p:autoComplete id="professor-id"
 								value="#{agendaMB.agenda.professorResponsavel}"
 								completeMethod="#{agendaMB.completaProfessor}" var="professor"
 								itemLabel="#{professor.nome}" itemValue="#{professor}"
 								forceSelection="true" required="true"
 								requiredMessage="O professor e obrigatorio!"
-								class="form-control" />
-
+								class="form-control"
+								style="width: 100%;"
+								styleClass="width: 100%; !important"
+								/>
+							
 							<br />
 							<label>Turma</label>
 							<h:selectOneMenu styleClass="form-control"
 								value="#{agendaMB.agenda.turma}" required="true" requiredMessage="A turma e obrigatorio!">
 								<f:selectItem itemLabel="-- Selecione --" />
 								<f:selectItems value="#{turmaMB.listaTurmas}" var="turma"
-									itemLabel="#{turma.titulo}" itemValue="#{turma}" />
+									itemLabel="#{turma.nome}" itemValue="#{turma}" />
 							</h:selectOneMenu>
 							
 							<label>Ambiente</label>
@@ -82,42 +85,31 @@
 								<div id="1" style="display: inline-block; width: 49%; margin-right: 1%;">
 									<label>Hora de inicio</label>
 					                <div class='input-group date' id='datetimepicker3'>
-					                    <h:inputText type='text' class="form-control" value="#{agendaMB.agenda.inicioDaAula}" required="true"
-					                    requiredMessage="A hora de inicio e obrigatorio!">
-					                    	<!-- <f:convertDateTime pattern="HH:mm"/> -->
+					                    <h:inputText type='text' class="form-control" value="#{agendaMB.agenda.inicioDaAula}" required="true">
+					                   		<f:convertDateTime pattern="HH:mm"/>
 					                    </h:inputText>
+					                    
 					                    <span class="input-group-addon">
 					                        <span class="glyphicon glyphicon-time"></span>
 					                    </span>
 					                </div>
 						          
-							        <script type="text/javascript">
-							            $(function () {
-							                $('#datetimepicker3').datetimepicker({
-							                    format: 'LT'
-							                });
-							            });
-							        </script>
+							        
 						        </div>
 						        <div id="2" style="display: inline-block; width: 49%;">
 							        <label>Hora de termino</label>
 					                <div class='input-group date' id='datetimepicker3a'>
 					                    <h:inputText type='text' class="form-control" value="#{agendaMB.agenda.fimDaAula}" required="true"
 					                    requiredMessage="A hora de termino e obrigatorio!">
-					                    	<!-- <f:convertDateTime pattern="HH:mm"/> -->
+					                    	<f:convertDateTime pattern="HH:mm"/>
 					                    </h:inputText>
 					                    <span class="input-group-addon">
 					                        <span class="glyphicon glyphicon-time"></span>
 					                    </span>
 					                </div>
+					                
+					                
 						          
-							        <script type="text/javascript">
-							            $(function () {
-							                $('#datetimepicker3a').datetimepicker({
-							                    format: 'LT'
-							                });
-							            });
-							        </script>
 					        	</div>
 					        </div>
         
@@ -127,6 +119,7 @@
 							
 
 						</h:form>
+						
 					</div>
 				</div>
 
@@ -134,6 +127,8 @@
 		</div>
 
 		<h:outputScript name="/js/datepicker-component.js" />
+		
+		
 	</ui:define>
 
 

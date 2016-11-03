@@ -28,6 +28,7 @@ public class UsuarioMB {
 	private List<Usuario> listaAlunos;
 	private List<Usuario> listaAlunosCadastrados;
 	private int tamanho;
+	private String descricao;
 	
 	@PostConstruct
 	public void depoisDeConstruir(){
@@ -88,6 +89,14 @@ public class UsuarioMB {
 
 	public void setUploadedFotoPerfil(Part uploadedFotoPerfil) {
 		this.uploadedFotoPerfil = uploadedFotoPerfil;
+	}
+	
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public void carregarUsuario(ComponentSystemEvent event){
@@ -154,18 +163,30 @@ public class UsuarioMB {
 	
 	public String alunosCadastrados(){
 		if(listaAlunosCadastrados == null){
-			if(usuario.getPerfil().equals("ROLE_ADMINISTRADOR")){
+			if(usuario.getPerfil().equals("TODOS_OS_USUARIOS")){
+				listaAlunosCadastrados = usuarioRN.listarUsuarios();				
+				tamanho = listaAlunosCadastrados.size();				
+				descricao = "Usuários cadastrados: ";
+			}else if(usuario.getPerfil().equals("ROLE_ADMINISTRADOR")){
 				listaAlunosCadastrados = usuarioRN.listarAdministradores();				
 				tamanho = listaAlunosCadastrados.size();
+				descricao = "Usuários com perfil de administrador: ";
 			}else if(usuario.getPerfil().equals("ROLE_ALUNO")){
 				listaAlunosCadastrados = usuarioRN.listarAlunos();
 				tamanho = listaAlunosCadastrados.size();
+				descricao = "Usuários com perfil de aluno: ";
 			}else if(usuario.getPerfil().equals("ROLE_PROFESSOR")){
 				listaAlunosCadastrados = usuarioRN.listarProfessores();
 				tamanho = listaAlunosCadastrados.size();
+				descricao = "Usuários com perfil de professor: ";
 			}
+		
 		}
-		return "/admin/relatorioAlunosCadastrados";
+		return "/admin/resultadoRelatorioUsuarios";
+	}
+
+	public String selecaoRelatoriosUsuario(){
+		return "/admin/selecaoRelatoriosUsuario";
 	}
 	
 	public String voltarRelatorios(){

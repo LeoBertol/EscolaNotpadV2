@@ -6,92 +6,59 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:p="http://primefaces.org/ui">
 	  
-	  <f:metadata>
+	  
+<f:metadata>
 	<f:viewParam name="id" value="#{ambienteMB.editarId}" />
 	<f:event listener="#{ambienteMB.carregarEdicao}" type="preRenderView" />
 </f:metadata>
-	  
-	<ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
-		<ui:define name="conteudo"><div id="conteudo"><div id="formulario_cadastro">
+
+<ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
+	<ui:define name="conteudo"><div id="conteudo"><div id="formulario_cadastro">
 		
-			<div id="quadro_cadastrar_titulo">
-				<h1>Cadastrar Ambiente <small>Novo</small></h1>
-			</div>
-			
-			<p:messages autoUpdate="true"/>
-			
-			<div id="quadro_cadastrar"><div class="col-md-7">
-			<h:form id="formulario">
-				<h:panelGroup rendered="#{not empty ambienteMB.ambiente.id}">
-					<div class="form-group id">
-						<label for="exampleId">ID</label>
-						<h:inputText styleClass="form-control" readonly="true"
-							value="#{ambienteMB.ambiente.id}" id="exampleId" />
-					</div>
-				</h:panelGroup>
-			
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<div class="form-group">
-							<p:outputLabel for="nome-id" value="Nome"/>
-							<p:inputText id="nome-id" styleClass="form-control"
-								value="#{ambienteMB.ambiente.nome}" required="true"
-								requiredMessage="O Nome do ambiente é obrigatório!"
-								maxlength="100"/>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<div class="form-group">
-							<p:outputLabel for="descricao-id" value="Descrição"/>
-							<p:inputTextarea id="descricao-id" 
-								styleClass="form-control"
-								value="#{ambienteMB.ambiente.descricao}"
-								counter="display" maxlength="500" 
-								counterTemplate="{0} caracteres restantes!"
-								required="true" requiredMessage="A descrição é obrigatória!"/>
-							<h:outputText id="display"/>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<div class="form-group">
-							<p:outputLabel for="capacidade-id" value="Capacidade"/>
-							<p:inputText id="capacidade-id" styleClass="form-control"
-								value="#{ambienteMB.ambiente.capacidade}" required="true"
-								requiredMessage="A capacidade do ambiente é obrigatória!"/>
-						</div>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<div class="form-group">
-				<label for="tipoAmbiente-id">Tipo do Ambiente</label>
-					<h:selectOneMenu value="#{ambienteMB.ambiente.tipoAmbiente}" styleClass="form-control" required="true" requiredMessage="O tipo do ambiente é obrigatório!">
-						<f:selectItem itemLabel="-- Selecione --" />
-								<f:selectItem itemLabel="Biblioteca" itemValue="Biblioteca" />
-								<f:selectItem itemLabel="Laboratório" itemValue="Laboratorio" />	
-					            <f:selectItem itemLabel="Sala" itemValue="Sala" />         
-					            <f:selectItem itemLabel="Outros" itemValue="Outros" />						 	   							
-					</h:selectOneMenu>
-				 
-					</div>
-					</div>
-				</div>
-			        			
-				<button type="reset" >Limpar</button>
-				<h:commandButton action="#{ambienteMB.salvar}" value="Salvar" />
-			</h:form>
-			</div>
+		<div id="quadro_cadastrar_titulo">
+			<h1>Cadastrar Ambiente <small>Novo</small></h1>
 		</div>
 		
-		</div></div>
-		</ui:define>
-	</ui:composition>
-	  
+		<p:messages autoUpdate="true"/>
+				
+		<div id="quadro_cadastrar"><div class="col-md-7">
+			<h:form>
+				
+				<h:inputHidden value="#{ambienteMB.ambiente.id}"  />
+				
+					<p:outputLabel for="nome-id" value="Nome"/>
+					<p:inputText styleClass="form-control"	value="#{ambienteMB.ambiente.nome}" id="nome-id" required="true"
+								requiredMessage="O Nome do ambiente é obrigatório!"/>
+				
+					<p:outputLabel for="descricao-id" value="Descrição"/>
+					<p:inputTextarea cols="30" rows="10"  styleClass="form-control textareaformulario" value="#{ambienteMB.ambiente.descricao}" id="descricao-id" required="true"
+								requiredMessage="A descrição do ambiente é obrigatória!"/>
+					
+					
+	        		<p:outputLabel for="capacidade-id" value="Capacidade" />
+      				<p:inputText id="capacidade-id" value="#{ambienteMB.ambiente.capacidade}" required="true" type="number" min="1"  max="1000" step="1"
+								requiredMessage="A capacidade do ambiente é obrigatória!" styleClass="form-control"/>
+        			        			
+					<p:outputLabel for="tipoAmbiente-id" value="Tipo do Ambiente" />
+					<!-- <label for="tipoAmbiente-id">Tipo Usuário</label> -->
+			        <h:selectOneMenu id="tipoAmbiente-id" value="#{ambienteMB.ambiente.tipoAmbiente}" required="true"
+								requiredMessage="O tipo do ambiente é obrigatório!" styleClass="form-control" style="">
+			        	<f:selectItem itemLabel="-- Selecione --"/>
+			            <f:selectItem itemLabel="Biblioteca" itemValue="Biblioteca" />
+						<f:selectItem itemLabel="Laboratório" itemValue="Laboratorio" />	
+			            <f:selectItem itemLabel="Sala" itemValue="Sala" />         
+			            <f:selectItem itemLabel="Outros" itemValue="Outros" />	
+	        		</h:selectOneMenu>
+	        			        					
+				<button type="reset">Limpar</button>
+				<h:commandButton styleClass="btn btn-success" action="#{ambienteMB.salvar}" value="Salvar" />
+			
+			</h:form>
+		</div>
+		</div>
+		
+		<h:outputScript name="/js/datepicker-component.js" />
+	</div></div></ui:define>
+
+</ui:composition>
 </html>

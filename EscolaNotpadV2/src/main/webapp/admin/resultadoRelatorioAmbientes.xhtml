@@ -2,26 +2,22 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
-	<ui:define name="conteudo">
-		<div id="conteudo">
-
-			<div id="quadro_listar_titulo">
-				<h1>
-					Listagem <small>de Ambientes</small>
-				</h1>
-			</div>
-			
-			<p:messages autoUpdate="true"/>
+	<ui:define name="conteudo"><div id="conteudo">
 		
-			<div id="listar_cadastros">
-				<h:form>
-					<p:dataTable value="#{ambienteMB.listaAmbientes}" var="ambiente" rows="10"
+		<div id="quadro_listar_titulo">
+			<h1>Listagem <small>de Ambientes</small></h1>
+		</div>
+		
+		<p>Ambientes cadastrados: <h:outputText value="#{ambienteMB.tamanho}" /></p>
+					
+		<div id="listar_cadastros"><h:form>
+			<p:dataTable value="#{ambienteMB.listaAmbientesCadastrados}" var="ambiente" rows="10"
                          paginator="true"
                          paginatorPosition="bottom"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -45,16 +41,6 @@
 									style="float: left; margin-top: 1px;"></span>
 							</button>
 							
-							<h:link outcome="/admin/formularioAmbiente" title="Editar">
-								<f:param name="id" value="#{ambiente.id}" />
-								<span class="glyphicon glyphicon-pencil" aria-hidden="true"
-									style="margin-top: 1px; margin-right: 5px;"></span>
-							</h:link>
-							
-								<h:commandLink onclick="return confirm('Tem certeza da exclusão do ambiente #{ambiente.nome}');" title="Excluir"
-						action="#{ambienteMB.excluir(ambiente.id)}"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="margin-top: 1px; margin-right: 3px;"></span></h:commandLink>
-						
-
 							<div class="modal fade" id="myModal#{ambiente.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"  style="text-align: left;">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
@@ -95,12 +81,10 @@
 						</p:column>
 
 					</p:dataTable>
-
-
-
-				</h:form>
-			</div>
-		</div>
-	</ui:define>
+			
+			<h:commandButton styleClass="btn btn-primary" action="#{ambienteMB.voltarRelatorios}" value="Voltar" style="margin-top: 25px;"/>
+			
+		</h:form></div>
+	</div></ui:define>
 </ui:composition>
 </html>

@@ -9,8 +9,12 @@ import br.escolanotpad.sc.model.entity.Ambiente;
 
 public class AmbienteDAO extends DAO{
 	
-	public void salvar(Ambiente ambiente) throws SQLException{
-		getEM().merge(ambiente);
+	public void salvar(Ambiente ambiente){
+		if(ambiente.getId() == null){
+			getEM().persist(ambiente);
+		}else{
+			getEM().merge(ambiente);
+		}
 	}
 	
 	public Ambiente buscarPorId(Long id){

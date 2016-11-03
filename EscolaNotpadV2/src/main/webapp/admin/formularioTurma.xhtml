@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 	
 <f:metadata>
 	<f:viewParam name="id" value="#{turmaMB.editarId}" />
@@ -18,70 +19,39 @@
 			<h1>Cadastrar Turma <small>Nova</small></h1>
 		</div>
 		
+		<p:messages autoUpdate="true"/>		
 		
 		<div id="quadro_cadastrar"><div class="col-md-7">
 			<h:form>
-				<h:panelGroup rendered="#{not empty turmaMB.turma.id}">
-					<div class="form-group id">
-						<label for="exampleId">ID</label>
-						<h:inputText styleClass="form-control" readonly="true"
-							value="#{turmaMB.turma.id}" id="exampleId" />
-					</div>
-				</h:panelGroup>
+				
 				<h:inputHidden value="#{turmaMB.turma.id}"  />
 				
-					<label for="exampleInputNome">Nome</label>
-					<h:inputText styleClass="form-control"	value="#{turmaMB.turma.nome}" id="exampleInputNome" />
+				<p:outputLabel for="nome-id" value="Nome"/>
+				<p:inputText styleClass="form-control"	value="#{turmaMB.turma.nome}" id="nome-id" required="true"
+								requiredMessage="O Nome da turma é obrigatório!"/>
 				
-					<label for="exampleInputTitulo">Titulo</label>
-					<h:inputText styleClass="form-control"	value="#{turmaMB.turma.titulo}" id="exampleInputTitulo" />
+				<p:outputLabel for="professorResponsavel-id" value="Professor Responsavel" />
+			        <h:selectOneMenu id="professorResponsavel-id" value="#{turmaMB.turma.professor}" required="true"
+								requiredMessage="O professor responsável pela turma é obrigatório!" styleClass="form-control" style="">
+			        	<f:selectItem itemLabel="-- Selecione --"/>
+			            <f:selectItems value="#{usuarioMB.listaProfessores}" var="professor" 
+						itemLabel="#{professor.nome}" itemValue="#{professor}" />	
+        			</h:selectOneMenu>
+        			
+        		<p:outputLabel for="cursoTurma-id" value="Curso Pertencente" />
+			        <h:selectOneMenu id="cursoTurma-id" value="#{turmaMB.turma.curso}" required="true"
+								requiredMessage="O curso da turma é obrigatório!" styleClass="form-control" style="">
+			        	<f:selectItem itemLabel="-- Selecione --"/>
+			            <f:selectItems value="#{cursoMB.listaCursos}" var="curso" 
+						itemLabel="#{curso.nome}" itemValue="#{curso}" />	
+        			</h:selectOneMenu>
 				
-					
-			
-					<label>Professor Responsavel</label>
-					<h:selectOneMenu styleClass="form-control" value="#{turmaMB.turma.professor}">
-						<f:selectItem itemLabel="-- Selecione --" />						
-						<f:selectItems value="#{usuarioMB.listaProfessores}" var="professor" 
-							itemLabel="#{professor.nome}" itemValue="#{professor}" />
-					</h:selectOneMenu>
-					
-					<label>Curso Pertencente</label>
-					<h:selectOneMenu styleClass="form-control" value="#{turmaMB.turma.curso}">
-						<f:selectItem itemLabel="-- Selecione --" />						
-						<f:selectItems value="#{cursoMB.listaCursos}" var="curso" 
-							itemLabel="#{curso.nome}" itemValue="#{curso}" />
-					</h:selectOneMenu>
-				
-			
-					<label>Data de Início</label>
-					<div class='input-group date datetimepicker'>
-						<h:inputText styleClass="form-control"
-							value="#{turmaMB.turma.dataDeInicio}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:inputText>
-						<span class="input-group-addon">
-	                        <span class="glyphicon glyphicon-calendar"></span>
-	                    </span>
-                    </div>
-				
-			
-					<label>Data de Termino</label>
-					<div class='input-group date datetimepicker'>
-						<h:inputText styleClass="form-control"
-							value="#{turmaMB.turma.dataDeTermino}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:inputText>
-						<span class="input-group-addon">
-	                        <span class="glyphicon glyphicon-calendar"></span>
-	                    </span>
-                    </div>
-             
-             <div id="inserirAluno">       
+			 <div id="inserirAluno" style="margin-top: 20px;">       
              <fieldset>
 				<legend>Alunos Participantes</legend>
 				<div class="row">
 					<div class="col-sm-9">
-						<h:selectOneMenu id="uiSelecionaCliente" styleClass="form-control" value="#{turmaMB.alunoSelecionado}">
+					 	<h:selectOneMenu id="uiSelecionaCliente" styleClass="form-control" value="#{turmaMB.alunoSelecionado}">
 							<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
 							<f:selectItems value="#{usuarioMB.listaAlunos}" var="cli"
 								itemLabel="#{cli.nome}" itemValue="#{cli}" />

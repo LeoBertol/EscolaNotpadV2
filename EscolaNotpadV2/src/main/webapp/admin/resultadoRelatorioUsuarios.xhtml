@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
 	<ui:define name="conteudo">
@@ -12,45 +13,38 @@
 
 			<div id="quadro_listar_titulo">
 				<h1>
-					Lista <small>Usuários</small>
+					Listagem <small>de Usuários</small>
 				</h1>
 			</div>
-			<p>Usuários Cadastrados Com Esse Perfil: <h:outputText value="#{usuarioMB.tamanho}" /></p>
+			
+			<p><h:outputText value="#{usuarioMB.descricao}"/><h:outputText value="#{usuarioMB.tamanho}" /></p>
 			<div id="listar_cadastros">
 				<h:form>
-					<h:dataTable value="#{usuarioMB.listaAlunosCadastrados}" var="user"
-						styleClass="table table-striped">
-						<h:column>
-							<f:facet name="header">ID</f:facet>
-							<h:outputText value="#{user.id}" />
-						</h:column>
-						<h:column>
+					<p:dataTable value="#{usuarioMB.listaAlunosCadastrados}" var="user" rows="10"
+                         paginator="true"
+                         paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15,20"
+                         currentPageReportTemplate="(Página: {currentPage} De {totalPages} )" style="text-align: center;">>
+						<p:column>
 							<f:facet name="header">Nome</f:facet>
 							<h:outputText value="#{user.nome}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Email</f:facet>
-							<h:outputText value="#{user.email}" />
-						</h:column>
-						<h:column>
+						</p:column>
+						<p:column>
 							<f:facet name="header">CPF</f:facet>
 							<h:outputText value="#{user.cpf}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">Tipo</f:facet>
-							<h:outputText value="#{user.perfil}" />
-						</h:column>
-						<h:column>
+						</p:column>
+						<p:column>
 							<f:facet name="header">Opções</f:facet>
 
 							<button type="button" data-toggle="modal" data-target="#myModal#{user.id}"
-								style="background-color: transparent; border: none; float: left">
+								style="background-color: transparent; border: none;">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"
 									style="float: left; margin-top: 1px; margin-right: 3px;"></span>
 							</button>
 
 							<div class="modal fade" id="myModal#{user.id}" tabindex="-1" role="dialog"
-								aria-labelledby="myModalLabel">
+								aria-labelledby="myModalLabel" style="text-align: left;">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -64,10 +58,6 @@
 										</div>
 										<div class="modal-body">
 											<p>
-												<b>ID: </b>
-												<h:outputText value="#{user.id}" />
-											</p>
-											<p>
 												<b>Nome: </b>
 												<h:outputText value="#{user.nome}" />
 											</p>
@@ -77,11 +67,11 @@
 											</p>
 											<p>
 												<b>CPF: </b>
-												<h:outputText value="#{user.endereco}" />
+												<h:outputText value="#{user.cpf}" />
 											</p>
 											<p>
-												<b>Tipo: </b>
-												<h:outputText value="#{user.perfil}" />
+												<b>Perfil: </b>
+												<h:outputText value="#{usuarioMB.converterPerfilLayout(user.perfil)}" />
 											</p>
 											<p>
 												<b>Data De Nascimento: </b>
@@ -106,11 +96,11 @@
 								</div>
 							</div>
 
-						</h:column>
+						</p:column>
 
-					</h:dataTable>
+					</p:dataTable>
 
-					<h:commandButton styleClass="btn btn-primary" action="#{usuarioMB.voltarRelatorios}" value="Voltar" />
+					<h:commandButton styleClass="btn btn-primary" action="#{usuarioMB.selecaoRelatoriosUsuario}" value="Voltar" style="margin-top: 25px;"/>
 
 				</h:form>
 			</div>

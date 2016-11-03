@@ -10,8 +10,12 @@ import br.escolanotpad.sc.model.entity.Usuario;
 
 public class TurmaDAO extends DAO{
 		
-	public void salvar(Turma turma) throws SQLException{
-		getEM().merge(turma);
+	public void salvar(Turma turma){
+		if(turma.getId() == null){
+			getEM().persist(turma);
+		}else{
+			getEM().merge(turma);
+		}
 	}
 	
 	public Turma buscarPorId(Long id){

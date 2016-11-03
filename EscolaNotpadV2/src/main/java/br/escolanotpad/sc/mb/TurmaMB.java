@@ -12,10 +12,10 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ComponentSystemEvent;
 
 import br.escolanotpad.sc.model.TurmaRN;
+import br.escolanotpad.sc.model.entity.Curso;
 import br.escolanotpad.sc.model.entity.Turma;
 import br.escolanotpad.sc.model.entity.Usuario;
 
-@ViewScoped
 @ManagedBean
 public class TurmaMB {
 	private List<Turma> listaTurmas;
@@ -24,9 +24,9 @@ public class TurmaMB {
 	private Turma turma;
 	private Usuario usuarioLogado;	
 	private Long editarId;
-		
-	
 	private Usuario alunoSelecionado;
+	private List<Turma> listaTurmasCadastradas;
+	private int tamanho;
 	
 	@PostConstruct
 	public void init(){
@@ -85,10 +85,36 @@ public class TurmaMB {
 		this.editarId = editarId;
 	}
 	
+	public List<Turma> getListaTurmasCadastradas() {
+		return listaTurmasCadastradas;
+	}
+
+	public void setListaTurmasCadastradas(List<Turma> listaTurmasCadastradas) {
+		this.listaTurmasCadastradas = listaTurmasCadastradas;
+	}
+
+	public int getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(int tamanho) {
+		this.tamanho = tamanho;
+	}
+
 	public void carregarEdicao(){
 		if(editarId != null && !FacesContext.getCurrentInstance().getPartialViewContext().isAjaxRequest()){
 			turma = turmaRN.buscarPorId(editarId);
 		}
+	}
+	
+	public String voltarRelatorios(){
+		return "/admin/relatorios";
+	}
+	
+	public String turmasCadastradas(){
+		listaTurmasCadastradas = turmaRN.listar();
+		tamanho = listaTurmasCadastradas.size();
+		return "/admin/resultadoRelatorioTurmas";
 	}
 	
 	public void adicionarAluno(AjaxBehaviorEvent event){
@@ -105,24 +131,23 @@ public class TurmaMB {
 	}
 	
 	public String salvar() throws Throwable{
-		try{
+		if(editarId == null){
 			turmaRN.salvar(turma);
 			listaTurmas = null;
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Salvo", "Salvo Com Sucesso"));
-			return "/admin/listaTurma";
-		} catch (IllegalArgumentException exception){
-			exception.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro",exception.getMessage()));
-		}catch (Exception e){
-			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Turma cadastrada com sucesso!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			turma = new Turma();
+			return "";
+		} else{
+			turmaRN.salvar(turma);
+			listaTurmas = null;
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Turma atualizada com sucesso!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			turma = new Turma();
+			return "";
 		}
-		return "";
 	}
-	
-	
-	
-	
+		
 	public void carregarTurma(ComponentSystemEvent event){
 		if(editarId == null){
 			return ;
@@ -135,6 +160,8 @@ public class TurmaMB {
 		Long idExcluir = Long.parseLong(id);
 		turmaRN.excluir(idExcluir);
 		listaTurmas = null;
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Turma removida com sucesso!", "");
+		FacesContext.getCurrentInstance().addMessage(null, message);
 		return "";
 	}
 	
