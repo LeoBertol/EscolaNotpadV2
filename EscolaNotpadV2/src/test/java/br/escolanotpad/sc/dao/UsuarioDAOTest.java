@@ -52,8 +52,8 @@ public class UsuarioDAOTest {
 	@Test
 	public void salvaUsuarioTest() {
 		UsuarioDAO dao = new UsuarioDAO(entityManager);
-		Usuario usuarioSave = new Usuario(1l, "ROLE_ADMINISTRADOR", "João", "joao@joao.com.br", 
-				"123456abc", "rua joão da silva, 2424", "000.000.000-00", new Date(), null, null);
+		Usuario usuarioSave = new Usuario(1l, "ROLE_ADMINISTRADOR", "Joï¿½o", "joao@joao.com.br", 
+				"123456abc", "rua joÃ£o da silva, 2424", "000.000.000-00", new Date(), null, null);
 		
 		JpaUtilTest.getInstancia().beginSession();
 		dao.salvar(usuarioSave);

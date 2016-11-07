@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.Part;
 
@@ -14,7 +13,6 @@ import br.escolanotpad.sc.commons.MailUtil;
 import br.escolanotpad.sc.commons.UploadUtil;
 import br.escolanotpad.sc.commons.Utils;
 import br.escolanotpad.sc.model.UsuarioRN;
-import br.escolanotpad.sc.model.entity.Perfil;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 @ManagedBean
@@ -137,7 +135,7 @@ public class UsuarioMB {
 			
 			try{
 			MailUtil.enviarEmail(usuario.getEmail(), "Cadastro Escola NotPad", 
-					"Seja Bem-Vindo(a) " + usuario.getNome() + ", \nVocÍ foi cadastrado em nossa escola, Sua senha para realizar o login: " + usuario.getSenha());
+					"Seja Bem-Vindo(a) " + usuario.getNome() + ", \nVoc√™ foi cadastrado em nossa escola, Sua senha para realizar o login: " + usuario.getSenha());
 			}catch (Exception e){
 				return "/admin/listaUsuario";
 			}
@@ -166,19 +164,19 @@ public class UsuarioMB {
 			if(usuario.getPerfil().equals("TODOS_OS_USUARIOS")){
 				listaAlunosCadastrados = usuarioRN.listarUsuarios();				
 				tamanho = listaAlunosCadastrados.size();				
-				descricao = "Usu·rios cadastrados: ";
+				descricao = "Usu√°rios cadastrados: ";
 			}else if(usuario.getPerfil().equals("ROLE_ADMINISTRADOR")){
 				listaAlunosCadastrados = usuarioRN.listarAdministradores();				
 				tamanho = listaAlunosCadastrados.size();
-				descricao = "Usu·rios com perfil de administrador: ";
+				descricao = "Usu√°rios com perfil de administrador: ";
 			}else if(usuario.getPerfil().equals("ROLE_ALUNO")){
 				listaAlunosCadastrados = usuarioRN.listarAlunos();
 				tamanho = listaAlunosCadastrados.size();
-				descricao = "Usu·rios com perfil de aluno: ";
+				descricao = "Usu√°rios com perfil de aluno: ";
 			}else if(usuario.getPerfil().equals("ROLE_PROFESSOR")){
 				listaAlunosCadastrados = usuarioRN.listarProfessores();
 				tamanho = listaAlunosCadastrados.size();
-				descricao = "Usu·rios com perfil de professor: ";
+				descricao = "Usu√°rios com perfil de professor: ";
 			}
 		
 		}
