@@ -2,6 +2,7 @@ package br.escolanotpad.sc.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -10,8 +11,20 @@ import br.escolanotpad.sc.model.entity.Usuario;
 
 public class UsuarioDAO extends DAO {
 	
-	public void salvar(Usuario usuario){
-		getEM().merge(usuario);
+	public UsuarioDAO(){
+		
+	}
+	
+	public UsuarioDAO(EntityManager entityManager) {
+		super(entityManager);
+	}
+	
+	public void salvar(Usuario usuario) {
+		if (usuario.getId() == null) {
+			getEM().persist(usuario);
+		} else {
+			getEM().merge(usuario);
+		}
 	}
 	
 	public Usuario buscarPorId(Long id){

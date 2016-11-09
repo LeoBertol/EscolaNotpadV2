@@ -33,6 +33,24 @@ public class Usuario {
 	@ManyToMany(mappedBy="alunosTurma", fetch=FetchType.EAGER)
 	private List<Turma> turma;
 	
+	public Usuario() {
+		
+	}
+	
+	public Usuario(Long id, String perfil, String nome, String email, String senha, String endereco, String cpf,
+			Date dataNascimento, String fotoPerfil) {
+		super();
+		this.id = id;
+		this.perfil = perfil;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.endereco = endereco;
+		this.cpf = cpf;
+		this.dataNascimento = dataNascimento;
+		this.fotoPerfil = fotoPerfil;
+	}
+
 	public Long getId() {
 		return id;
 	}
