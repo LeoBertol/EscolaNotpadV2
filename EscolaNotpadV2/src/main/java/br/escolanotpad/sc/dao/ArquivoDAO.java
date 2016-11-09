@@ -10,14 +10,18 @@ import br.escolanotpad.sc.model.entity.Turma;
 
 public class ArquivoDAO extends DAO{
 	
-	public void salvar(Arquivo arquivo) throws SQLException{
-		getEM().merge(arquivo);
+	public void salvar(Arquivo arquivo){
+		if(arquivo.getId() == null){
+			getEM().persist(arquivo);
+		}else{
+			getEM().merge(arquivo);
+		}
 	}
 	
 	public Arquivo buscarPorId(Long id){
 		return getEM().find(Arquivo.class, id);
 	}
-	
+		
 	public List<Arquivo> listar(){
 		Query query = getEM().createQuery("From Arquivo order by id desc", Arquivo.class);
 		return query.getResultList();

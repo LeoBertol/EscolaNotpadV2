@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -12,6 +13,7 @@ import javax.servlet.http.Part;
 
 import br.escolanotpad.sc.commons.CompartilhamentoDeArquivoUtil;
 import br.escolanotpad.sc.model.ArquivoRN;
+import br.escolanotpad.sc.model.entity.Ambiente;
 import br.escolanotpad.sc.model.entity.Arquivo;
 import br.escolanotpad.sc.model.entity.Turma;
 import br.escolanotpad.sc.model.entity.Usuario;
@@ -100,28 +102,36 @@ public class ArquivoMB {
 	}
 	
 	public String salvar() throws Throwable{
-		try {
+		if(editarId == null){
 			String arquivoSendoUploaded = CompartilhamentoDeArquivoUtil.moverArquivo(arquivoUploaded, arquivo.getNomeArquivo());
-			
 			arquivo.setNomeArquivo(arquivoSendoUploaded);
 			arquivoRN.salvar(arquivo);
 			listaArquivos = null;
-						
-			return "listaArquivo";
-		} catch (IOException e) {
-			e.printStackTrace();
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Arquivo cadastrado com sucesso!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			arquivo = new Arquivo();
+			return "";
+		}else{
+			String arquivoSendoUploaded = CompartilhamentoDeArquivoUtil.moverArquivo(arquivoUploaded, arquivo.getNomeArquivo());
+			arquivo.setNomeArquivo(arquivoSendoUploaded);
+			arquivoRN.salvar(arquivo);
+			listaArquivos = null;
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Arquivo atualizado com sucesso(A imagem poderá não aparecer)!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
 			return "";
 		}
+		
 	}
 	
 	public String excluir(String id){
-		
 		Long idExcluir = Long.parseLong(id);		
 		Arquivo arquivo = arquivoRN.buscarPorId(idExcluir);		
-		CompartilhamentoDeArquivoUtil.removerArquivo(arquivo.getNomeArquivo());						
+		CompartilhamentoDeArquivoUtil.removerArquivo(arquivo.getNomeArquivo());	
 		arquivoRN.excluir(idExcluir);
-		listaArquivos = null;				
-		return "listaArquivo";	
+		listaArquivos = null;
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Arquivo removido com sucesso!", "");
+		FacesContext.getCurrentInstance().addMessage(null, message);
+		return"";
 		
 	}	
 	
