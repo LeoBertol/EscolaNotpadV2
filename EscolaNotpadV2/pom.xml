@@ -14,6 +14,11 @@
 			<name>Leonardo Bertol</name>
 			<email>xxx@spto.com.br</email>
 		</developer>
+		<developer>
+			<id>leonardo</id>
+			<name>Leonardo Bertol</name>
+			<email>xxx@spto.com.br</email>
+		</developer>
 	</developers>
 
 	<properties>
@@ -124,6 +129,11 @@
 			<artifactId>itextpdf</artifactId>
 			<version>5.5.10</version>
 		</dependency>
+	<dependency>
+			<groupId>org.jacoco</groupId>
+			<artifactId>jacoco-maven-plugin</artifactId>
+			<version>0.7.7.201606060606</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -140,17 +150,60 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.4.201502262128</version>
-				<configuration>
-					<destFile>${sonar.jacoco.reportPath}</destFile>
-					<append>true</append>
-				</configuration>
+				<version>0.7.7.201606060606</version>
 				<executions>
 					<execution>
-						<id>agent</id>
+						<id>pre-unit-test</id>
 						<goals>
 							<goal>prepare-agent</goal>
 						</goals>
+						<configuration>
+							<destFile>${sonar.jacoco.reportPath}</destFile>
+							<!-- <append>true</append> -->
+							<propertyName>surefireArgLine</propertyName>
+						</configuration>
+					</execution>
+					<execution>
+						<id>post-unit-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<!-- Seta o caminho para o arquivo contendo os dados de cobertura -->
+							<dataFile>${sonar.jacoco.reportPath}</dataFile>
+							<!-- Seta o diretório para os reports do jacoco. -->
+							<outputDirectory>${project.basedir}/target</outputDirectory>
+						</configuration>
+					</execution>
+					<!-- TESTES DE INTEGRAÇÂO -->
+					<execution>
+						<id>pre-integration-test</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<!-- Seta o caminho para o arquivo contendo os dados de cobertura -->
+							<destFile>${sonar.jacoco.reportPath}</destFile>
+							<!-- seta o nome da propriedade que contém as configurações do agente 
+								do jacoco -->
+							<propertyName>failsafeArgLine</propertyName>
+						</configuration>
+					</execution>
+					<!-- Assegura que os artefatos de cobertura de código serão gerados após a execução dos testes integração -->
+					<execution>
+						<id>post-integration-test</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<!-- Seta o caminho para o arquivo contendo os dados de cobertura -->
+							<dataFile>${sonar.jacoco.reportPath}</dataFile>
+							<!-- Seta o diretório para os reports do jacoco. -->
+							<outputDirectory>${project.basedir}/target</outputDirectory>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
@@ -183,11 +236,30 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.18.1</version>
+				<version>2.19.1</version>
 				<configuration>
-					<argLine>-XX:PermSize=128m -XX:MaxPermSize=512m ${argLine}</argLine>
+					<argLine>-Xms256m -Xmx1024m -XX:PermSize=256m -XX:MaxPermSize=256m -Dfile.encoding=${project.build.sourceEncoding} ${surefireArgLine}</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.19.1</version>
+				<executions>
+					<execution>
+						<id>integration-tests</id>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+						<configuration>
+							<argLine>-Xms256m -Xmx768m -XX:PermSize=128m -XX:MaxPermSize=256m -Dfile.encoding=${project.build.sourceEncoding} ${failsafeArgLine}</argLine>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<argLine>-Xms256m -Xmx768m -XX:PermSize=128m -XX:MaxPermSize=256m -Dfile.encoding=${project.build.sourceEncoding} ${failsafeArgLine}</argLine>
 				</configuration>
 			</plugin>
 		</plugins>

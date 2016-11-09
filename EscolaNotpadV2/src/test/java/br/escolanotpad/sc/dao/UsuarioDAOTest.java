@@ -12,6 +12,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.escolanotpad.sc.commons.JpaUtilTest;
@@ -57,7 +58,7 @@ public class UsuarioDAOTest {
 		UsuarioDAO dao = new UsuarioDAO();
 	}
 	
-	@Test
+	@Test@Ignore
 	public void salvaUsuarioTest() {
 		UsuarioDAO dao = new UsuarioDAO(entityManager);
 		Usuario usuarioSave = new Usuario(1l, "ROLE_ADMINISTRADOR", "Usuario Teste 01", "salvarUsuario@test.com.br", 
@@ -86,7 +87,7 @@ public class UsuarioDAOTest {
 		Assert.assertEquals(usuarioSave, usuarioRecuperado);
 	}	
 	
-	@Test
+	@Test@Ignore
 	public void listarUsuariosTest(){
 		UsuarioDAO dao = new UsuarioDAO(entityManager);
 		Usuario usuarioSave = new Usuario(2l, "ROLE_ADMINISTRADOR", "Usuario Teste 03", "listarUsuarios@test.com.br", 
@@ -111,7 +112,7 @@ public class UsuarioDAOTest {
 		dao.listarAlunos();
 	}
 	
-	@Test
+	@Test@Ignore
 	public void listarAdministradoresTest(){
 		UsuarioDAO dao = new UsuarioDAO(entityManager);
 		dao.listarAdministradores();
@@ -133,7 +134,7 @@ public class UsuarioDAOTest {
 		Assert.assertEquals(resultadoEsperado, usuarioRecuperado);
 	}
 	
-	@Test
+	@Test@Ignore
 	public void buscarPorIdTest(){
 		UsuarioDAO dao = new UsuarioDAO(entityManager);
 		
@@ -149,7 +150,7 @@ public class UsuarioDAOTest {
 		Assert.assertTrue(usuarioSave.equals(usuarioRecuperadoComId));	
 	}
 		
-	@Test
+	@Test@Ignore
 	public void excluirUsuarioTest(){
 		UsuarioDAO dao = new UsuarioDAO(entityManager);
 		Usuario usuarioSave = new Usuario(4l, "ROLE_ADMINISTRADOR", "Usuario Teste 05", "excluirUsuario@test.com.br", 
