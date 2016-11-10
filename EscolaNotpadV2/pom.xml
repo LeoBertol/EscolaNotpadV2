@@ -4,20 +4,20 @@
 	<groupId>br.escolanotpad.sc</groupId>
 	<artifactId>EscolaNotpadV2</artifactId>
 	<packaging>war</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>EscolaNotpadV2 Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<developers>
 		<developer>
-			<id>leonardo</id>
+			<id>Leonardo</id>
 			<name>Leonardo Bertol</name>
-			<email>xxx@spto.com.br</email>
+			<email>leonardo_bertoL@estudante.sc.senai.br</email>
 		</developer>
 		<developer>
-			<id>leonardo</id>
-			<name>Leonardo Bertol</name>
-			<email>xxx@spto.com.br</email>
+			<id>Guilherme</id>
+			<name>Guilherme Bertol</name>
+			<email>guilherme_bertoL@estudante.sc.senai.br</email>
 		</developer>
 	</developers>
 
