@@ -4,45 +4,47 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="/WEB-INF/template/padrao_aluno.xhtml">
 	<ui:define name="conteudo">
 		<div id="conteudo">
 
 			<div id="quadro_listar_titulo">
-				<h1>
-					Lista <small>Arquivos</small>
-				</h1>
+				<h1>Listagem <small>de Arquivos</small></h1>
 			</div>
+		
+			<p:messages autoUpdate="true"/>
 
 			<div id="listar_cadastros">
 				<h:form>
-					<h:dataTable value="#{arquivoMB.listaArquivos}" var="arquivo"
-						styleClass="table table-striped">
-						<h:column>
-							<f:facet name="header">ID</f:facet>
-							<h:outputText value="#{arquivo.id}" />
-						</h:column>
-						<h:column>
+					<p:dataTable value="#{arquivoMB.listaArquivos}" var="arquivo" rows="10"
+                         paginator="true"
+                         paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15,20"
+                         currentPageReportTemplate="(Página: {currentPage} De {totalPages} )" style="text-align: center">
+						
+						<p:column>
 							<f:facet name="header">Nome</f:facet>
 							<h:outputText value="#{arquivo.nome}" />
-						</h:column>
-						<h:column>
+						</p:column>
+						<p:column>
 							<f:facet name="header">Turma do arquivo</f:facet>
-							<h:outputText value="#{arquivo.turma.titulo}" />
-						</h:column>
-						<h:column>
+							<h:outputText value="#{arquivo.turma.nome}" />
+						</p:column>
+						<p:column>
 							<f:facet name="header">Opções</f:facet>
 
 							<button type="button" data-toggle="modal" data-target="#myModal#{arquivo.id}"
-								style="background-color: transparent; border: none; float: left">
+								style="background-color: transparent; border: none;">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"
-									style="float: left; margin-top: 1px; margin-right: 3px;"></span>
+									style="margin-top: 1px; margin-right: 3px;"></span>
 							</button>
-							
+														
 							<div class="modal fade" id="myModal#{arquivo.id}" tabindex="-1" role="dialog"
-								aria-labelledby="myModalLabel">
+								aria-labelledby="myModalLabel" style="text-align: left;">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -55,26 +57,13 @@
 											</h4>
 										</div>
 										<div class="modal-body">
-											<p>
-												<b>ID: </b>
-												<h:outputText value="#{arquivo.id}" />
-											</p>
-											<p>
-												<b>Nome: </b>
-												<h:outputText value="#{arquivo.nome}" />
-											</p>
-											<p>
-												<b>Turma do arquivo: </b>
-												<h:outputText value="#{arquivo.turma.titulo}" />
-											</p>
-											<p>
-												<b>Responsável: </b>
-												<h:outputText value="#{arquivo.usuario.nome}" />
-											</p>
+											<p><b>Nome: </b><h:outputText value="#{arquivo.nome}" /></p>
+											<p><b>Turma do arquivo: </b><h:outputText value="#{arquivo.turma.nome}" /></p>
+											<p><b>Responsável: </b><h:outputText value="#{arquivo.usuario.nome}" /></p>
 											<p>
 												<b>Em: </b>
 												<h:outputText value="#{arquivo.diaCadastrado}">
-													<f:convertDateTime pattern="dd/MM/yyyy"/>
+													<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
 												</h:outputText>
 											</p>
 											<p>
@@ -95,15 +84,15 @@
 								</div>
 							</div>
 
-						</h:column>
+						</p:column>
 
-					</h:dataTable>
+					</p:dataTable>
 
 
 
 				</h:form>
 			</div>
 		</div>
-	</ui:define>
+		</ui:define>
 </ui:composition>
 </html>

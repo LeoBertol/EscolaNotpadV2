@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
 	
 <f:metadata>
 	<f:viewParam name="id" value="#{arquivoMB.editarId}" />
@@ -17,30 +18,28 @@
 		<div id="quadro_cadastrar_titulo">
 			<h1>Cadastrar Arquivo <small>Novo</small></h1>
 		</div>
+		
+		<p:messages autoUpdate="true"/>
 				
 		<div id="quadro_cadastrar"><div class="col-md-7">
 			<h:form enctype="multipart/form-data">
-				<h:panelGroup rendered="#{not empty arquivoMB.arquivo.id}">
-					<div class="form-group id">
-						<label for="exampleId">ID</label>
-						<h:inputText styleClass="form-control" readonly="true"
-							value="#{arquivoMB.arquivo.id}" id="exampleId" />
-					</div>
-				</h:panelGroup>
-				<h:inputHidden value="#{arquivoMB.arquivo.id}"  />
+				
+				<h:inputHidden value="#{ambienteMB.ambiente.id}"  />
 									
-					<label for="exampleInputNome">Nome</label>
-					<h:inputText styleClass="form-control"	value="#{arquivoMB.arquivo.nome}" id="exampleInputNome" />
-								
-					<label>Turma</label>
-					<h:selectOneMenu styleClass="form-control" value="#{arquivoMB.arquivo.turma}">
-						<f:selectItem itemLabel="-- Selecione --" />						
+					<p:outputLabel for="nome-id" value="Nome"/>
+					<p:inputText styleClass="form-control"	value="#{arquivoMB.arquivo.nome}" id="nome-id" required="true"
+								requiredMessage="O Nome do arquivo é obrigatório!"/>
+						
+					<p:outputLabel for="turma-id" value="Turma" />
+			        <h:selectOneMenu id="turma-id" value="#{arquivoMB.arquivo.turma}" required="true"
+								requiredMessage="A turma é obrigatória!" styleClass="form-control" style="">
+			        	<f:selectItem itemLabel="-- Selecione --" />						
 						<f:selectItems value="#{turmaMB.listaTurmas}" var="turma" 
-							itemLabel="#{turma.titulo}" itemValue="#{turma}" />
-					</h:selectOneMenu>
-					
+							itemLabel="#{turma.nome}" itemValue="#{turma}" />
+	        		</h:selectOneMenu>	
+													
 					<h:selectOneMenu style="display: none;" value="#{arquivoMB.arquivo.usuario}" styleClass="form-control">
-						<f:selectItem itemValue="#{sessaoMB.usuarioLogado}" itemLabel="#{sessaoMB.idUsuarioLogado}" />
+						<f:selectItem itemValue="#{loginManager.usuario}" itemLabel="#{loginManager.usuario.id}" />
 					</h:selectOneMenu>
 									
 					<div class='input-group date datetimepicker' style="display: none;">
@@ -52,23 +51,23 @@
 	                        <span class="glyphicon glyphicon-calendar"></span>
 	                    </span>
                     </div>
-                    					
-					<label for="exampleInputTitulo">Descrição</label>
-					<h:inputTextarea cols="30" rows="10"  styleClass="form-control textareaformulario" value="#{arquivoMB.arquivo.descricao}" id="exampleInputDescricao" />
+                    
+                   	<p:outputLabel for="descricao-id" value="Descrição"/>
+					<p:inputTextarea cols="30" rows="10"  styleClass="form-control textareaformulario" value="#{arquivoMB.arquivo.descricao}" id="descricao-id" required="true"
+								requiredMessage="A descrição do arquivo é obrigatória!"/>
 					
+
 					<div class="form-group">
-						<label>Arquivo</label>
-						<h:inputFile styleClass="form-control" value="#{arquivoMB.arquivoUploaded}" />
+						<p:outputLabel value="Arquivo"/>
+						<h:inputFile styleClass="form-control" value="#{arquivoMB.arquivoUploaded}"/>
 					</div>
 					<h:inputHidden value="#{arquivoMB.arquivo.nomeArquivo}"/>
 					<h:graphicImage rendered="#{not empty arquivoMB.arquivo.nomeArquivo}"
-					styleClass="img-responsive"	name="/compartilhamentoDeArquivo/#{arquivoMB.arquivo.nomeArquivo}" />
+					styleClass="img-responsive"	name="compartilhamentoDeArquivo/#{arquivoMB.arquivo.nomeArquivo}"/>
 							
 				<button type="reset" class="btn btn-default">Limpar</button>
-				<h:commandButton styleClass="btn btn-success" action="#{provaMB.salvar}" value="Salvar" />
-			
-				<h:messages errorStyle="color: red"></h:messages>
-			
+				<h:commandButton styleClass="btn btn-success" action="#{arquivoMB.salvar}" value="Salvar" />
+						
 			</h:form>
 		</div>
 		</div>
