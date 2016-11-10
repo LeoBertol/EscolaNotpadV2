@@ -145,93 +145,37 @@ public class AgendaMB {
 	
 
 	public String salvar() throws SQLException{
+	
+		//Verifica a data de locaï¿½ï¿½o
+		List<Agenda> dataVerificar = agendaRN.buscarPorData(agenda.getData());
+		//Verificar a data e o ambiente de locaï¿½ï¿½o
+		List<Agenda> ambienteVerificar = agendaRN.buscarPorAmbiente(agenda.getAmbiente().getId(),agenda.getData());
+		//Verifica a data, ambiente, hora de inicio e de termino
+		List<Agenda> horarioVerificar = agendaRN.buscarPorHorario(agenda.getAmbiente().getId(),agenda.getData(),agenda.getInicioDaAula(), agenda.getFimDaAula());
 		
-		if(editarId == null){
-			//Verifica a data de locação
-			List<Agenda> dataVerificar = agendaRN.buscarPorData(agenda.getData());
-			//Verificar a data e o ambiente de locação
-			List<Agenda> ambienteVerificar = agendaRN.buscarPorAmbiente(agenda.getAmbiente().getId(),agenda.getData());
-			//Verifica a data, ambiente, hora de inicio e de termino
-			List<Agenda> horarioVerificar = agendaRN.buscarPorHorario(agenda.getAmbiente().getId(),agenda.getData(),agenda.getInicioDaAula(), agenda.getFimDaAula());
-						
-			if(dataVerificar.size() == 0){
+		
+		if(dataVerificar.size() == 0){
+			agendaRN.salvar(agenda);
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda cadastrada com sucesso!", "");
+			FacesContext.getCurrentInstance().addMessage(null, message);
+			agenda = new Agenda();
+			return "";
+		}else{
+			if(ambienteVerificar.size() == 0){
 				agendaRN.salvar(agenda);
-				listaAgendas = null;
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda cadastrada com sucesso!", "");
 				FacesContext.getCurrentInstance().addMessage(null, message);
 				agenda = new Agenda();
 				return "";
 			}else{
-				if(ambienteVerificar.size() == 0){
-					agendaRN.salvar(agenda);
-					listaAgendas = null;
-					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda cadastrada com sucesso!", "");
-					FacesContext.getCurrentInstance().addMessage(null, message);
-					agenda = new Agenda();
-					return "";
-				}else{
-					if(horarioVerificar.size() == 0){
-						agendaRN.salvar(agenda);
-						listaAgendas = null;
-						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda cadastrada com sucesso!", "");
-						FacesContext.getCurrentInstance().addMessage(null, message);
-						agenda = new Agenda();
-						return "";
-					}else{
-						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Este ambiente, já esta reservado para a mesma hora, por favor, tente com o proximo horario disponivel", "");
-						FacesContext.getCurrentInstance().addMessage(null, message);
-					}
-				}
 				
-			}
-		}else{
-			//Verifica a data de locação
-			List<Agenda> dataVerificar = agendaRN.buscarPorData(agenda.getData());
-			//Verificar a data e o ambiente de locação
-			List<Agenda> ambienteVerificar = agendaRN.buscarPorAmbiente(agenda.getAmbiente().getId(),agenda.getData());
-			//Verifica a data, ambiente, hora de inicio e de termino
-			List<Agenda> horarioVerificar = agendaRN.buscarPorHorario(agenda.getAmbiente().getId(),agenda.getData(),agenda.getInicioDaAula(), agenda.getFimDaAula());
-						
-			if(dataVerificar.size() == 0){
-				agendaRN.salvar(agenda);
-				listaAgendas = null;
-				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda atualizada com sucesso!", "");
-				FacesContext.getCurrentInstance().addMessage(null, message);
-				agenda = new Agenda();
-				return "";
-			}else{
-				if(ambienteVerificar.size() == 0){
-					agendaRN.salvar(agenda);
-					listaAgendas = null;
-					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda atualizada com sucesso!", "");
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Este ambiente, jÃ¡ esta reservado para a mesma hora, por favor, tente com o prÃ³ximo horario disponÃ­vel", "");
 					FacesContext.getCurrentInstance().addMessage(null, message);
-					agenda = new Agenda();
-					return "";
-				}else{
-					if(horarioVerificar.size() == 0){
-						agendaRN.salvar(agenda);
-						listaAgendas = null;
-						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda atualizada com sucesso!", "");
-						FacesContext.getCurrentInstance().addMessage(null, message);
-						agenda = new Agenda();
-						return "";
-					}else{
-						FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Este ambiente, já esta reservado para a mesma hora, por favor, tente com o proximo horario disponivel", "");
-						FacesContext.getCurrentInstance().addMessage(null, message);
-					}
-				}
 				
 			}
 			
 		}
-	
-		
-			
-			
-	
-			
-		
-		
+					
 		listaAgendas = null;
 		return "";
 		

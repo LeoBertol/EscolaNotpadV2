@@ -1,10 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+	
+
 
 <ui:composition template="/WEB-INF/template/padrao_aluno.xhtml">
 	<ui:define name="conteudo">
@@ -18,7 +20,17 @@
 
 			<div id="listar_cadastros">
 				<h:form>
-					<h:dataTable value="#{agendaMB.agendaPorTurma(loginManager.usuario.turma.get(0).id)}" var="agenda" styleClass="table table-striped">
+					<h:dataTable value="#{agendaMB.agendaPorTurma(loginManager.usuario.id)}" var="agenda" styleClass="table table-striped">
+						
+						<h:column>
+							<f:facet name="header">ID</f:facet>
+							<h:outputText value="#{agenda.id}" />
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Ambiente</f:facet>
+							<h:outputText value="#{agenda.ambiente.nome}" />
+						</h:column>
 						
 						<h:column>
 							<f:facet name="header">Data de reserva</f:facet>
@@ -28,10 +40,10 @@
 						</h:column>
 						
 						<h:column>
-							<f:facet name="header">Ambiente</f:facet>
-							<h:outputText value="#{agenda.ambiente.nome}" />
+							<f:facet name="header">Turma</f:facet>
+							<h:outputText value="#{agenda.turma.nome}" />
 						</h:column>
-												
+						
 						<h:column>
 							<f:facet name="header">Professor Responsavel</f:facet>
 							<h:outputText value="#{agenda.professorResponsavel.nome}" />
@@ -40,7 +52,7 @@
 						
 						<h:column>
 						
-							<f:facet name="header">VisualizaÃ§Ã£o</f:facet>
+							<f:facet name="header">Opções</f:facet>
 							
 							<button type="button" data-toggle="modal" data-target="#myModal#{agenda.id}"
 								style="background-color: transparent; border: none; float: left">
@@ -58,7 +70,7 @@
 												<span aria-hidden="true">&times;</span>
 											</button>
 											<h4 class="modal-title" id="myModalLabel">
-												InformaÃ§Ãµes Sobre a Agenda
+												Informações Sobre a Agenda
 											</h4>
 										</div>
 										<div class="modal-body">
@@ -80,7 +92,7 @@
 											
 											<p>
 												<b>Turma: </b>
-												<h:outputText value="#{agenda.turma.titulo}" />
+												<h:outputText value="#{agenda.turma.nome}" />
 											</p>
 											
 											<p>
@@ -114,14 +126,11 @@
 
 
 				</h:form>
+				<h:form>
+					<p:commandLink class="btn btn-info" value="Gerar PDF" action="#{pdfMB.gerarPdf(loginManager.usuario.id)}" ajax="false" target="_blank"/>
+				</h:form>
 			</div>
-			<br />
 		</div>
-		
-		
-		
-		
 	</ui:define>
 </ui:composition>
-
 </html>

@@ -37,20 +37,22 @@ import com.itextpdf.text.pdf.draw.LineSeparator;
 @RequestScoped
 public class PdfMB {
 	
-	 private String professorId;
+	private String usuarioId;
 	
-	public String getProfessorId() {
-		return professorId;
+	
+	public String getUsuarioId() {
+		return usuarioId;
 	}
 
-	public void setProfessorId(String professorId) {
-		this.professorId = professorId;
+	public void setUsuarioId(String usuarioId) {
+		this.usuarioId = usuarioId;
 	}
-	
+
 	public static final Font BOLD_UNDERLINED = new Font(FontFamily.TIMES_ROMAN, 12, Font.BOLD | Font.UNDERLINE);
 	public static final Font NORMAL = new Font(FontFamily.HELVETICA, 24, Font.BOLDITALIC | Font.getStyleValue("text-align: center;"));
 
-	public void gerarPdf(String professorId) {
+	public void gerarPdf(String usuarioId) {
+		
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletResponse response = (HttpServletResponse) 
 				context.getExternalContext().getResponse();
@@ -71,7 +73,10 @@ public class PdfMB {
 			
 			AgendaRN agendaRN = new AgendaRN();
 			
-			List<Agenda> agendas = agendaRN.listaAgendaPorProfessor(professorId);
+			List<Agenda> agendas = agendaRN.listaAgendaPorProfessor(usuarioId);
+			if(agendas.isEmpty() == true){
+				agendas = agendaRN.listaAgendaPorAluno(usuarioId);
+			}
 			
 			Paragraph p1 = new Paragraph("Sua Agenda", NORMAL);
 			p1.setAlignment(Element.ALIGN_CENTER);

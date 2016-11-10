@@ -59,6 +59,10 @@ public class AgendaRN {
 		return dao.buscarPorHorario(buscaAmbiente, buscaData, buscaInicioDaAula, buscaFimDaAula);
 	}
 
+	public List<Agenda> listaAgendaPorAluno(String usuarioId) {
+		return dao.listaAgendaPorAluno(usuarioId);
+	}
+
 	
 	
 

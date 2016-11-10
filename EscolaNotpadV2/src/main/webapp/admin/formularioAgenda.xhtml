@@ -13,12 +13,7 @@
 
 <ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
 
-
 	<ui:define name="conteudo">
-	
-	
-	
-
 	
 		<div id="conteudo">
 			<div id="formulario_cadastro">
@@ -34,8 +29,14 @@
 				<div id="quadro_cadastrar">
 					<div class="col-md-7">
 						<h:form id="formulario">
-						
-							<h:inputHidden value="#{agendaMB.agenda.id}"  />
+
+							<h:panelGroup rendered="#{not empty agendaMB.agenda.id}">
+								<div class="form-group id">
+									<label for="exampleId">ID</label>
+									<h:inputText styleClass="form-control" readonly="true"
+										value="#{agendaMB.agenda.id}" id="exampleId" />
+								</div>
+							</h:panelGroup>
 
 							<label for="tipoAmbiente-id">Professor</label>
 							<br />
