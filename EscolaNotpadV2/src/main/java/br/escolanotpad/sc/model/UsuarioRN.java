@@ -7,7 +7,7 @@ import br.escolanotpad.sc.model.entity.Usuario;
 
 public class UsuarioRN {
 
-	private UsuarioDAO dao;
+	
 	
 	public UsuarioRN() {
 		dao = new UsuarioDAO();
