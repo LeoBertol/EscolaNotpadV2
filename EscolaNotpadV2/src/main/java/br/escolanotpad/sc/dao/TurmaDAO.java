@@ -3,12 +3,21 @@ package br.escolanotpad.sc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.escolanotpad.sc.model.entity.Turma;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 public class TurmaDAO extends DAO{
+	
+	public TurmaDAO(){
+		
+	}
+	
+	public TurmaDAO(EntityManager entityManager) {
+		super(entityManager);
+	}
 		
 	public void salvar(Turma turma){
 		if(turma.getId() == null){

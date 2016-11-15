@@ -62,6 +62,19 @@ public class Turma {
 	public void setListaArquivos(List<Arquivo> listaArquivos) {
 		this.listaArquivos = listaArquivos;
 	}
+			
+	public Turma() {
+		
+	}
+	
+	public Turma(Long id, String nome, Usuario professor, Curso curso) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.professor = professor;
+		this.curso = curso;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
