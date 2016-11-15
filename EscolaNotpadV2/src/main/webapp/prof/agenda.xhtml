@@ -6,62 +6,60 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
 	  xmlns:p="http://primefaces.org/ui">
 	
-
-
 <ui:composition template="/WEB-INF/template/padrao_professor.xhtml">
 	<ui:define name="conteudo">
 		<div id="conteudo">
 
 			<div id="quadro_listar_titulo">
 				<h1>
-					Lista <small>Agendas</small>
+					Listagem <small>de Agendas</small>
 				</h1>
 			</div>
 
 			<div id="listar_cadastros">
 				<h:form>
-					<h:dataTable value="#{agendaMB.agendaPorProfessor(loginManager.usuario.id)}" var="agenda" styleClass="table table-striped">
-						
-						<h:column>
-							<f:facet name="header">ID</f:facet>
-							<h:outputText value="#{agenda.id}" />
-						</h:column>
-						
-						<h:column>
+					<p:dataTable value="#{agendaMB.agendaPorProfessor(loginManager.usuario.id)}" var="agenda"  rows="10"
+                         paginator="true"
+                         paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15,20"
+                         currentPageReportTemplate="(Página: {currentPage} De {totalPages} )" style="text-align: center;">
+												
+						<p:column>
 							<f:facet name="header">Ambiente</f:facet>
 							<h:outputText value="#{agenda.ambiente.nome}" />
-						</h:column>
+						</p:column>
 						
-						<h:column>
+						<p:column>
 							<f:facet name="header">Data de reserva</f:facet>
 							<h:outputText value="#{agenda.data}">
 								<f:convertDateTime pattern="dd/MM/yyyy" />
 							</h:outputText>
-						</h:column>
+						</p:column>
 						
-						<h:column>
+						<p:column>
 							<f:facet name="header">Turma</f:facet>
 							<h:outputText value="#{agenda.turma.nome}" />
-						</h:column>
+						</p:column>
 						
-						<h:column>
-							<f:facet name="header">Professor Responsavel</f:facet>
+						<p:column>
+							<f:facet name="header">Professor Responsável</f:facet>
 							<h:outputText value="#{agenda.professorResponsavel.nome}" />
-						</h:column>
+						</p:column>
 						
 						
-						<h:column>
+						<p:column>
 						
 							<f:facet name="header">Opções</f:facet>
 							
 							<button type="button" data-toggle="modal" data-target="#myModal#{agenda.id}"
-								style="background-color: transparent; border: none; float: left">
+								style="background-color: transparent; border: none;">
 								<span class="glyphicon glyphicon-search" aria-hidden="true"
 									style="float: left; margin-top: 1px; margin-right: 3px;"></span>
 							</button>
 														
 							<div class="modal fade" id="myModal#{agenda.id}" tabindex="-1" role="dialog"
-								aria-labelledby="myModalLabel">
+								aria-labelledby="myModalLabel" style="text-align: left;">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -74,14 +72,9 @@
 											</h4>
 										</div>
 										<div class="modal-body">
-											
+																					
 											<p>
-												<b>ID: </b>
-												<h:outputText value="#{agenda.id}" />
-											</p>
-											
-											<p>
-												<b>Professor responsavel: </b>
+												<b>Professor responsável: </b>
 												<h:outputText value="#{agenda.professorResponsavel.nome}" />
 											</p>
 											
@@ -103,7 +96,7 @@
 											</p>
 											
 											<p>
-												<b>Inicio da aula: </b>
+												<b>Início da aula: </b>
 												<h:outputText value="#{agenda.inicioDaAula}" />
 											</p>
 											
@@ -118,17 +111,17 @@
 							</div>
 
 
-						</h:column>
+						</p:column>
 						
 
-					</h:dataTable>
-
-
+					</p:dataTable>
 
 				</h:form>
 				<h:form>
-					<p:commandLink class="btn btn-info" value="Gerar PDF" action="#{pdfMB.gerarPdf(loginManager.usuario.id)}" ajax="false" target="_blank"/>
+					<p:commandLink class="btn btn-info" value="Gerar PDF" action="#{pdfMB.gerarPdf(loginManager.usuario.id)}" ajax="false" target="_blank" style="margin-top: 25px;"/>
 				</h:form>
+				
+				
 			</div>
 		</div>
 	</ui:define>
