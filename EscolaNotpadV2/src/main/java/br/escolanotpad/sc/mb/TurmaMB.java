@@ -16,6 +16,7 @@ import br.escolanotpad.sc.model.entity.Curso;
 import br.escolanotpad.sc.model.entity.Turma;
 import br.escolanotpad.sc.model.entity.Usuario;
 
+@ViewScoped
 @ManagedBean
 public class TurmaMB {
 	private List<Turma> listaTurmas;
