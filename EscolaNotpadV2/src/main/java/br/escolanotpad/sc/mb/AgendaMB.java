@@ -1,11 +1,13 @@
 package br.escolanotpad.sc.mb;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.context.RequestContext;
@@ -16,6 +18,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import br.escolanotpad.sc.commons.Utils;
 import br.escolanotpad.sc.model.AgendaRN;
 import br.escolanotpad.sc.model.AmbienteRN;
 import br.escolanotpad.sc.model.UsuarioRN;
@@ -146,9 +149,9 @@ public class AgendaMB {
 
 	public String salvar() throws SQLException{
 	
-		//Verifica a data de loca��o
+		//Verifica a data de locação
 		List<Agenda> dataVerificar = agendaRN.buscarPorData(agenda.getData());
-		//Verificar a data e o ambiente de loca��o
+		//Verificar a data e o ambiente de locação
 		List<Agenda> ambienteVerificar = agendaRN.buscarPorAmbiente(agenda.getAmbiente().getId(),agenda.getData());
 		//Verifica a data, ambiente, hora de inicio e de termino
 		List<Agenda> horarioVerificar = agendaRN.buscarPorHorario(agenda.getAmbiente().getId(),agenda.getData(),agenda.getInicioDaAula(), agenda.getFimDaAula());
@@ -158,6 +161,8 @@ public class AgendaMB {
 			agendaRN.salvar(agenda);
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda cadastrada com sucesso!", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
+			
+			
 			agenda = new Agenda();
 			return "";
 		}else{
@@ -169,13 +174,18 @@ public class AgendaMB {
 				return "";
 			}else{
 				
-					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Este ambiente, já esta reservado para a mesma hora, por favor, tente com o próximo horario disponível", "");
+					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Este ambiente, já esta reservado para a mesma hora, por favor, tente com o proximo horario disponivel", "");
 					FacesContext.getCurrentInstance().addMessage(null, message);
 				
 			}
 			
 		}
-					
+			
+			
+	
+			
+		
+		
 		listaAgendas = null;
 		return "";
 		
@@ -191,9 +201,26 @@ public class AgendaMB {
 		Long idExcluir = Long.parseLong(id);
 		agendaRN.excluir(idExcluir);
 		listaAgendas = null;
-		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda removida com sucesso!", "");
-		FacesContext.getCurrentInstance().addMessage(null, message);
 		return"";
+	}
+	
+	//Parte do JSON
+	public void renderListaAgendasJson() throws IOException {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		
+		String key = externalContext.getRequestParameterMap().get("key");
+				
+		String json = "";
+		if (key != null && key.equals(Utils.KEY)) {
+			json = Utils.getGson().toJson(agendaRN.listarAgendasParaJson());
+		}
+		
+				
+		externalContext.setResponseContentType("application/json");
+		externalContext.setResponseCharacterEncoding("UTF-8");
+		externalContext.getResponseOutputWriter().write(json);
+		context.responseComplete();
 	}
 	
 	

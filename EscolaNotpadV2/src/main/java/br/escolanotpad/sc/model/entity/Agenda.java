@@ -31,6 +31,7 @@ public class Agenda {
 	private Date inicioDaAula;
 	@Temporal(TemporalType.TIME)
 	private Date fimDaAula;
+	
 	public Long getId() {
 		return id;
 	}

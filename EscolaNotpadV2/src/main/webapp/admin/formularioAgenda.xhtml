@@ -13,7 +13,12 @@
 
 <ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
 
+
 	<ui:define name="conteudo">
+	
+	
+	
+
 	
 		<div id="conteudo">
 			<div id="formulario_cadastro">
@@ -70,11 +75,11 @@
 							</h:selectOneMenu>
 
 							
-							<label>Data da locação</label>
+							<label>Data da locacao</label>
 							<div class='input-group date datetimepicker'>
 							
 								<h:inputText styleClass="form-control"
-									value="#{agendaMB.agenda.data}" required="true" requiredMessage="A data de locação e obrigatorio!">
+									value="#{agendaMB.agenda.data}" required="true" requiredMessage="A data de locacaoo e obrigatorio!">
 									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:inputText>
 								<span class="input-group-addon"> <span

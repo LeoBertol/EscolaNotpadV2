@@ -2,8 +2,10 @@ package br.escolanotpad.sc.model;
 
 import java.sql.SQLException;
 import java.util.List;
-
+import java.util.ArrayList;
 import java.util.Date;
+
+import br.escolanotpad.sc.Json.AgendaJson;
 import br.escolanotpad.sc.dao.AgendaDAO;
 import br.escolanotpad.sc.model.entity.Agenda;
 import br.escolanotpad.sc.model.entity.Ambiente;
@@ -61,6 +63,27 @@ public class AgendaRN {
 
 	public List<Agenda> listaAgendaPorAluno(String usuarioId) {
 		return dao.listaAgendaPorAluno(usuarioId);
+	}
+	
+	//Listar com JSON
+	public List<AgendaJson> listarAgendasParaJson() {
+		
+		List<AgendaJson> agendasJson = new ArrayList<AgendaJson>();
+		List<Agenda> agendasCarregados = dao.listar();
+		
+		for (Agenda a : agendasCarregados) {
+			AgendaJson aj = new AgendaJson();
+			aj.setAmbienteNome(a.getAmbiente().getNome());
+			aj.setData(a.getData());
+			aj.setFimDaAula(a.getFimDaAula());
+			aj.setInicioDaAula(a.getInicioDaAula());
+			aj.setProfessorNome(a.getProfessorResponsavel().getNome());
+			aj.setId(a.getId());
+			
+			agendasJson.add(aj);
+		}
+		
+		return agendasJson;
 	}
 
 	
