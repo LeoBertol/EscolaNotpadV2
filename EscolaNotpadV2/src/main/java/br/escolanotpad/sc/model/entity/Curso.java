@@ -15,6 +15,18 @@ public class Curso {
 	private String descricao;
 	private float mensalidade;
 	
+	public Curso() {
+		
+	}
+
+	public Curso(Long id, String nome, String descricao, float mensalidade) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.mensalidade = mensalidade;
+	}
+
 	public Long getId() {
 		return id;
 	}

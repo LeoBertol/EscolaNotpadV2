@@ -3,12 +3,21 @@ package br.escolanotpad.sc.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.escolanotpad.sc.model.entity.Curso;
 
 public class CursoDAO extends DAO{
 
+	public CursoDAO(){
+		
+	}
+	
+	public CursoDAO(EntityManager entityManager) {
+		super(entityManager);
+	}
+		
 	public void salvar(Curso curso){
 		if(curso.getId() == null){
 			getEM().persist(curso);
