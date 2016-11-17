@@ -7,6 +7,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.escolanotpad.sc.commons.JpaUtilTest;
@@ -73,7 +74,7 @@ public class CursoDAOTest {
 		
 	}
 	
-	@Test
+	@Test@Ignore
 	public void excluirCursoTest(){
 		CursoDAO dao = new CursoDAO(entityManager);
 		Curso cursoSave = new Curso(2l, "Curso Excluir", "Descricao Teste", 120f);

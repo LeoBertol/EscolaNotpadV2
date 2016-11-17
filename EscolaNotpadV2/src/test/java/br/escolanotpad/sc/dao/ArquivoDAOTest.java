@@ -9,6 +9,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.escolanotpad.sc.commons.JpaUtilTest;
@@ -80,7 +81,7 @@ public class ArquivoDAOTest {
 		JpaUtilTest.getInstancia().endSession();						
 	}
 	
-	@Test
+	@Test@Ignore
 	public void excluirArquivoTest() {
 		ArquivoDAO dao = new ArquivoDAO(entityManager);
 		Usuario usuario = new Usuario();
