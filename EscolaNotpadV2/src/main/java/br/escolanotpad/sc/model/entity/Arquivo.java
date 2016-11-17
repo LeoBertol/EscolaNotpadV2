@@ -22,6 +22,22 @@ public class Arquivo {
 	private Turma turma;
 	@ManyToOne
 	private Usuario usuario;
+		
+	public Arquivo() {
+		
+	}
+
+	public Arquivo(Long id, String nome, String nomeArquivo, String descricao,
+			Date diaCadastrado, Turma turma, Usuario usuario) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.nomeArquivo = nomeArquivo;
+		this.descricao = descricao;
+		this.diaCadastrado = diaCadastrado;
+		this.turma = turma;
+		this.usuario = usuario;
+	}
 	
 	public Long getId() {
 		return id;
