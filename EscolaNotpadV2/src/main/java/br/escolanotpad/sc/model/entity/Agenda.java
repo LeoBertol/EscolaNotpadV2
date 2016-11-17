@@ -1,6 +1,5 @@
 package br.escolanotpad.sc.model.entity;
 
-import java.sql.Time;
 import java.util.Date;
 
 import javax.faces.bean.ViewScoped;
@@ -10,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.mysql.fabric.xmlrpc.base.Data;
 
 @ViewScoped
 @Entity

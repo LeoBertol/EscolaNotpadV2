@@ -1,9 +1,7 @@
 package br.escolanotpad.sc.model.entity;
 
-import java.util.Date;
 import java.util.List;
 
-import javax.faces.bean.ViewScoped;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

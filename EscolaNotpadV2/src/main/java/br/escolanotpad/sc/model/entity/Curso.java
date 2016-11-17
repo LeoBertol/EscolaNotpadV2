@@ -1,12 +1,9 @@
 package br.escolanotpad.sc.model.entity;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 @Entity
 public class Curso {
@@ -14,7 +11,7 @@ public class Curso {
 	@GeneratedValue
 	private Long id;
 	private String nome;
-	@Column(columnDefinition = "TEXT")
+	@Column(length = 4000)
 	private String descricao;
 	private float mensalidade;
 	

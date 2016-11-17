@@ -1,7 +1,6 @@
 package br.escolanotpad.sc.model.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +15,8 @@ public class Arquivo {
 	private Long id;
 	private String nome;
 	private String nomeArquivo;
-	@Column(columnDefinition = "TEXT")
+	@Column(length = 4000)
 	private String descricao;
-	@Column(columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
 	private Date diaCadastrado;
 	@ManyToOne
 	private Turma turma;

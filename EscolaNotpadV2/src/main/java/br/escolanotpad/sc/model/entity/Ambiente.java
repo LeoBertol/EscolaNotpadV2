@@ -1,15 +1,11 @@
 package br.escolanotpad.sc.model.entity;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Ambiente {
@@ -19,7 +15,7 @@ public class Ambiente {
 	private String nome;
 	@Enumerated(EnumType.STRING)
 	private TipoAmbiente tipoAmbiente;
-	@Column(columnDefinition = "TEXT")
+	@Column(length = 4000)
 	private String descricao;
 	private int capacidade;
 	
