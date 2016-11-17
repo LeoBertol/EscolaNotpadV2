@@ -1,7 +1,5 @@
 package br.escolanotpad.sc.dao;
 
-import java.util.Date;
-
 import javax.persistence.EntityManager;
 
 import org.junit.After;
@@ -57,7 +55,7 @@ public class TurmaDAOTest {
 	}
 	
 	@Test
-	public void salvaTurmaTest() {
+	public void salvarTurmaTest() {
 		TurmaDAO dao = new TurmaDAO(entityManager);
 		Usuario usuarioProfessor = new Usuario();
 		Curso cursoTeste = new Curso();
@@ -65,14 +63,12 @@ public class TurmaDAOTest {
 		
 		JpaUtilTest.getInstancia().beginSession();
 		dao.salvar(turmaSave);
-		Turma turmaRecuperada = dao.buscarPorId(1l);
 		JpaUtilTest.getInstancia().endSession();
 						
-		Assert.assertFalse(turmaRecuperada.equals(null));
 	}
 	
 	@Test
-	public void salvaTurmaComIdNuloTest() {
+	public void salvarTurmaComIdNuloTest() {
 		TurmaDAO dao = new TurmaDAO(entityManager);
 		Usuario usuarioProfessor = new Usuario();
 		Curso cursoTeste = new Curso();
@@ -107,5 +103,11 @@ public class TurmaDAOTest {
 		TurmaDAO dao = new TurmaDAO(entityManager);
 		dao.listarTurmaPorUsuario(1l);
 	}
-
+	
+	@Test
+	public void buscarPorIdTest(){
+		TurmaDAO dao = new TurmaDAO(entityManager);
+		dao.buscarPorId(1l);
+	}
+	
 }
