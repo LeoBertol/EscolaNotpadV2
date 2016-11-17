@@ -15,7 +15,6 @@ public class Arquivo {
 	private Long id;
 	private String nome;
 	private String nomeArquivo;
-	@Column(length = 4000)
 	private String descricao;
 	private Date diaCadastrado;
 	@ManyToOne

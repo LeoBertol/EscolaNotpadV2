@@ -11,7 +11,6 @@ public class Curso {
 	@GeneratedValue
 	private Long id;
 	private String nome;
-	@Column(length = 4000)
 	private String descricao;
 	private float mensalidade;
 	
