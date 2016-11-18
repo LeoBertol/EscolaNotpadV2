@@ -123,7 +123,7 @@ public class UsuarioDAOTest {
 		Usuario usuarioRecuperado = dao.buscarPorEmail("salvarUsuario@test.com.br");	
 	}	
 			
-	@Test
+	@Test@Ignore
 	public void excluirUsuarioTest(){
 		UsuarioDAO dao = new UsuarioDAO(entityManager);
 		Usuario usuarioSave4 = new Usuario(1l, "ROLE_ADMINISTRADOR", "Usuario Teste 05", "excluirUsuario@test.com.br", 

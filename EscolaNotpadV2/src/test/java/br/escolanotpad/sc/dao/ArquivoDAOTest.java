@@ -81,7 +81,7 @@ public class ArquivoDAOTest {
 		JpaUtilTest.getInstancia().endSession();						
 	}
 	
-	@Test
+	@Test@Ignore
 	public void excluirArquivoTest() {
 		ArquivoDAO dao = new ArquivoDAO(entityManager);
 		Usuario usuario = new Usuario();

@@ -80,7 +80,7 @@ public class TurmaDAOTest {
 		JpaUtilTest.getInstancia().endSession();						
 	}
 	
-	@Test
+	@Test@Ignore
 	public void excluirTurmaTest() {
 		TurmaDAO dao = new TurmaDAO(entityManager);
 		Usuario usuarioProfessor = new Usuario();
