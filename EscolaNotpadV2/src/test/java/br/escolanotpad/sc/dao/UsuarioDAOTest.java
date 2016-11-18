@@ -118,20 +118,20 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
-	public void buscarPorEmailTeste(){
+	public void buscarPorEmailTest(){
 		UsuarioDAO dao = new UsuarioDAO(entityManager);		
 		Usuario usuarioRecuperado = dao.buscarPorEmail("salvarUsuario@test.com.br");	
 	}	
-		
-	@Test@Ignore
+			
+	@Test
 	public void excluirUsuarioTest(){
 		UsuarioDAO dao = new UsuarioDAO(entityManager);
-		Usuario usuarioSave4 = new Usuario(4l, "ROLE_ADMINISTRADOR", "Usuario Teste 05", "excluirUsuario@test.com.br", 
+		Usuario usuarioSave4 = new Usuario(1l, "ROLE_ADMINISTRADOR", "Usuario Teste 05", "excluirUsuario@test.com.br", 
 				"123456abc", "rua dos testes, 0102", "000.000.000-00", new Date(), null);
 		
 		JpaUtilTest.getInstancia().beginSession();
 		dao.salvar(usuarioSave4);
-		dao.excluir(4l);
+		dao.excluir(1l);
 		JpaUtilTest.getInstancia().endSession();
 		
 		Assert.assertFalse(usuarioSave4.equals(null));	
