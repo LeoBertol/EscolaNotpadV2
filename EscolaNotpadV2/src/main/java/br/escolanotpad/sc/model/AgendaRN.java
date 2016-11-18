@@ -1,14 +1,13 @@
 package br.escolanotpad.sc.model;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import br.escolanotpad.sc.Json.AgendaJson;
 import br.escolanotpad.sc.dao.AgendaDAO;
 import br.escolanotpad.sc.model.entity.Agenda;
-import br.escolanotpad.sc.model.entity.Ambiente;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 public class AgendaRN {

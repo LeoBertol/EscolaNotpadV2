@@ -2,14 +2,6 @@ package br.escolanotpad.sc.Json;
 
 import java.util.Date;
 
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import br.escolanotpad.sc.model.entity.Ambiente;
-import br.escolanotpad.sc.model.entity.Turma;
-import br.escolanotpad.sc.model.entity.Usuario;
-
 public class AgendaJson {
 	
 	private Long id;

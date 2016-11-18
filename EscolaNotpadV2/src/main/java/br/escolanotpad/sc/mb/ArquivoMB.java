@@ -1,7 +1,5 @@
 package br.escolanotpad.sc.mb;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -13,7 +11,6 @@ import javax.servlet.http.Part;
 
 import br.escolanotpad.sc.commons.CompartilhamentoDeArquivoUtil;
 import br.escolanotpad.sc.model.ArquivoRN;
-import br.escolanotpad.sc.model.entity.Ambiente;
 import br.escolanotpad.sc.model.entity.Arquivo;
 import br.escolanotpad.sc.model.entity.Turma;
 import br.escolanotpad.sc.model.entity.Usuario;

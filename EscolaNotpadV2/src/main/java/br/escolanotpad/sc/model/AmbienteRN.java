@@ -5,7 +5,6 @@ import java.util.List;
 
 import br.escolanotpad.sc.dao.AmbienteDAO;
 import br.escolanotpad.sc.model.entity.Ambiente;
-import br.escolanotpad.sc.model.entity.Arquivo;
 
 public class AmbienteRN {
 	

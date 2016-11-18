@@ -12,7 +12,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ComponentSystemEvent;
 
 import br.escolanotpad.sc.model.TurmaRN;
-import br.escolanotpad.sc.model.entity.Curso;
 import br.escolanotpad.sc.model.entity.Turma;
 import br.escolanotpad.sc.model.entity.Usuario;
 

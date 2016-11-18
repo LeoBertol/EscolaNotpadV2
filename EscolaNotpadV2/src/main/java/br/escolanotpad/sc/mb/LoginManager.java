@@ -11,14 +11,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import br.escolanotpad.sc.model.UsuarioRN;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
-import br.escolanotpad.sc.model.entity.Perfil;
+import br.escolanotpad.sc.model.UsuarioRN;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 @ManagedBean

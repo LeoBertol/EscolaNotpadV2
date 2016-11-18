@@ -1,13 +1,11 @@
 package br.escolanotpad.sc.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.escolanotpad.sc.model.entity.Arquivo;
-import br.escolanotpad.sc.model.entity.Turma;
 
 public class ArquivoDAO extends DAO{
 	

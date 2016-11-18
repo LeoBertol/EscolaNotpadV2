@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
 	
 <f:metadata>
 	<f:viewParam name="id" value="#{turmaMB.editarId}" />
@@ -18,18 +19,14 @@
 			<h1>Cadastrar Turma <small>Nova</small></h1>
 		</div>
 		
+		<p:messages autoUpdate="true"/>
+				
 		
 		<div id="quadro_cadastrar"><div class="col-md-7">
 			<h:form>
-				<h:panelGroup rendered="#{not empty turmaMB.turma.id}">
-					<div class="form-group id">
-						<label for="exampleId">ID</label>
-						<h:inputText styleClass="form-control" readonly="true"
-							value="#{turmaMB.turma.id}" id="exampleId" />
-					</div>
-				</h:panelGroup>
+			
 				<h:inputHidden value="#{turmaMB.turma.id}"  />
-				
+			
 					<label for="exampleInputNome">Nome</label>
 					<h:inputText styleClass="form-control"	value="#{turmaMB.turma.nome}" id="exampleInputNome" />
 				

@@ -15,6 +15,7 @@ public class Ambiente {
 	private String nome;
 	@Enumerated(EnumType.STRING)
 	private TipoAmbiente tipoAmbiente;
+	@Column(length = 4000)
 	private String descricao;
 	private int capacidade;
 	

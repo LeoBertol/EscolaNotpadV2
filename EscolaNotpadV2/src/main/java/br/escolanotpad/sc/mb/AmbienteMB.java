@@ -1,17 +1,14 @@
 package br.escolanotpad.sc.mb;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.escolanotpad.sc.model.AmbienteRN;
 import br.escolanotpad.sc.model.entity.Ambiente;
-import br.escolanotpad.sc.model.entity.Curso;
 
 @ManagedBean
 public class AmbienteMB {

@@ -6,14 +6,9 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.hibernate.query.internal.NativeQueryImpl;
-
 import br.escolanotpad.sc.model.entity.Agenda;
-import br.escolanotpad.sc.model.entity.Ambiente;
-import br.escolanotpad.sc.model.entity.Perfil;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 public class AgendaDAO extends DAO{

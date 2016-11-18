@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.servlet.http.Part;
 
@@ -14,7 +13,6 @@ import br.escolanotpad.sc.commons.MailUtil;
 import br.escolanotpad.sc.commons.UploadUtil;
 import br.escolanotpad.sc.commons.Utils;
 import br.escolanotpad.sc.model.UsuarioRN;
-import br.escolanotpad.sc.model.entity.Perfil;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 @ManagedBean

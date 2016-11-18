@@ -1,6 +1,5 @@
 package br.escolanotpad.sc.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;

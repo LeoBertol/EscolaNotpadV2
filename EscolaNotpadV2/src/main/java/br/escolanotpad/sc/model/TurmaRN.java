@@ -5,7 +5,6 @@ import java.util.List;
 
 import br.escolanotpad.sc.dao.TurmaDAO;
 import br.escolanotpad.sc.model.entity.Turma;
-import br.escolanotpad.sc.model.entity.Usuario;
 
 public class TurmaRN {
 	

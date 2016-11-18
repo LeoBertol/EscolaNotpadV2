@@ -9,29 +9,21 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.border.TitledBorder;
+
+import br.escolanotpad.sc.model.AgendaRN;
+import br.escolanotpad.sc.model.entity.Agenda;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-
-import br.escolanotpad.sc.model.entity.Agenda;
-import br.escolanotpad.sc.model.AgendaRN;
-
-
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.pdf.BaseFont;
-
-import com.itextpdf.text.pdf.draw.LineSeparator;
 
 @ManagedBean
 @RequestScoped
