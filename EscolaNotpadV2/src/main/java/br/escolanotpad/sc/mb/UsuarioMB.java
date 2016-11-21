@@ -1,4 +1,4 @@
-package br.escolanotpad.sc.mb;
+ï»¿package br.escolanotpad.sc.mb;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -6,14 +6,22 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ComponentSystemEvent;
+import javax.persistence.Query;
 import javax.servlet.http.Part;
 
+import br.escolanotpad.sc.Json.LoginJson;
 import br.escolanotpad.sc.commons.MailUtil;
+import br.escolanotpad.sc.commons.TesteEmail;
 import br.escolanotpad.sc.commons.UploadUtil;
 import br.escolanotpad.sc.commons.Utils;
 import br.escolanotpad.sc.model.UsuarioRN;
+import br.escolanotpad.sc.model.entity.Perfil;
 import br.escolanotpad.sc.model.entity.Usuario;
+
 
 @ManagedBean
 public class UsuarioMB {
@@ -135,7 +143,7 @@ public class UsuarioMB {
 			
 			try{
 			MailUtil.enviarEmail(usuario.getEmail(), "Cadastro Escola NotPad", 
-					"Seja Bem-Vindo(a) " + usuario.getNome() + ", \nVocê foi cadastrado em nossa escola, Sua senha para realizar o login: " + usuario.getSenha());
+					"Seja Bem-Vindo(a) " + usuario.getNome() + ", \nVocï¿½ foi cadastrado em nossa escola, Sua senha para realizar o login: " + usuario.getSenha());
 			}catch (Exception e){
 				return "/admin/listaUsuario";
 			}
@@ -164,19 +172,19 @@ public class UsuarioMB {
 			if(usuario.getPerfil().equals("TODOS_OS_USUARIOS")){
 				listaAlunosCadastrados = usuarioRN.listarUsuarios();				
 				tamanho = listaAlunosCadastrados.size();				
-				descricao = "Usuários cadastrados: ";
+				descricao = "Usuï¿½rios cadastrados: ";
 			}else if(usuario.getPerfil().equals("ROLE_ADMINISTRADOR")){
 				listaAlunosCadastrados = usuarioRN.listarAdministradores();				
 				tamanho = listaAlunosCadastrados.size();
-				descricao = "Usuários com perfil de administrador: ";
+				descricao = "Usuï¿½rios com perfil de administrador: ";
 			}else if(usuario.getPerfil().equals("ROLE_ALUNO")){
 				listaAlunosCadastrados = usuarioRN.listarAlunos();
 				tamanho = listaAlunosCadastrados.size();
-				descricao = "Usuários com perfil de aluno: ";
+				descricao = "Usuï¿½rios com perfil de aluno: ";
 			}else if(usuario.getPerfil().equals("ROLE_PROFESSOR")){
 				listaAlunosCadastrados = usuarioRN.listarProfessores();
 				tamanho = listaAlunosCadastrados.size();
-				descricao = "Usuários com perfil de professor: ";
+				descricao = "Usuï¿½rios com perfil de professor: ";
 			}
 		
 		}
@@ -209,5 +217,33 @@ public class UsuarioMB {
 	public void setTamanho(int tamanho) {
 		this.tamanho = tamanho;
 	}
+	
+	//Login para Json
+	public void renderLoginJson() throws IOException {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		
+		String email = externalContext.getRequestParameterMap().get("email");
+		String senha = externalContext.getRequestParameterMap().get("senha");
+		String key = externalContext.getRequestParameterMap().get("key");
+		
+		String json = "";
+		if (key != null && key.equals(Utils.KEY)) {
+			Usuario u = usuarioRN.loginParaJson(email, senha);
+			if (u != null) {
+				LoginJson lj = new LoginJson();
+				lj.setNome(u.getNome());
+				lj.setSucesso(true);
+				lj.setRegra("ROLE_USER");
+				json = Utils.getGson().toJson(lj);
+			}
+		}
+		
+		externalContext.setResponseContentType("application/json");
+		externalContext.setResponseCharacterEncoding("UTF-8");
+		externalContext.getResponseOutputWriter().write(json);
+		context.responseComplete();
+	}
+
 
 }

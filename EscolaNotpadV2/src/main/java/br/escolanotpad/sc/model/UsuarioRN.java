@@ -49,4 +49,9 @@ public class UsuarioRN {
 		return dao.listarAlunosCadastrados();
 	}
 	
+	//Json para login
+	public Usuario loginParaJson(String email, String senha) {
+		return dao.loginParaJson(email, senha);
+	}
+	
 }
