@@ -234,7 +234,8 @@ public class UsuarioMB {
 				LoginJson lj = new LoginJson();
 				lj.setNome(u.getNome());
 				lj.setSucesso(true);
-				lj.setRegra("ROLE_USER");
+				lj.setEmail(u.getEmail());
+				lj.setRegra(u.getPerfil());
 				json = Utils.getGson().toJson(lj);
 			}
 		}
