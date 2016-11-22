@@ -202,10 +202,11 @@ public class AgendaMB {
 		ExternalContext externalContext = context.getExternalContext();
 		
 		String key = externalContext.getRequestParameterMap().get("key");
+		String id = externalContext.getRequestParameterMap().get("id");
 				
 		String json = "";
 		if (key != null && key.equals(Utils.KEY)) {
-			json = Utils.getGson().toJson(agendaRN.listarAgendasParaJson());
+			json = Utils.getGson().toJson(agendaRN.listarAgendasParaJson(id));
 		}
 		
 				

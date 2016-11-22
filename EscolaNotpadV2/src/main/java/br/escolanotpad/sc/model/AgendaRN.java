@@ -65,10 +65,10 @@ public class AgendaRN {
 	}
 	
 	//Listar com JSON
-	public List<AgendaJson> listarAgendasParaJson() {
+	public List<AgendaJson> listarAgendasParaJson(String id) {
 		
 		List<AgendaJson> agendasJson = new ArrayList<AgendaJson>();
-		List<Agenda> agendasCarregados = dao.listar();
+		List<Agenda> agendasCarregados = dao.listarAgendasPorTurma(id);
 		
 		for (Agenda a : agendasCarregados) {
 			AgendaJson aj = new AgendaJson();
