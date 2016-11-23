@@ -1,11 +1,14 @@
 package br.escolanotpad.sc.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import br.escolanotpad.sc.model.entity.Curso;
 import br.escolanotpad.sc.model.entity.Turma;
+import br.escolanotpad.sc.model.entity.Usuario;
 
 public class TurmaDAO extends DAO{
 	
@@ -39,12 +42,40 @@ public class TurmaDAO extends DAO{
 		getEM().remove(turma);
 	}
 
-	public List<Turma> listarTurmaPorUsuario(Long usuarioLogado) {
-		Query query = getEM().createQuery(
-				"From Turma t Where t.professor.id = :idUsuario"
-				, Turma.class);	
+	public List<Turma> listarTurmaPorProfessor(Long usuarioLogado) {
+		Query query = getEM().createNativeQuery("select t.nome as turma, c.nome as curso from Turma t inner join Curso c ON (t.curso_id = c.id) where t.professor_id = :idUsuario");
 		query.setParameter("idUsuario", usuarioLogado);
-		return query.getResultList();
+		
+		List<Object[]> turmas = query.getResultList();
+		
+		List<Turma> turmasList = new ArrayList<Turma>();
+		for (Object[] o : turmas) {
+			Turma t = new Turma();
+			t.setNome((String) o[0]);
+			t.setCurso(new Curso());
+			t.getCurso().setNome((String) o[1]);
+			turmasList.add(t);
+		}
+		return turmasList;
+	}
+		
+	public List<Turma> listarTurmaPorAluno(Long usuarioLogado) {
+		Query query = getEM().createNativeQuery("select t.nome as turma, u.nome as professor, c.nome as curso from Turma t inner join Turma_Usuario tu ON (t.id = tu.turma_id) inner join usuario u ON (t.professor_id = u.id) inner join curso c ON (t.curso_id = c.id) where tu.alunosTurma_id = :idUsuario");
+		query.setParameter("idUsuario", usuarioLogado);
+		
+		List<Object[]> turmas = query.getResultList();
+		
+		List<Turma> turmasList = new ArrayList<Turma>();
+		for (Object[] o : turmas) {
+			Turma t = new Turma();
+			t.setNome((String) o[0]);
+			t.setProfessor(new Usuario());
+			t.getProfessor().setNome((String) o[1]);
+			t.setCurso(new Curso());
+			t.getCurso().setNome((String) o[2]);
+			turmasList.add(t);
+		}
+		return turmasList;
 	}
 	
 }

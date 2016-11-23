@@ -19,7 +19,8 @@ import br.escolanotpad.sc.model.entity.Usuario;
 @ManagedBean
 public class TurmaMB {
 	private List<Turma> listaTurmas;
-	private List<Turma> listaTurmasUsuario;
+	private List<Turma> listaTurmasParaAluno;
+	private List<Turma> listaTurmasParaProfessor;
 	private TurmaRN turmaRN;
 	private Turma turma;
 	private Usuario usuarioLogado;	
@@ -50,15 +51,18 @@ public class TurmaMB {
 		return usuarioLogado ==  null ? null: usuarioLogado.getId();
 	}
 		
-	public List<Turma> getListaTurmasUsuario(Long usuarioLogado) {		
+	public List<Turma> getListaTurmasParaAluno(Long usuarioLogado) {		
 		if (listaTurmas == null){
-			listaTurmasUsuario = turmaRN.listarTurmaPorUsuario(usuarioLogado);
-		}		
-		return listaTurmasUsuario;
+			listaTurmasParaAluno = turmaRN.listarTurmaPorAluno(usuarioLogado);
+		}	
+		return listaTurmasParaAluno;
 	}
-
-	public void setListaTurmasUsuario(List<Turma> listaTurmasUsuario) {
-		this.listaTurmasUsuario = listaTurmasUsuario;
+	
+	public List<Turma> getListaTurmasParaProfessor(Long usuarioLogado) {		
+		if (listaTurmas == null){
+			listaTurmasParaAluno = turmaRN.listarTurmaPorProfessor(usuarioLogado);
+		}	
+		return listaTurmasParaProfessor;
 	}
 
 	public Turma getTurma() {

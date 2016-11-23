@@ -26,14 +26,16 @@ public class TurmaRN {
 		return dao.buscarPorId(id);
 	}
 	
-	
-	
 	public void excluir(Long id) {
 		dao.excluir(id);
 	}
 
-	public List<Turma> listarTurmaPorUsuario(Long usuarioLogado) {
-		return dao.listarTurmaPorUsuario(usuarioLogado);
+	public List<Turma> listarTurmaPorAluno(Long usuarioLogado) {
+		return dao.listarTurmaPorAluno(usuarioLogado);
+	}
+	
+	public List<Turma> listarTurmaPorProfessor(Long usuarioLogado) {
+		return dao.listarTurmaPorProfessor(usuarioLogado);
 	}
 	
 	

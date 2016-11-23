@@ -102,7 +102,13 @@ public class TurmaDAOTest {
 	@Test
 	public void listarTurmaPorUsuarioTest(){
 		TurmaDAO dao = new TurmaDAO(entityManager);
-		dao.listarTurmaPorUsuario(1l);
+		dao.listarTurmaPorAluno(1l);
+	}
+	
+	@Test
+	public void listarTurmaPorProfessorTest(){
+		TurmaDAO dao = new TurmaDAO(entityManager);
+		dao.listarTurmaPorProfessor(1l);
 	}
 	
 	@Test
