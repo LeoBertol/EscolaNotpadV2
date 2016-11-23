@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.escolanotpad.sc.model.entity.Agenda;
@@ -13,8 +14,20 @@ import br.escolanotpad.sc.model.entity.Usuario;
 
 public class AgendaDAO extends DAO{
 	
+	public AgendaDAO(){
+		
+	}
+	
+	public AgendaDAO(EntityManager entityManager) {
+		super(entityManager);
+	}
+	
 	public void salvar(Agenda agenda) throws SQLException{
-		getEM().merge(agenda);
+		if(agenda.getId() == null){
+			getEM().persist(agenda);
+		}else{
+			getEM().merge(agenda);
+		}
 	}
 	
 	public Agenda buscarPorId(Long id){

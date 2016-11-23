@@ -29,6 +29,21 @@ public class Agenda {
 	@Temporal(TemporalType.TIME)
 	private Date fimDaAula;
 	
+	public Agenda() {
+		
+	}
+	
+	public Agenda(Long id, Usuario professorResponsavel, Ambiente ambiente,
+			Turma turma, Date data, Date inicioDaAula, Date fimDaAula) {
+		super();
+		this.id = id;
+		this.professorResponsavel = professorResponsavel;
+		this.ambiente = ambiente;
+		this.turma = turma;
+		this.data = data;
+		this.inicioDaAula = inicioDaAula;
+		this.fimDaAula = fimDaAula;
+	}
 	public Long getId() {
 		return id;
 	}
