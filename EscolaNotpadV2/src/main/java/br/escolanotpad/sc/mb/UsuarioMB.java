@@ -232,6 +232,7 @@ public class UsuarioMB {
 			Usuario u = usuarioRN.loginParaJson(email, senha);
 			if (u != null) {
 				LoginJson lj = new LoginJson();
+				lj.setId(u.getId());
 				lj.setNome(u.getNome());
 				lj.setSucesso(true);
 				lj.setEmail(u.getEmail());
