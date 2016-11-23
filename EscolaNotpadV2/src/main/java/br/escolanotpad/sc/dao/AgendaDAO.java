@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.escolanotpad.sc.model.entity.Agenda;
+import br.escolanotpad.sc.model.entity.Turma;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 public class AgendaDAO extends DAO{
@@ -113,6 +114,29 @@ public class AgendaDAO extends DAO{
 		queryBuscaAgenda.setParameter("turmaId", resultadoBuscaIdTurma.get(0));
 		
 		return queryBuscaAgenda.getResultList();
+	}
+
+	public List<Agenda> listaAgendaParaEmail(String turmaid) {
+		//Query para buscar um ID DE TURMA com base no id do usuario
+		Query queryBuscaIdTurma = getEM().createNativeQuery("select turma_id from turma_usuario where turma_id = :turmaid");
+		queryBuscaIdTurma.setParameter("turmaid", turmaid);
+		List resultadoBuscaIdTurma = queryBuscaIdTurma.getResultList();
+		
+		//Query para buscar a agenda, com base no id da turma obtido na qiuery de cima
+		Query queryBuscaAgenda = getEM().createQuery("From Agenda where turma_id = :turmaId ", Agenda.class);
+		queryBuscaAgenda.setParameter("turmaId", resultadoBuscaIdTurma.get(0));
+		
+		return queryBuscaAgenda.getResultList();
+	}
+
+	public List<Turma> listaUsuarioParaEmail(String id) {
+		
+		//Query para buscar um ID DE TURMA com base no id do usuario
+		Query queryBuscaIdTurma = getEM().createNativeQuery("From Turma where id = :turmaid");
+		queryBuscaIdTurma.setParameter("turmaid", id);
+		
+		return queryBuscaIdTurma.getResultList();
+		
 	}
 
 	

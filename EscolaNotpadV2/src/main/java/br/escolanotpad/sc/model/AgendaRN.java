@@ -8,6 +8,7 @@ import java.util.List;
 import br.escolanotpad.sc.Json.AgendaJson;
 import br.escolanotpad.sc.dao.AgendaDAO;
 import br.escolanotpad.sc.model.entity.Agenda;
+import br.escolanotpad.sc.model.entity.Turma;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 public class AgendaRN {
@@ -83,6 +84,14 @@ public class AgendaRN {
 		}
 		
 		return agendasJson;
+	}
+	
+	public List<Agenda> listaAgendaParaEmail(String turmaid) {
+		return dao.listaAgendaParaEmail(turmaid);
+	}
+
+	public List<Turma> listarUsuarioParaEmail(String id) {
+		return dao.listaUsuarioParaEmail(id);
 	}
 
 	

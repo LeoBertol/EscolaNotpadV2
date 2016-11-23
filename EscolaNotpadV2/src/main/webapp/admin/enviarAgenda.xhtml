@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/WEB-INF/template/padrao_admin.xhtml">
+
+
+	<ui:define name="conteudo">
+
+		<div id="conteudo">
+			<div id="formulario_cadastro">
+
+				<div id="quadro_cadastrar_titulo">
+					<h1>
+						Enviar Agenda <small>Por Email</small>
+					</h1>
+				</div>
+
+				<div id="quadro_cadastrar">
+					<div class="col-md-7">
+						<h:form id="formulario">
+							<label>Turma</label>
+							<h:selectOneMenu styleClass="form-control"
+								value="#{agendaMB.agenda.turma}" required="true"
+								requiredMessage="A turma e obrigatorio!">
+								<f:selectItem itemLabel="-- Selecione --" />
+								<f:selectItems value="#{turmaMB.listaTurmas}" var="turma"
+									itemLabel="#{turma.nome}" itemValue="#{turma.id}" />
+							</h:selectOneMenu>
+							<h:commandButton action="#{agendaMB.enviarAgendaPorEmail(turma)}" value="Enviar" />
+						</h:form>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+
+
+
+
+
+	</ui:define>
+
+
+</ui:composition>
+</html>

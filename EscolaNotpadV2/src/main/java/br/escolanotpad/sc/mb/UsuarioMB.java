@@ -136,6 +136,7 @@ public class UsuarioMB {
 		try{
 			String nomeFotoPerfil = UploadUtil.moverArquivo(uploadedFotoPerfil, usuario.getFotoPerfil());
 			usuario.setFotoPerfil(nomeFotoPerfil);	
+			String senha_temporaria = usuario.getSenha();
 			String hash = Utils.senhaToSha256(usuario.getSenha());
 			usuario.setSenha(hash);									
 			usuarioRN.salvar(usuario);
@@ -143,7 +144,7 @@ public class UsuarioMB {
 			
 			try{
 			MailUtil.enviarEmail(usuario.getEmail(), "Cadastro Escola NotPad", 
-					"Seja Bem-Vindo(a) " + usuario.getNome() + ", \nVoc� foi cadastrado em nossa escola, Sua senha para realizar o login: " + usuario.getSenha());
+					"Seja Bem-Vindo(a) " + usuario.getNome() + ", \nVocê foi cadastrado em nossa escola, Sua senha para realizar o login: " + senha_temporaria);
 			}catch (Exception e){
 				return "/admin/listaUsuario";
 			}

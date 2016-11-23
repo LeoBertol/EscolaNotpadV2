@@ -11,11 +11,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import br.escolanotpad.sc.commons.MailUtil;
 import br.escolanotpad.sc.commons.Utils;
 import br.escolanotpad.sc.model.AgendaRN;
 import br.escolanotpad.sc.model.AmbienteRN;
 import br.escolanotpad.sc.model.UsuarioRN;
 import br.escolanotpad.sc.model.entity.Agenda;
+import br.escolanotpad.sc.model.entity.Turma;
 import br.escolanotpad.sc.model.entity.Usuario;
 
 @ViewScoped
@@ -27,6 +29,7 @@ public class AgendaMB {
 	private AmbienteRN ambienteRN;
 	private UsuarioRN usuarioRN;
 	private Agenda agenda;
+	private Turma turma;
 	
 	private Long editarId;
 	
@@ -214,6 +217,21 @@ public class AgendaMB {
 		externalContext.setResponseCharacterEncoding("UTF-8");
 		externalContext.getResponseOutputWriter().write(json);
 		context.responseComplete();
+	}
+	
+	public void enviarAgendaPorEmail(String id){
+		
+		
+		List<Turma> turmaSelecionado = agendaRN.listarUsuarioParaEmail(id);
+		List<Agenda> agendasSelecionadas = agendaRN.listaAgendaParaEmail(id);
+		
+		for(int i = 0; i < agendasSelecionadas.size(); i++){
+			for(int z = 0; z < turmaSelecionado.size(); i++){
+				for(int y = 0; y < turmaSelecionado.get(z).getAlunosTurma().size(); y++){
+					MailUtil.enviarEmail(turmaSelecionado.get(z).getAlunosTurma().get(y).getEmail(), "Sua Agenda", "" + agendasSelecionadas);
+				}
+			}
+		}
 	}
 	
 	
