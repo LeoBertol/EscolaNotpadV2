@@ -8,7 +8,7 @@ public class JavaMailAuthenticator extends Authenticator {
 
 	@Override
 	protected PasswordAuthentication getPasswordAuthentication() {
-		return new PasswordAuthentication("guilherme.bertol@hotmail.com", "gui050899");
+		return new PasswordAuthentication("exemploenviosenai@hotmail.com", "DEsmKg]D");
 	}
 	
 }
