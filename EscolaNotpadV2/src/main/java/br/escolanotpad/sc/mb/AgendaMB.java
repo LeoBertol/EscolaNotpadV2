@@ -154,6 +154,15 @@ public class AgendaMB {
 		
 		if(dataVerificar.size() == 0){
 			agendaRN.salvar(agenda);
+			
+			List<Turma> turmaSelecionado = agendaRN.listarUsuarioParaEmail(agenda.getTurma().getId());
+			for(int z = 0; z < turmaSelecionado.size(); z++){
+				for(int y = 0; y < turmaSelecionado.get(z).getAlunosTurma().size(); y++){
+					MailUtil.enviarEmail(turmaSelecionado.get(z).getAlunosTurma().get(y).getEmail(), "Sua Agenda", "Data:" + agenda.getData() + "\n Horario: " +
+				agenda.getInicioDaAula() + " As " + agenda.getFimDaAula() + "\n" +
+				"Ambiente: " + agenda.getAmbiente().getNome() + "\n Professor Responsavel: " + agenda.getProfessorResponsavel().getNome());
+				}
+			}
 			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda cadastrada com sucesso!", "");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			
@@ -163,6 +172,14 @@ public class AgendaMB {
 		}else{
 			if(ambienteVerificar.size() == 0){
 				agendaRN.salvar(agenda);
+				List<Turma> turmaSelecionado = agendaRN.listarUsuarioParaEmail(agenda.getTurma().getId());
+				for(int z = 0; z < turmaSelecionado.size(); z++){
+					for(int y = 0; y < turmaSelecionado.get(z).getAlunosTurma().size(); y++){
+						MailUtil.enviarEmail(turmaSelecionado.get(z).getAlunosTurma().get(y).getEmail(), "Sua Agenda", "Data:" + agenda.getData() + "\n Horario: " +
+					agenda.getInicioDaAula() + " As " + agenda.getFimDaAula() + "\n" +
+					"Ambiente: " + agenda.getAmbiente().getNome() + "\n Professor Responsavel: " + agenda.getProfessorResponsavel().getNome());
+					}
+				}
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Agenda cadastrada com sucesso!", "");
 				FacesContext.getCurrentInstance().addMessage(null, message);
 				agenda = new Agenda();
@@ -217,26 +234,7 @@ public class AgendaMB {
 		externalContext.setResponseCharacterEncoding("UTF-8");
 		externalContext.getResponseOutputWriter().write(json);
 		context.responseComplete();
-	}
-	
-	public void enviarAgendaPorEmail(String id){
-		
-		
-		List<Turma> turmaSelecionado = agendaRN.listarUsuarioParaEmail(id);
-		List<Agenda> agendasSelecionadas = agendaRN.listaAgendaParaEmail(id);
-		
-		for(int i = 0; i < agendasSelecionadas.size(); i++){
-			for(int z = 0; z < turmaSelecionado.size(); i++){
-				for(int y = 0; y < turmaSelecionado.get(z).getAlunosTurma().size(); y++){
-					MailUtil.enviarEmail(turmaSelecionado.get(z).getAlunosTurma().get(y).getEmail(), "Sua Agenda", "" + agendasSelecionadas);
-				}
-			}
-		}
-	}
-	
-	
-
-    
+	}  
 	
 
 }

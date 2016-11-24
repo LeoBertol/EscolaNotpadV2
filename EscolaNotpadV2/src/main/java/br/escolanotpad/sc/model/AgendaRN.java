@@ -85,12 +85,8 @@ public class AgendaRN {
 		
 		return agendasJson;
 	}
-	
-	public List<Agenda> listaAgendaParaEmail(String turmaid) {
-		return dao.listaAgendaParaEmail(turmaid);
-	}
 
-	public List<Turma> listarUsuarioParaEmail(String id) {
+	public List<Turma> listarUsuarioParaEmail(Long id) {
 		return dao.listaUsuarioParaEmail(id);
 	}
 
